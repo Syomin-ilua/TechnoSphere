@@ -14,6 +14,7 @@ import Catalog from './pages/Catalog';
 import ProductDetails from './pages/ProductDetails';
 import Basket from './pages/Basket';
 import PageNotFound from './pages/PageNotFound';
+import UserProfile from './components/users-components/UserProfile';
 
 let isInitialRunning = true;
 
@@ -52,6 +53,7 @@ function App() {
             <Route path='/products' element={<Catalog />}/>
             <Route path='/products/:productID/*' element={<ProductDetails />} />
             <Route path='/basket' element={<Basket />}/>
+            <Route path='/profile' element={<UserProfile />}/>
             <Route path='*' element={<PageNotFound />}/>
           </Routes>
         </main>
