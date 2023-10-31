@@ -1,0 +1,30 @@
+.review__product {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    border: 2px solid #333;
+    border-radius: 5px;
+}
+.review__info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.review__info p {
+    font-size: 12px;
+    font-family: "IBMPlexMono-Medium";
+}
+.review__info p span {
+    font-size: 14px;
+    font-family: "IBMPlexMono-SemiBold";
+}
+.review__description {
+    font-size: 12px;
+    font-family: "IBMPlexMono-Medium";
+}
+.review__description span {
+    font-size: 14px;
+    font-family: "IBMPlexMono-SemiBold";
+}

@@ -1,0 +1,45 @@
+.itemsQuantityWrapper {
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background-color: red;
+    position: absolute;
+    bottom: -4px;
+    right: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.itemsQuantityWrapper p {
+    color: #fff;
+    font-family: "IBMPlexMono-Bold";
+}
+.basket {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 20px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    transition: border all 0.3s;
+    position: relative;
+}
+.basket:hover {
+    border-top: none;
+    border-bottom: none;
+    transition: border 0.3s;
+}
+.basket a img {
+    width: 60%;
+    height: 60%;
+}
+.basket a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

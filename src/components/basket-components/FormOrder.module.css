@@ -1,0 +1,83 @@
+.formOrder {
+    max-width: 650px;
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 20px;
+    padding: 20px;
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+/* 
+label {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+label p {
+    font-family: "IBMPlexMono-SemiBold";
+    font-size: 15px;
+    cursor: pointer;
+}
+
+label input {
+    max-width: 350px;
+    min-width: 200px;
+    width: 100%;
+    height: 30px;
+    border: 1px solid #c7c7c7;
+    padding-left: 10px;
+    font-family: "IBMPlexMono-Regular";
+}
+
+label input:focus {
+    border: 1px solid #535353;
+}
+
+label select {
+    max-width: 350px;
+    min-width: 200px;
+    width: 100%;
+    height: 25px;
+} */
+
+.btnAddOrder {
+    height: 35px;
+    border-radius: 5px;
+}
+
+.pushable {
+    background: hsl(340deg 100% 32%);
+    border-radius: 12px;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    outline-offset: 4px;
+    margin-top: 15px;
+}
+
+.front {
+    display: block;
+    padding: 12px 42px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    background: hsl(345deg 100% 47%);
+    color: white;
+    transform: translateY(-6px);
+    font-family: "IBMPlexMono-Bold";
+    font-size: 16px;
+}
+
+.pushable:active .front {
+    transform: translateY(-2px);
+}
+.method__payment_wrapper select {
+    width: 70px;
+    cursor: pointer;
+    font-family: "IBMPlexMono-Regular";
+    padding: 3px;
+    border: 1px solid #4a4a4a;
+}

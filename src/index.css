@@ -1,0 +1,40 @@
+/* Шрифты */
+@font-face {
+  font-family: "IBMPlexMono-Light";
+  src: local("IBMPlexMonoLight"),
+   url("./fonts/IBM-Plex-Mono/IBMPlexMono-Light.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "IBMPlexMono-Regular";
+  src: local("IBMPlexMonoRegular"),
+   url("./fonts/IBM-Plex-Mono/IBMPlexMono-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "IBMPlexMono-Medium";
+  src: local("IBMPlexMonoMedium"),
+   url("./fonts/IBM-Plex-Mono/IBMPlexMono-Medium.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "IBMPlexMono-Semibold";
+  src: local("IBMPlexMonoSemibold"),
+   url("./fonts/IBM-Plex-Mono/IBMPlexMono-SemiBold.ttf") format("truetype");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "IBMPlexMono-Bold";
+  src: local("IBMPlexMonoBold"),
+   url("./fonts/IBM-Plex-Mono/IBMPlexMono-Bold.ttf") format("truetype");
+  font-weight: normal;
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  background-color: rgb(252, 252, 252);
+}
+

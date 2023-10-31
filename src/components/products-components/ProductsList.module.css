@@ -1,0 +1,8 @@
+.products {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(200px, 250px));
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 20px;
+    row-gap: 20px;
+}

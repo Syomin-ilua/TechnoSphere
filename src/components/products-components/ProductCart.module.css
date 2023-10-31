@@ -1,0 +1,186 @@
+.product {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    column-gap: 50px;
+}
+
+.imgWrapper {
+    width: 200px;
+    height: 220px;
+}
+
+.imgWrapper img {
+    width: 100%;
+    height: 100%;
+}
+
+.productInformation {
+    display: flex;
+    flex-direction: column;
+    max-width: 650px;
+    width: 100%;
+}
+
+.productName {
+    font-family: "IBMPlexMono-Bold";
+    font-size: 19px;
+    line-height: 24px;
+}
+
+.productInfo {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    margin-bottom: 20px;
+}
+
+.cost span {
+    font-family: "IBMPlexMono-Bold";
+    font-size: 16px;
+}
+
+.cost {
+    font-family: "IBMPlexMono-Regular";
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.description span {
+    font-family: "IBMPlexMono-Bold";
+    font-size: 16px;
+}
+
+.description {
+    font-family: "IBMPlexMono-Regular";
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.productOptions {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.productOptions i {
+    font-family: "IBMPlexMono-Regular";
+    font-size: 16px;
+}
+
+.productOptions p {
+    font-family: "IBMPlexMono-Regular";
+    font-size: 14px;
+}
+
+.productOptions p span {
+    font-family: "IBMPlexMono-Bold";
+}
+
+.productActions {
+    margin-top: 20px;
+}
+
+.choiseQuontityActions {
+    display: flex;
+    align-items: center;
+}
+
+.choiseQuontityActions button {
+    font-family: "IBMPlexMono-Bold";
+    font-size: 16px;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.choiseQuontityActions button:active {
+    transform: scale(0.9);
+    transition: all 0.3s;
+}
+
+.incrementButton {
+    border: 1px solid #4AB8A1;
+    background-color: #4AB8A1;
+    width: 35px;
+    height: 35px;
+}
+
+.incrementButton:hover {
+    background-color: #fff;
+    color: #4AB8A1;
+    transition: all 0.3s;
+}
+
+.productQuantity {
+    width: 35px;
+    height: 35px;
+    background-color: rgb(236, 236, 236);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.productQuantity p {
+    font-size: 14px;
+    font-family: "IBMPlexMono-Bold";
+}
+
+.decrementButton {
+    background-color: #000;
+    width: 35px;
+    height: 35px;
+    border: 1px solid #000;
+}
+
+.decrementButton:hover {
+    background-color: #fff;
+    color: #000;
+    transition: all 0.3s;
+}
+
+.btnAddBasket {
+    width: 250px;
+    height: 35px;
+    border: 1px solid rgb(0, 220, 0);
+    background-color: rgb(0, 220, 0);
+    font-family: "IBMPlexMono-Bold";
+    font-size: 16px;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.btnAddBasket:active {
+    transform: scale(0.9);
+    transition: all 0.3s;
+}
+
+.reviews__link {
+    font-family: "IBMPlexMono-Medium";
+    font-size: 14px;
+    color: #000;
+    transition: all 0.3s;
+}
+
+.reviews__link:hover {
+    color: #676767;
+    transition: all 0.3s;
+}
+
+.btn__reviews_hide {
+    font-family: "IBMPlexMono-Medium";
+    font-size: 14px;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.btn__reviews_hide:hover {
+    color: #676767;
+    transition: all 0.3s;
+}
+
+.product__action {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+    margin-top: 20px;
+}

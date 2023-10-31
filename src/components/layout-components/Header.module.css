@@ -1,0 +1,42 @@
+.header {
+    width: 100%;
+    background-color: #4AB8A1;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    z-index: 1499;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    width: 120px;
+}
+
+.logo img {
+    width: 120px;
+    height: 100px;
+}
+
+.navigation ul {
+    display: flex;
+    align-items: center;
+    column-gap: 30px;
+}
+
+.navigation ul li {
+    list-style: none;
+}
+
+.navigation ul li a {
+    text-decoration: none;
+    font-size: 21px;
+    font-family: "IBMPlexMono-Bold";
+    color: #fff;
+}
+
+.navigation ul li a:hover {
+    border-bottom: 3px solid #fff;
+    border-radius: 2px;
+}

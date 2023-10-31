@@ -1,0 +1,28 @@
+.add__reviews {
+    width: 150px;
+    height: 30px;
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #333;
+    font-family: "IBMPlexMono-SemiBold";
+    font-size: 14px;
+    transition: all 0.3s;
+}
+.add__reviews:hover {
+    background-color: transparent;
+    color: #333;
+    font-family: "IBMPlexMono-SemiBold";
+    transition: all 0.3s;
+}
+.add__reviews_wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+.reviews__emty_text {
+    text-align: center;
+    font-size: 18px;
+    font-family: "IBMPlexMono-Bold";
+    color: #333;
+}

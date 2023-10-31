@@ -1,0 +1,7 @@
+.reviews__list {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}

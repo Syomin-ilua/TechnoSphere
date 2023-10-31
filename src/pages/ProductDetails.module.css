@@ -1,0 +1,39 @@
+.location__action {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(74 184 161);
+    font-size: 16px;
+    font-family: "IBMPlexMono-Bold";
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+.loaderWrapper {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.product__text_back {
+    text-align: center;
+    font-size: 16px;
+    font-family: "IBMPlexMono-Medium";
+}
+.product__top {
+    margin-bottom: 30px;
+}
+.product__top a {
+    display: flex;
+    align-items: center;
+    color: #333;
+    column-gap: 15px;
+    transition: all 0.3s;    
+}
+.product__top a:hover {
+    color: #8f8f8f;
+    transition: all 0.3s;
+}

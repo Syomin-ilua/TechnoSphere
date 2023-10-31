@@ -1,0 +1,24 @@
+.headerWrapper h1 {
+    font-family: "IBMPlexMono-Bold";
+    font-size: 26px;
+    text-align: center;
+}
+.aboutWrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    column-gap: 30px;
+}
+.imageWrapper {
+    min-width: 500px;
+    height: 500px;
+}
+.imageWrapper img {
+    width: 100%;
+    height: 100%;
+}
+.aboutTextWrapper p {
+    font-family: "IBMPlexMono-Regular";
+    font-size: 14px;
+    line-height: 20px;
+}

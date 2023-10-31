@@ -1,0 +1,21 @@
+.footer {
+    width: 100%;
+    background-color: #3d3d3d;
+    margin-top: 60px;
+}
+
+.centerSide div p {
+    color: #fff;
+    font-weight: 600;
+    font-family: "IBMPlexMono-SemiBold";
+    text-align: center;
+    line-height: 30px;
+}
+
+.centerSide {
+    height: 100%;
+    display: flex;
+    align-items: end;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
