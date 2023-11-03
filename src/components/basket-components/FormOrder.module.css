@@ -67,7 +67,7 @@ label select {
     background: hsl(345deg 100% 47%);
     color: white;
     transform: translateY(-6px);
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 16px;
 }
 
@@ -77,7 +77,7 @@ label select {
 .method__payment_wrapper select {
     width: 70px;
     cursor: pointer;
-    font-family: "IBMPlexMono-Regular";
+    font-family: "Montserrat-Regular";
     padding: 3px;
     border: 1px solid #4a4a4a;
 }

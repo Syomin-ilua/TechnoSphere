@@ -17,6 +17,7 @@ import PageNotFound from './pages/PageNotFound';
 import UserProfile from './components/users-components/UserProfile';
 
 let isInitialRunning = true;
+const isAuth = false;
 
 function App() {
 
@@ -46,9 +47,6 @@ function App() {
       <Header />
         <main>
           <Routes>
-            <Route path='/' element={<Navigate to="/login" replace/>}/>
-            <Route path='/login' element={<SignIn />}/>
-            <Route path='/register' element={<SignUp />}/>
             <Route path='/home' element={<About />}/>
             <Route path='/products' element={<Catalog />}/>
             <Route path='/products/:productID/*' element={<ProductDetails />} />

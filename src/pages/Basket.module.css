@@ -7,7 +7,7 @@
 }
 .basket__header_text {
     text-align: center;
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 24px;
 }
 .basket__body {
@@ -32,7 +32,7 @@
     height: 40px;
     background-color: #333;
     color: #fff;
-    font-family: "IBMPlexMono-SemiBold";
+    font-family: "Montserrat-SemiBold";
     border-radius: 5px;
     transition: all 0.3s;
 }
@@ -45,7 +45,7 @@
     height: 40px;
     background-color: #4AB8A1;
     color: #fff;
-    font-family: "IBMPlexMono-SemiBold";
+    font-family: "Montserrat-SemiBold";
     border-radius: 5px;
     transition: all 0.3s;
 }

@@ -14,17 +14,17 @@
 }
 .review__info p {
     font-size: 12px;
-    font-family: "IBMPlexMono-Medium";
+    font-family: "Montserrat-Medium";
 }
 .review__info p span {
     font-size: 14px;
-    font-family: "IBMPlexMono-SemiBold";
+    font-family: "Montserrat-SemiBold";
 }
 .review__description {
     font-size: 12px;
-    font-family: "IBMPlexMono-Medium";
+    font-family: "Montserrat-Medium";
 }
 .review__description span {
     font-size: 14px;
-    font-family: "IBMPlexMono-SemiBold";
+    font-family: "Montserrat-SemiBold";
 }

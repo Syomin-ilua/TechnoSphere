@@ -9,11 +9,11 @@ import store from './store';
 import "./firebase";
 
 // импорт шрифтов
-import "./fonts/IBM-Plex-Mono/IBMPlexMono-Bold.ttf";
-import "./fonts/IBM-Plex-Mono/IBMPlexMono-Medium.ttf";
-import "./fonts/IBM-Plex-Mono/IBMPlexMono-Regular.ttf";
-import "./fonts/IBM-Plex-Mono/IBMPlexMono-SemiBold.ttf";
-import "./fonts/IBM-Plex-Mono/IBMPlexMono-Light.ttf";
+import "./fonts/Montserrat/Montserrat-Bold.ttf";
+import "./fonts/Montserrat/Montserrat-Medium.ttf";
+import "./fonts/Montserrat/Montserrat-Regular.ttf";
+import "./fonts/Montserrat/Montserrat-SemiBold.ttf";
+import "./fonts/Montserrat/Montserrat-Light.ttf";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -6,7 +6,7 @@
     width: 100%;
 }
 .user__profile_header {
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 24px;
     text-align: left;
 }
@@ -39,7 +39,7 @@
     border-radius: 50%;
 }
 .general__title {
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 16px;
     margin-top: 10px;
 }
@@ -54,11 +54,11 @@
     row-gap: 10px;
 }
 .user__info_title {
-    font-family: "IBMPlexMono-Medium";
+    font-family: "Montserrat-Medium";
     font-size: 14px;
 }
 .user__info_data {
-    font-family: "IBMPlexMono-Regular";
+    font-family: "Montserrat-Regular";
     font-size: 14px;
 }
 .user__actions {
@@ -76,7 +76,7 @@
     align-items: center;
     column-gap: 10px;
     padding: 10px;
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 14px;
     background-color: blue;
     border: 1px solid blue;
@@ -87,7 +87,7 @@
     width: 200px;
     height: 35px;
     display: flex;
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 14px;
     align-items: center;
     column-gap: 10px;

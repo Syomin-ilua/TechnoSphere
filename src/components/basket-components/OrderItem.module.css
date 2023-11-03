@@ -22,11 +22,11 @@
 }
 
 .orderPrice {
-    font-family: "IBMPlexMono-Regular";
+    font-family: "Montserrat-Regular";
 }
 
 .orderPrice span {
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
 }
 
 .orderImageWrapper img {}
@@ -48,17 +48,17 @@
 }
 
 .orderName {
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 16px;
 }
 
 .cost {
-    font-family: "IBMPlexMono-Regular";
+    font-family: "Montserrat-Regular";
     font-size: 14px;
 }
 
 .cost span {
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
 }
 
 .orderActions {
@@ -71,7 +71,7 @@
     height: 30px;
     background-color: #4AB8A1;
     border: 1px solid #4AB8A1;
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 16px;
     transition: all 0.3s;
     color: #fff;
@@ -86,7 +86,7 @@
 .btnRemoveOrder {
     width: 30px;
     height: 30px;
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 16px;
     background-color: #000;
     border: 1px solid #000;

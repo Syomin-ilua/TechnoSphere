@@ -23,7 +23,7 @@
 }
 
 .productName {
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 19px;
     line-height: 24px;
 }
@@ -36,23 +36,23 @@
 }
 
 .cost span {
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 16px;
 }
 
 .cost {
-    font-family: "IBMPlexMono-Regular";
+    font-family: "Montserrat-Regular";
     font-size: 14px;
     line-height: 24px;
 }
 
 .description span {
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 16px;
 }
 
 .description {
-    font-family: "IBMPlexMono-Regular";
+    font-family: "Montserrat-Regular";
     font-size: 14px;
     line-height: 24px;
 }
@@ -64,17 +64,17 @@
 }
 
 .productOptions i {
-    font-family: "IBMPlexMono-Regular";
+    font-family: "Montserrat-Regular";
     font-size: 16px;
 }
 
 .productOptions p {
-    font-family: "IBMPlexMono-Regular";
+    font-family: "Montserrat-Regular";
     font-size: 14px;
 }
 
 .productOptions p span {
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
 }
 
 .productActions {
@@ -87,7 +87,7 @@
 }
 
 .choiseQuontityActions button {
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 16px;
     color: #fff;
     transition: all 0.3s;
@@ -122,7 +122,7 @@
 
 .productQuantity p {
     font-size: 14px;
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
 }
 
 .decrementButton {
@@ -143,7 +143,7 @@
     height: 35px;
     border: 1px solid rgb(0, 220, 0);
     background-color: rgb(0, 220, 0);
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 16px;
     color: #fff;
     transition: all 0.3s;
@@ -155,7 +155,7 @@
 }
 
 .reviews__link {
-    font-family: "IBMPlexMono-Medium";
+    font-family: "Montserrat-Medium";
     font-size: 14px;
     color: #000;
     transition: all 0.3s;
@@ -167,7 +167,7 @@
 }
 
 .btn__reviews_hide {
-    font-family: "IBMPlexMono-Medium";
+    font-family: "Montserrat-Medium";
     font-size: 14px;
     color: #333;
     cursor: pointer;

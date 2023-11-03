@@ -16,7 +16,7 @@
     padding-left: 40px;
     padding-right: 15px;
     font-size: 14px;
-    font-family: "IBMPlexMono-SemiBold";
+    font-family: "Montserrat-SemiBold";
     color: #000000;
     box-shadow: 0px 5px 10px -5px rgba(34, 60, 80, 0.2);
     transition: all 0.3s;
@@ -86,6 +86,6 @@
     height: 100%;
     border-radius: 3px;
     cursor: pointer;
-    font-family: "IBMPlexMono-SemiBold";
+    font-family: "Montserrat-SemiBold";
     outline: none;
 }

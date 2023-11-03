@@ -25,22 +25,22 @@
     margin-bottom: 15px;
 }
 .productName {
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     color: #000;
 }
 .productCost {
-    font-family: "IBMPlexMono-Regular";
+    font-family: "Montserrat-Regular";
     color: #000;
 }
 .productCost span {
-    font-family: "IBMPlexMono-SemiBold";
+    font-family: "Montserrat-SemiBold";
 }
 .productDescription {
-    font-family: "IBMPlexMono-Regular";
+    font-family: "Montserrat-Regular";
     color: #000;
 }
 .productDescription span {
-    font-family: "IBMPlexMono-SemiBold";
+    font-family: "Montserrat-SemiBold";
 }
 .btnAddBasket {
     height: 35px;
@@ -48,7 +48,7 @@
     border: 1px solid #4AB8A1;
     border-radius: 5px;
     color: #fff;
-    font-family: "IBMPlexMono-SemiBold";
+    font-family: "Montserrat-SemiBold";
     font-size: 14px;
     transition: all .3s;
 }
@@ -59,7 +59,7 @@
 }
 .moreDetailed {
     color: #000000;
-    font-family: "IBMPlexMono-SemiBold";
+    font-family: "Montserrat-SemiBold";
     font-size: 14px;
     text-align: center;
     margin-top: 20px;

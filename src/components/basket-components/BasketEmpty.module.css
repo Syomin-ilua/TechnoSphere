@@ -13,7 +13,7 @@
 }
 
 .basketEmptyText {
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 18px;
     color: #000;
 }
@@ -23,7 +23,7 @@
     height: 35px;
     background-color: red;
     color: #fff;
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Montserrat-Bold";
     font-size: 16px;
     border-radius: 3px;
     transition: all 0.2s;

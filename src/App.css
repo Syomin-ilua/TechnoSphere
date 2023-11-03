@@ -50,13 +50,13 @@ main {
 }
 
 .auth__title {
-	font-family: "IBMPlexMono-Bold";
+	font-family: "Montserrat-Bold";
 	font-size: 24px;
 	text-align: center;
 }
 
 .link__auth {
-	font-family: "IBMPlexMono-Regular";
+	font-family: "Montserrat-Regular";
 	font-size: 14px;
 	text-align: center;
 	margin-top: 10px;
