@@ -1,7 +1,7 @@
 import './App.css';
 import { Fragment, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Switch, Routes, Route, Navigate } from 'react-router-dom';
+import { Switch, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { basketGetOrders, basketChangeOrders } from './store/basket-slice';
 
 import Header from './components/layout-components/Header';
@@ -15,47 +15,68 @@ import ProductDetails from './pages/ProductDetails';
 import Basket from './pages/Basket';
 import PageNotFound from './pages/PageNotFound';
 import UserProfile from './components/users-components/UserProfile';
+import RequireAuth from './RequireAuth';
+
 
 let isInitialRunning = true;
-const isAuth = false;
 
 function App() {
 
   const basket = useSelector((state) => state.basket);
-  const dispatchAction = useDispatch(); 
+  const dispatchAction = useDispatch();
 
   useEffect(() => {
     dispatchAction(basketGetOrders());
   }, []);
 
   useEffect(() => {
-    if(isInitialRunning) {
+    if (isInitialRunning) {
       isInitialRunning = false;
       return;
     }
 
 
-    if(basket.isBasketContentChanged) {
+    if (basket.isBasketContentChanged) {
       dispatchAction(basketChangeOrders());
     }
 
   }, [basket]);
 
-
   return (
     <Fragment>
-      <Header />
-        <main>
+      <Routes>
+        <Route path='/*' element={
+          <Fragment>
+            <Header />
+            <Routes>
+              <Route path='/' element={<About />} />
+              <Route path='/products' element={<Catalog />} />
+              <Route path='/products/:productID/*' element={<ProductDetails />} />
+              <Route path='/basket' element={
+                <RequireAuth>
+                  <Basket />
+                </RequireAuth>
+              } />
+              <Route path='/profile' element={
+                <RequireAuth>
+                  <UserProfile />
+                </RequireAuth>
+              } />
+              <Route path='/*' element={<PageNotFound />}/>
+            </Routes>
+            <Footer />
+          </Fragment>
+        } />
+
+        <Route path='/auth/*' element={
           <Routes>
-            <Route path='/home' element={<About />}/>
-            <Route path='/products' element={<Catalog />}/>
-            <Route path='/products/:productID/*' element={<ProductDetails />} />
-            <Route path='/basket' element={<Basket />}/>
-            <Route path='/profile' element={<UserProfile />}/>
-            <Route path='*' element={<PageNotFound />}/>
+            <Route path='/login' element={<SignIn />} />
+            <Route path='/register' element={<SignUp />} />
+            <Route path='/*' element={<PageNotFound />}/>
           </Routes>
-        </main>
-      <Footer />
+        } />
+
+      </Routes>
     </Fragment>
   );
 }
