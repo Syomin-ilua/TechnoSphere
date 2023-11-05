@@ -45,6 +45,10 @@ main {
     border-radius: 2px;
 }
 
+.active__profile-link {
+	color: #5454FF;
+}
+
 .auth__title_wrapper {
 	width: 100%;
 }

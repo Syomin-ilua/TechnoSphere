@@ -3,8 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import { userActions } from "../store/user-slice";
-import styles from "./SignUp.module.css";
-import Container from "../components/layout-components/Container";
+import styles from "./Auth.module.css";
+import LogoBanner from "../images/logo-banner.svg";
 
 const validateRegexEmail = /^\S+@\S+\.\S+$/;
 
@@ -58,48 +58,49 @@ const SignUp = () => {
 
 
     return (
-        <Container class="auth__container">
-            <div className={styles["auth__wrapper"]}>
-                <div className={styles["auth-form__wrapper"]}>
-                    <div className="auth__title_wrapper">
-                        <h1 className="auth__title">регистрация</h1>
+        <div className={styles["auth"]}>
+            <div className={styles["auth__container"]}>
+                <div className={styles["auth__wrapper"]}>
+                    <div className={styles["auth__wrapper__container"]}>
+                        <div className={styles["auth__header"]}>
+                            <h1 className={styles["auth__header_title"]}>Авторизация</h1>
+                        </div>
+                        <div className={styles["auth__form_wrapper"]}>
+                            <form className={styles["auth__form"]}>
+                                <label htmlFor="email" className={styles["auth__label"]}>
+                                    Эл. почта
+                                    <input className={styles["auth__input"]} type="email" id="email" />
+                                </label>
+                                <label className={styles["auth__label"]}>
+                                    Пароль
+                                    <input className={styles["auth__input"]} type="email" id="email" />
+                                </label>
+                                <button className={styles["auth__button"]} type="submit">Зарегистрироваться</button>
+                            </form>
+                        </div>
+                        <div className={styles["link__auth__wrapper"]}>
+                            <p className={styles["link__auth"]}>
+                                Есть аккаунт?
+                                <a href="/auth/login">Авторизоваться</a>
+                            </p>
+                        </div>
                     </div>
-                    <form onSubmit={signUpHandler} className={styles["auth__form"]}>
-                        <div className={styles["label__wrapper"]}>
-                            <label htmlFor="email" className={styles["input__wrapper"]}>
-                                <input
-                                    placeholder="Введите эл. почту"
-                                    className={styles["input"]}
-                                    id="email"
-                                    ref={emailRef}
-                                />
-                            </label>
-                            {
-                                invalidMessageEmail &&
-                                <p className={styles["invalid__input-text"]}>{invalidMessageEmail}</p>
-                            }
+                </div>
+                <div className={styles["project__banner_wrapper"]}>
+                    <div className={styles["project__banner_wrapper-container"]}>
+                        <div className={styles["project__image_wrapper-container"]}>
+                            <div className={styles["project__image_wrapper"]}>
+                                <img src={LogoBanner} alt="Баннер: ТехноСфера" />
+                            </div>
+                            <p className={styles["project__author"]}>
+                                <span>Сервис создан: </span>
+                                <a href="https://github.com/Syomin-ilua">https://github.com/Syomin-ilua</a>
+                            </p>
                         </div>
-                        <div className={styles["label__wrapper"]}>
-                            <label htmlFor="password" className={styles["input__wrapper"]}>
-                                <input
-                                    placeholder="Введите пароль"
-                                    className={styles["input"]}
-                                    id="password"
-                                    ref={passwordRef}
-                                />
-                            </label>
-                            {
-                                invalidMessagePassword &&
-                                <p className={styles["invalid__input-text"]}>{invalidMessagePassword}</p>
-                            }
-                        </div>
-                        <button type="submit" className={styles["btn_auth"]}>Зарегистрироваться</button>
-                    </form>
-
-                    <p className="link__auth">Есть аккаунт? <Link to="/login">Авторизоваться</Link></p>
+                    </div>
                 </div>
             </div>
-        </Container>
+        </div>
     );
 }
 

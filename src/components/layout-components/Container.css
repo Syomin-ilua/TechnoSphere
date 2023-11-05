@@ -48,8 +48,8 @@
     padding-top: 100px;  
 }
 
-.user__profile_container {
-    padding-top: 100px;
+.profile__container {
+    padding-top: 150px;
 }
 
 @media(max-width: 1350px) {

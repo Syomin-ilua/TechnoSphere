@@ -14,8 +14,8 @@ import Catalog from './pages/Catalog';
 import ProductDetails from './pages/ProductDetails';
 import Basket from './pages/Basket';
 import PageNotFound from './pages/PageNotFound';
-import UserProfile from './components/users-components/UserProfile';
-import RequireAuth from './RequireAuth';
+import RequireAuth from './hoc/RequireAuth';
+import Profile from './pages/Profile';
 
 
 let isInitialRunning = true;
@@ -58,8 +58,11 @@ function App() {
                 </RequireAuth>
               } />
               <Route path='/profile' element={
+                <Navigate to="/profile/info" replace="true"/>
+              } />
+              <Route path='/profile/*' element={
                 <RequireAuth>
-                  <UserProfile />
+                  <Profile />
                 </RequireAuth>
               } />
               <Route path='/*' element={<PageNotFound />}/>

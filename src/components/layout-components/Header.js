@@ -11,13 +11,13 @@ const Header = () => {
     return (
         <header className={styles["header"]}>
             <Container class="header__container">
-                <NavLink className={styles["logo"]} to="/home">
+                <NavLink className={styles["logo"]} to="/">
                     <img src={Logo} alt="Логотип" />
                 </NavLink>
                 <nav className={styles["navigation"]}>
                     <ul>
                         <li>
-                            <NavLink className={setActive} to="/home">О нас</NavLink>
+                            <NavLink className={setActive} to="/">О нас</NavLink>
                         </li>
                         <li>
                             <NavLink className={setActive} to="/products">Каталог товаров</NavLink>
