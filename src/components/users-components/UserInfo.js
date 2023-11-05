@@ -24,7 +24,7 @@ const UserInfo = () => {
 	}
 
 	return (
-		<div className={styles["user__info"]}>
+		<div className={styles["user__wrapper"]}>
 			<div className={styles["user__info_wrapper"]}>
 				<div className={styles["user__general_info"]}>
 					<div className={styles["user__info_title"]}>

@@ -63,7 +63,7 @@ const SignUp = () => {
                 <div className={styles["auth__wrapper"]}>
                     <div className={styles["auth__wrapper__container"]}>
                         <div className={styles["auth__header"]}>
-                            <h1 className={styles["auth__header_title"]}>Авторизация</h1>
+                            <h1 className={styles["auth__header_title"]}>Регистрация</h1>
                         </div>
                         <div className={styles["auth__form_wrapper"]}>
                             <form className={styles["auth__form"]}>
