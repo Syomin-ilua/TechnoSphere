@@ -40,3 +40,8 @@
     border-bottom: 3px solid #fff;
     border-radius: 2px;
 }
+.profile__links {
+    display: flex;
+    align-items: center;
+    column-gap: 10px
+}

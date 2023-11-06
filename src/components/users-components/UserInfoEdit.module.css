@@ -1,0 +1,104 @@
+.profile__edit {
+    max-width: 100%;
+    width: 100%;
+    height: 426px;
+    background-color: #FFF;
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    padding: 25px;
+}
+
+h2 {
+    font-family: "Montserrat-Bold";
+    color: #333;
+    font-size: 18px;
+}
+
+.profile__edit_general-info {
+    margin-bottom: 30px;
+}
+
+.edit__sections {
+    display: flex;
+    align-items: start;
+    margin-top: 30px;
+    column-gap: 50px;
+}
+
+.edit__section {
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.edit__item_label {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.edit__item_label p {
+    font-family: "Montserrat-Bold";
+    font-size: 14px;
+    color: #333;
+}
+
+.edit__item_label input {
+    background-color: #FFF;
+    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
+    height: 20px;
+    padding: 10px;
+    font-family: "Montserrat-Regular";
+    font-size: 12px;
+    transition: all 0.3s;
+}
+
+.edit__item_label input:hover {
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s;
+}
+
+.edit__item_label input:focus {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s;
+}
+
+select {
+    font-family: "Montserrat-Regular";
+    font-size: 12px;
+}
+
+.edit__actions {
+    margin-top: 25px;
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.edit__actions button {
+    width: 150px;
+    height: 35px;
+    font-family: "Montserrat-Bold";
+    font-size: 14px;
+    color: #fff;
+    transition: all 0.3s;
+}
+
+.edit__cancel {
+    background-color: red;
+    border: 1px solid red;
+}
+
+.edit__cancel:hover {
+    background-color: #fff;
+    color: red;
+}
+
+.edit__save {
+    background-color: #4AB8A1;
+    border: 1px solid #4AB8A1;
+}
+
+.edit__save:hover {
+    background-color: #fff;
+    color: #4AB8A1;
+}
