@@ -4,12 +4,13 @@ import Container from "./Container";
 import Logo from "../../images/logo.svg";
 import BasketLink from "../basket-components/BasketLink";
 import ProfileLink from "../users-components/ProfileLink";
+import { useAuth } from "../../hooks/use-auth";
 
 const setActive = ({ isActive }) => isActive ? "active__link" : '';
 
-const isAuth = true;
-
 const Header = () => {
+
+    const { isAuth } = useAuth();
 
     return (
         <header className={styles["header"]}>
@@ -20,7 +21,7 @@ const Header = () => {
                 <nav className={styles["navigation"]}>
                     <ul>
                         <li>
-                            <NavLink className={setActive} to="/">Главная</NavLink>
+                            <NavLink className={setActive} to="/home">Главная</NavLink>
                         </li>
                         <li>
                             <NavLink className={setActive} to="/products">Каталог товаров</NavLink>

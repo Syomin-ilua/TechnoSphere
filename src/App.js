@@ -49,7 +49,10 @@ function App() {
           <Fragment>
             <Header />
             <Routes>
-              <Route path='/' element={<About />} />
+              <Route path='/' element={
+                <Navigate to="/home" replace={true}/>
+              } />
+              <Route path='/home' element={<About />} />
               <Route path='/products' element={<Catalog />} />
               <Route path='/products/:productID/*' element={<ProductDetails />} />
               <Route path='/basket' element={
@@ -58,14 +61,14 @@ function App() {
                 </RequireAuth>
               } />
               <Route path='/profile' element={
-                <Navigate to="/profile/info" replace="true"/>
+                <Navigate to="/profile/info" replace="true" />
               } />
               <Route path='/profile/*' element={
                 <RequireAuth>
                   <Profile />
                 </RequireAuth>
               } />
-              <Route path='/*' element={<PageNotFound />}/>
+              <Route path='/*' element={<PageNotFound />} />
             </Routes>
             <Footer />
           </Fragment>
@@ -75,7 +78,7 @@ function App() {
           <Routes>
             <Route path='/login' element={<SignIn />} />
             <Route path='/register' element={<SignUp />} />
-            <Route path='/*' element={<PageNotFound />}/>
+            <Route path='/*' element={<PageNotFound />} />
           </Routes>
         } />
 

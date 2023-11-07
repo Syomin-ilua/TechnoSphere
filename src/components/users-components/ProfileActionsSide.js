@@ -1,7 +1,9 @@
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import styles from "./ProfileActionsSide.module.css";
+import { signOut } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 
-const setActive = ({isActive}) => isActive ? styles["active__profile-link"] : '';
+const setActive = ({ isActive }) => isActive ? styles["active__profile-link"] : '';
 
 const ProfileActionsSide = () => {
 
@@ -17,8 +19,19 @@ const ProfileActionsSide = () => {
         country: "Российсикая Федерация"
     }
 
-    const exitProfileHandler = () => {
+    const logoutUser = () => {
+        const auth = getAuth();
+        signOut(auth).then(() => {
+            alert("Пользователь вышел из аккаунта");
+        }).catch((error) => {
+            alert("Произошла ошибка");
+            const errorCode = error.code;
+            console.log(errorCode);
+        })
+    }
 
+    const exitProfileHandler = () => {
+        logoutUser();
     }
 
     return (

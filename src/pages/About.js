@@ -1,8 +1,13 @@
 import Container from "../components/layout-components/Container";
 import styles from "./About.module.css";
 import AboutImage from "../images/about-images/about-image.jpg";
+import { useSelector } from "react-redux";
 
 const About = () => {
+
+    const userInfo = useSelector((state) => state.user);
+    console.log(userInfo); 
+
     return (
         <Container class="about__container">
             <div className={styles["about__wrapper"]}>

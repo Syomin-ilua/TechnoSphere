@@ -45,3 +45,22 @@
     align-items: center;
     column-gap: 10px
 }
+
+.auth__links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+}
+
+.auth__links a {
+    font-family: "Montserrat-Semibold";
+    color: #fff;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.auth__links a:hover {
+    color: #e4e4e4;
+    transition: all 0.3s;
+}

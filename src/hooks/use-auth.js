@@ -9,5 +9,4 @@ export const useAuth = () => {
         token,
         id
     };
-
 }
