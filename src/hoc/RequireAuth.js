@@ -5,7 +5,6 @@ import { useAuth } from '../hooks/use-auth';
 const RequireAuth = (props) => {
   
     const { isAuth } = useAuth(); 
-    console.log(isAuth); 
 
     if(!isAuth) {
         return <Navigate to="/auth/login" replace={true}/>     

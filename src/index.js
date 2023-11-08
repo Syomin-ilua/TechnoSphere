@@ -2,11 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
+import "./firebase";
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
+import { persistor, store } from './store/index.js';
 import { Provider } from 'react-redux';
-import store from './store';
-import "./firebase";
+import { PersistGate } from 'redux-persist/integration/react';
 
 // импорт шрифтов
 import "./fonts/Montserrat/Montserrat-Bold.ttf";
@@ -20,7 +21,9 @@ root.render(
   <React.StrictMode>
     <BrowserRouter>
       <Provider store={store}>
-        <App />
+        <PersistGate loading={null} persistor={persistor}>
+          <App />
+        </PersistGate>
       </Provider>
     </BrowserRouter>
   </React.StrictMode>
