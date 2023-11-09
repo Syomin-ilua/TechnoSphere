@@ -4,7 +4,7 @@
     border-radius: 50%;
     background-color: rgb(74 184 161);
     font-size: 16px;
-    font-family: "IBMPlexMono-Bold";
+    font-family: "Monserrat-Bold";
     color: #fff;
     display: flex;
     justify-content: center;
@@ -21,7 +21,7 @@
 .product__text_back {
     text-align: center;
     font-size: 16px;
-    font-family: "IBMPlexMono-Medium";
+    font-family: "Montserrat-Medium";
 }
 .product__top {
     margin-bottom: 30px;

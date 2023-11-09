@@ -1,11 +1,16 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import styles from "./ProfileActionsSide.module.css";
 import { signOut } from "firebase/auth";
 import { getAuth } from "firebase/auth";
+import { useDispatch } from "react-redux";
+import { userActions } from "../../store/user-slice";
 
 const setActive = ({ isActive }) => isActive ? styles["active__profile-link"] : '';
 
 const ProfileActionsSide = () => {
+
+    const dispatchAction = useDispatch();
+    const navigate = useNavigate();
 
     const userINFO = {
         id: "1",
@@ -22,7 +27,10 @@ const ProfileActionsSide = () => {
     const logoutUser = () => {
         const auth = getAuth();
         signOut(auth).then(() => {
-            alert("Пользователь вышел из аккаунта");
+            dispatchAction(userActions.removeUser());
+            setTimeout(() => {
+                navigate("/auth/login");
+            }, 1000);
         }).catch((error) => {
             alert("Произошла ошибка");
             const errorCode = error.code;

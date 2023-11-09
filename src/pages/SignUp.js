@@ -65,9 +65,13 @@ const SignUp = () => {
                     userRole: "user",
                     tel: "",
                     address: "",
-                    basket: [],
-                    orders: [],
                     registeredAt: Timestamp.fromDate(new Date()),
+                });
+                setDoc(doc(db, 'baskets', user.uid), {
+                    basket: []
+                });
+                setDoc(doc(db, 'orders', user.uid), {
+                    orders: []
                 });
                 setIsRegisterState({
                     text: "Регистрация прошла успешно!",

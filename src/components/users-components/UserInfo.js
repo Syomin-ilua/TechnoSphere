@@ -1,22 +1,42 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./UserInfo.module.css";
+import { doc, getDoc } from "firebase/firestore"
+import { db } from "../../firebase";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 const UserInfo = () => {
 
 	const navaigate = useNavigate();
+	const userId = useSelector((state) => state.user.user.id);
+	const [user, setUser] = useState({});
+	const [isLoading, setIsLoading] = useState(false);
 
-	const userINFO = {
-		id: "1",
-		surname: "Сёмин",
-		name: "Илья",
-		patronymic: "Александрович",
-		gender: "мужской",
-		email: "semin574@yandex.ru",
-		tel: "+79610344485",
-		dateOfBirth: "12.01.2000",
-		country: "Российсикая Федерация",
-		role: "администратор"
-	}
+
+	useEffect(() => {
+
+		const getUserData = async () => {
+			setIsLoading(true);
+
+			const docRef = doc(db, "users", userId);
+			const docSnap = await getDoc(docRef);
+
+			if (docSnap.exists()) {
+				const userInfo = docSnap.data();
+				setUser(userInfo);
+				setIsLoading(false);
+			} else {
+				setIsLoading(false);
+				throw new Error("No such document!");
+			}
+		}
+
+		getUserData().catch(error => {
+			console.log(error);
+		});
+
+
+	}, []);
 
 
 	const changeProfileHandler = () => {
@@ -35,19 +55,19 @@ const UserInfo = () => {
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Фамилия: </span>
-									{userINFO.surname}
+									{isLoading && !user.surname ? "..." : !isLoading && !!user.surname ? user.surname : "не указано"}
 								</p>
 							</div>
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Имя: </span>
-									{userINFO.name}
+									{isLoading && !user.name ? "..." : !isLoading && !!user.name ? user.name : "не указано"}
 								</p>
 							</div>
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Отчество: </span>
-									{userINFO.patronymic}
+									{isLoading && !user.patronymic ? "..." : !isLoading && !!user.patronymic ? user.patronymic : "не указано"}
 								</p>
 							</div>
 						</div>
@@ -55,19 +75,19 @@ const UserInfo = () => {
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Дата рождения: </span>
-									{userINFO.dateOfBirth}
+									{isLoading && !user.dateOfBirth ? "..." : !isLoading && !!user.dateOfBirth ? user.dateOfBirth : "не указано"}
 								</p>
 							</div>
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Пол: </span>
-									{userINFO.gender}
+									{isLoading && !user.gender ? "..." : !isLoading && !!user.gender ? user.gender : "не указано"}
 								</p>
 							</div>
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Роль: </span>
-									{userINFO.role}
+									{isLoading && !user.userRole ? "..." : !isLoading && !!user.userRole ? user.userRole : "не указано"}
 								</p>
 							</div>
 						</div>
@@ -81,19 +101,19 @@ const UserInfo = () => {
 						<div className={styles["info__item"]}>
 							<p className={styles["info__text"]}>
 								<span>Эл. почта: </span>
-								{userINFO.email}
+								{isLoading && !user.email ? "..." : !isLoading && !!user.email ? user.email : "не указано"}
 							</p>
 						</div>
 						<div className={styles["info__item"]}>
 							<p className={styles["info__text"]}>
 								<span>Номер телефона: </span>
-								{userINFO.tel}
+								{isLoading && !user.tel ? "..." : !isLoading && !!user.tel ? user.tel : "не указано"}
 							</p>
 						</div>
 						<div className={styles["info__item"]}>
 							<p className={styles["info__text"]}>
 								<span>Адрес: </span>
-								{userINFO.country}
+								{isLoading && !user.address ? "..." : !isLoading && !!user.address ? user.address : "не указано"}
 							</p>
 						</div>
 					</div>

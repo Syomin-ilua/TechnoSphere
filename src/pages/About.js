@@ -1,12 +1,12 @@
 import Container from "../components/layout-components/Container";
 import styles from "./About.module.css";
-import AboutImage from "../images/about-images/about-image.jpg";
-import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const About = () => {
 
-    const userInfo = useSelector((state) => state.user);
-    console.log(userInfo); 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
 
     return (
         <Container class="about__container">
