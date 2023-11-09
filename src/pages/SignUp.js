@@ -68,7 +68,8 @@ const SignUp = () => {
                     registeredAt: Timestamp.fromDate(new Date()),
                 });
                 setDoc(doc(db, 'baskets', user.uid), {
-                    basket: []
+                    basket: [],
+                    itemsQuantity: 0
                 });
                 setDoc(doc(db, 'orders', user.uid), {
                     orders: []

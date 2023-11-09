@@ -55,19 +55,19 @@ const UserInfo = () => {
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Фамилия: </span>
-									{isLoading && !user.surname ? "..." : !isLoading && !!user.surname ? user.surname : "не указано"}
+									{isLoading && !user.surname ? "загрузка" : !isLoading && !!user.surname ? user.surname : "не указано"}
 								</p>
 							</div>
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Имя: </span>
-									{isLoading && !user.name ? "..." : !isLoading && !!user.name ? user.name : "не указано"}
+									{isLoading && !user.name ? "загрузка" : !isLoading && !!user.name ? user.name : "не указано"}
 								</p>
 							</div>
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Отчество: </span>
-									{isLoading && !user.patronymic ? "..." : !isLoading && !!user.patronymic ? user.patronymic : "не указано"}
+									{isLoading && !user.patronymic ? "загрузка" : !isLoading && !!user.patronymic ? user.patronymic : "не указано"}
 								</p>
 							</div>
 						</div>
@@ -75,19 +75,19 @@ const UserInfo = () => {
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Дата рождения: </span>
-									{isLoading && !user.dateOfBirth ? "..." : !isLoading && !!user.dateOfBirth ? user.dateOfBirth : "не указано"}
+									{isLoading && !user.dateOfBirth ? "загрузка" : !isLoading && !!user.dateOfBirth ? user.dateOfBirth : "не указано"}
 								</p>
 							</div>
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Пол: </span>
-									{isLoading && !user.gender ? "..." : !isLoading && !!user.gender ? user.gender : "не указано"}
+									{isLoading && !user.gender ? "загрузка" : !isLoading && !!user.gender ? user.gender : "не указано"}
 								</p>
 							</div>
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Роль: </span>
-									{isLoading && !user.userRole ? "..." : !isLoading && !!user.userRole ? user.userRole : "не указано"}
+									{isLoading && !user.userRole ? "загрузка" : !isLoading && !!user.userRole ? user.userRole : "не указано"}
 								</p>
 							</div>
 						</div>
@@ -101,19 +101,19 @@ const UserInfo = () => {
 						<div className={styles["info__item"]}>
 							<p className={styles["info__text"]}>
 								<span>Эл. почта: </span>
-								{isLoading && !user.email ? "..." : !isLoading && !!user.email ? user.email : "не указано"}
+								{isLoading && !user.email ? "загрузка" : !isLoading && !!user.email ? user.email : "не указано"}
 							</p>
 						</div>
 						<div className={styles["info__item"]}>
 							<p className={styles["info__text"]}>
 								<span>Номер телефона: </span>
-								{isLoading && !user.tel ? "..." : !isLoading && !!user.tel ? user.tel : "не указано"}
+								{isLoading && !user.tel ? "загрузка" : !isLoading && !!user.tel ? user.tel : "не указано"}
 							</p>
 						</div>
 						<div className={styles["info__item"]}>
 							<p className={styles["info__text"]}>
 								<span>Адрес: </span>
-								{isLoading && !user.address ? "..." : !isLoading && !!user.address ? user.address : "не указано"}
+								{isLoading && !user.address ? "загрузка" : !isLoading && !!user.address ? user.address : "не указано"}
 							</p>
 						</div>
 					</div>

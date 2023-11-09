@@ -1,54 +1,48 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-
-const FirebaseBasketURL = "https://react-course-http-cae26-default-rtdb.firebaseio.com/basket.json"
+import { db } from "../firebase";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 
 export const basketChangeOrders = createAsyncThunk(
     "basket/basketChangeOrders",
-    async function (_, {rejectWithValue, getState}) {
+    async function({userId}, {rejectWithValue, getState}) {
 
-        const { items, itemsQuantity } = getState().basket; 
+        const {items, itemsQuantity} = getState().basket;
+        const userBasketDocRef = doc(db, "baskets", userId);
 
         try {
-            const response = await fetch(FirebaseBasketURL, {
-                method: "PUT",
-                headers: {
-                    "Content-type": "application/json"
-                },
-                body: JSON.stringify({
-                    items: items,
-                    itemsQuantity: itemsQuantity
-                })
+
+            await updateDoc(userBasketDocRef, {
+                items,
+                itemsQuantity
             });
 
-            if(!response.ok) {
-                throw new Error("Произошла ошибка отправки данных корзины на сервер");
-            }
 
-
-        } catch (error) {
+        } catch(error) {
             return rejectWithValue(error.message);
         }
+
     }
 );
 
 export const basketGetOrders = createAsyncThunk(
     "basket/basketGetOrders",
-    async function (_, {rejectWithValue}) {
+    async function({userId}, {rejectWithValue}) {
+        const docRef = doc(db, "baskets", userId);
+
         try {
-            const response = await fetch(FirebaseBasketURL);
+            const docSnap = await getDoc(docRef);
 
-            if(!response.ok) {
-                throw new Error("Произошла ошибка получения данных корзины");
-            }
+            if (docSnap.exists()) {
+				const basket = docSnap.data();
+                return basket;
+			} else {
+				throw new Error("No such document!");
+			}
 
-            const basketData = await response.json();
-
-            return basketData;
-
-        } catch (error) {
+        } catch(error) {
             return rejectWithValue(error.message);
         }
-    }
+    }    
 )
 
 const basketActionsInitialState = {

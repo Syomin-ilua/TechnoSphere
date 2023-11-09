@@ -1,7 +1,7 @@
 import './App.css';
 import { Fragment, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Switch, Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { basketGetOrders, basketChangeOrders } from './store/basket-slice';
 
 import Header from './components/layout-components/Header';
@@ -17,16 +17,17 @@ import PageNotFound from './pages/PageNotFound';
 import RequireAuth from './hoc/RequireAuth';
 import Profile from './pages/Profile';
 
-
 let isInitialRunning = true;
 
 function App() {
 
+  const userId = useSelector((state) => state.user.user.id);
   const basket = useSelector((state) => state.basket);
+  
   const dispatchAction = useDispatch();
 
   useEffect(() => {
-    dispatchAction(basketGetOrders());
+    dispatchAction(basketGetOrders({userId}));
   }, []);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ function App() {
 
 
     if (basket.isBasketContentChanged) {
-      dispatchAction(basketChangeOrders());
+      dispatchAction(basketChangeOrders({userId}));
     }
 
   }, [basket]);
