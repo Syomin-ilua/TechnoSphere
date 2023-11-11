@@ -5,14 +5,17 @@ import ReviewsList from "./ReviewsList";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../UI-components/Loader";
 import { changeReviews, getReviews } from "../../store/reviews-slice";
+import { useAuth } from "../../hooks/use-auth";
 
 let isInitialRunning = true;
 
 const Reviews = (props) => {
 
+    const { isAuth } = useAuth();
+
     const { productId } = props;
     const [isFormShowState, setIsFormShowState] = useState(false);
-    
+
     const { status, error, reviews, reviewsAddState } = useSelector((state) => state.reviews);
     const dispatchAction = useDispatch();
 
@@ -25,13 +28,13 @@ const Reviews = (props) => {
     }, []);
 
     useEffect(() => {
-        
-        if(isInitialRunning) {
+
+        if (isInitialRunning) {
             isInitialRunning = false;
             return;
         }
 
-        if(reviewsAddState) {
+        if (reviewsAddState) {
             dispatchAction(changeReviews(productId));
         }
 
@@ -39,11 +42,14 @@ const Reviews = (props) => {
 
     return (
         <div className={styles["reviews"]}>
-            <div className={styles["add__reviews_wrapper"]}>
-                <button onClick={toggleFormAddReviewState} className={styles["add__reviews"]}>{isFormShowState ? "Закрыть форму" : "Добавить отзыв"}</button>
-            </div>
+            {
+                isAuth &&
+                <div className={styles["add__reviews_wrapper"]}>
+                    <button onClick={toggleFormAddReviewState} className={styles["add__reviews"]}>{isFormShowState ? "Закрыть форму" : "Добавить отзыв"}</button>
+                </div>
+            }
             {isFormShowState && <ReviewsForm productId={productId} />}
-            {status === "loading" && <Loader/>}
+            {status === "loading" && <Loader />}
             {error && <p className={styles["reviews__error"]}>Произошла ошибка - {error} </p>}
             {status === "resolved" && <ReviewsList reviews={reviews} />}
         </div>

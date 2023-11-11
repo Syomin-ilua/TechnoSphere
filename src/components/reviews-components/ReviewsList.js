@@ -24,6 +24,9 @@ const ReviewsList = (props) => {
                                     reviewData: review.reviewData,
                                     productID: review.productId,
                                     userId: review.userId,
+                                    userName: review.userName,
+                                    gender: review.gender,
+                                    address: review.address
                                 }}
                             />
                         ))

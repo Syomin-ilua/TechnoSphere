@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../firebase";
 import { userActions } from "../store/user-slice";
@@ -7,6 +7,7 @@ import LogoBanner from "../images/logo-banner.svg"
 import IconSuccesStatus from "../images/status-success.svg";
 import IconFailedStatus from "../images/status-failed.svg";
 import { useDispatch, useSelector } from "react-redux";
+import { useAuth } from "../hooks/use-auth";
 
 const validateRegexEmail = /^\S+@\S+\.\S+$/;
 
@@ -15,8 +16,7 @@ const SignIn = () => {
     const navigate = useNavigate();
     const dispatchAction = useDispatch();
 
-    const userInfo = useSelector((state) => state.user);
-    console.log(userInfo);
+    const { isAuth } = useAuth(); 
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -29,6 +29,15 @@ const SignIn = () => {
         stateLogin: null,
         isShow: false,
     });
+
+    useEffect(() => {
+        
+        if(isAuth) {
+            navigate("/home");
+        }
+
+
+    }, []);
 
     const emailChangeHandler = (event) => {
         setEmail(event.target.value);

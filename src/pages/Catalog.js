@@ -28,7 +28,11 @@ const Catalog = () => {
         <Container class="catalog__container">
             <SearchForm />
             <div className={styles["catalog"]}>
-                {status === "loading" && <Loader />}
+                {status === "loading" &&
+                <div className={styles["loader__wrapper"]}>
+                    <Loader />
+                </div>
+                }
                 {status === "resolved" && <ProductsList />}
                 {error && errorContent}
             </div>

@@ -11,9 +11,13 @@
     align-items: center;
     border-radius: 50%;
 }
-.loaderWrapper {
+.location__action img {
+    width: 60%;
+    height: 60%;
+}
+.loader__wrapper {
     width: 100%;
-    height: 200px;
+    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -21,7 +25,7 @@
 .product__text_back {
     text-align: center;
     font-size: 16px;
-    font-family: "Montserrat-Medium";
+    font-family: "Montserrat-SemiBold";
 }
 .product__top {
     margin-bottom: 30px;
@@ -30,7 +34,7 @@
     display: flex;
     align-items: center;
     color: #333;
-    column-gap: 15px;
+    column-gap: 10px;
     transition: all 0.3s;    
 }
 .product__top a:hover {

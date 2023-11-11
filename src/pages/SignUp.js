@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { registerUser, db } from "../firebase";
@@ -7,12 +7,14 @@ import styles from "./Auth.module.css";
 import LogoBanner from "../images/logo-banner.svg";
 import IconSuccesStatus from "../images/status-success.svg";
 import IconFailedStatus from "../images/status-failed.svg";
+import { useAuth } from "../hooks/use-auth";
 
 const validateRegexEmail = /^\S+@\S+\.\S+$/;
 
 const SignUp = () => {
 
     const navigate = useNavigate();
+    const { isAuth } = useAuth(); 
 
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -27,6 +29,15 @@ const SignUp = () => {
         stateReg: null,
         isShow: false,
     });
+
+    useEffect(() => {
+        
+        if(isAuth) {
+            navigate("/home");
+        }
+
+
+    }, []);
 
     const nameChangeHandler = (event) => {
         setName(event.target.value);
@@ -101,7 +112,7 @@ const SignUp = () => {
                 });
                 setTimeout(() => {
                     navigate("/auth/login");
-                }, 3000);
+                }, 1500);
             })
             .catch((error) => {
                 setIsRegisterState({
@@ -115,7 +126,7 @@ const SignUp = () => {
                         stateReg: null,
                         isShow: false
                     });
-                }, 1000);
+                }, 1500);
             });
     }
 

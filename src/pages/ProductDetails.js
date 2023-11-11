@@ -7,6 +7,7 @@ import Loader from "../components/UI-components/Loader";
 import Reviews from "../components/reviews-components/Reviews";
 import { useDispatch, useSelector } from "react-redux";
 import { getProduct } from "../store/productDetails-slice";
+import LeftArrow from "../../src/images/left-arrow.svg";
 
 const ProductDetails = () => {
 
@@ -26,16 +27,19 @@ const ProductDetails = () => {
 
     return (
         <Container class="productDetails__container">
-
             <div className={styles["product__top"]}>
                 <Link to="/products">
                     <div className={styles["location__action"]}>
-                        ←
+                        <img src={LeftArrow} alt="<-" />
                     </div>
                     <p className={styles["product__text_back"]}>Назад</p>
                 </Link>
             </div>
-            {product.status === "loading" && <Loader />}
+            {product.status === "loading" &&
+                <div className={styles["loader__wrapper"]}>
+                    <Loader />
+                </div>
+            }
             {product.status === "resolved" &&
                 <ProductCart
                     product={{

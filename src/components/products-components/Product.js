@@ -2,18 +2,28 @@ import styles from "./Product.module.css";
 import Image from "../UI-components/Image";
 import { basketActions } from "../../store/basket-slice";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../hooks/use-auth";
 
 
 const Product = (props) => {
 
-    const { id, image, productName, cost, description } = props.product;
+    const { id, image, productName, cost } = props.product;
+
+    const { isAuth } = useAuth();
+    const navigate = useNavigate();
 
     const dispatchAction = useDispatch();
 
     const addProductInBasketHandler = () => {
+
+        if(!isAuth) {
+            navigate("/auth/login");
+            return;
+        }
+
         dispatchAction(basketActions.addItem({
-            id: id, 
+            id: id,
             image: image,
             productName: productName,
             cost: cost,

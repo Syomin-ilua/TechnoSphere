@@ -1,8 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styles from "./ReviewsForm.module.css";
 import { reviewsActions } from "../../store/reviews-slice";
 import { changeReviews } from "../../store/reviews-slice";
+import { db } from "../../firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 const now = new Date();
 
@@ -22,8 +24,34 @@ const ReviewsForm = (props) => {
     const [comment, setComment] = useState("");
     const [InvalidMessage, setInvalidMessage] = useState(null);
     
+    const [isLoading, setIsLoading] = useState(false);
+    const [user, setUser] = useState({});
+    const [error, setError] = useState(false);
+
     const productId = props.productId;
     const userId = useSelector((state) => state.user.user.id);
+
+    useEffect(() => {
+        const getUserData = async () => {
+            setIsLoading(true);
+
+            const docRef = doc(db, "users", userId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                const userInfo = docSnap.data();
+                setUser(userInfo);
+                setIsLoading(false);
+            } else {
+                setIsLoading(false);
+                throw new Error("No such document!");
+            }
+        }
+
+        getUserData().catch(error => {
+            alert("Произошла ошибка - " + error);
+        });
+    }, []);
 
     const commentHandler = (event) => {
         setComment(event.target.value);
@@ -44,15 +72,21 @@ const ReviewsForm = (props) => {
 
         setInvalidMessage(null);
 
+        if(isLoading || error) {
+            return;
+        }
+
         const review = {
             id: Math.random(),
             date: date.format(now),
             reviewData: comment,
             productID: productId,
             userId: userId,
-            userDisplayName: "wearlord" 
+            userName: user.name,
+            gender: user.gender,
+            address: user.address
         }
-        
+
         dispatchAction(reviewsActions.addReviewProduct(review));
         setComment("");
     }

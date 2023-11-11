@@ -4,11 +4,14 @@ import { basketActions } from "../../store/basket-slice";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import styles from "./ProductCart.module.css";
 import Image from "../UI-components/Image";
+import { useAuth } from "../../hooks/use-auth";
 
 const ProductCart = (props) => {
 
     const navigate = useNavigate();
     const location = useLocation();
+
+    const { isAuth } = useAuth();
 
     const { id, productName, type, description, cost, image, options } = props.product;
 
@@ -42,6 +45,12 @@ const ProductCart = (props) => {
     }
 
     const addProductBasketHandler = () => {
+
+        if (!isAuth) {
+            navigate("/auth/login");
+            return;
+        }
+
         dispatchAction(basketActions.addItem({
             id: id,
             image: image,
@@ -49,11 +58,12 @@ const ProductCart = (props) => {
             cost: cost,
             quantity: productQuantity
         }));
+        setProductQuantity(0);
     }
 
     if (type === "smartphone") {
         content =
-            <div className={styles.productOptions}>
+            <div className={styles["product__options"]}>
                 <i>Характеристики: </i>
                 <p><span>Память: </span>{options.memory}</p>
                 <p><span>Камера: </span>{options.camera}</p>
@@ -62,7 +72,7 @@ const ProductCart = (props) => {
             </div>;
     } else if (type === "laptop") {
         content =
-            <div className={styles.productOptions}>
+            <div className={styles["product__options"]}>
                 <i>Характеристики: </i>
                 <p><span>Память: </span>{options.memory}</p>
                 <p><span>Камера: </span>{options.camera}</p>
@@ -71,7 +81,7 @@ const ProductCart = (props) => {
             </div>;
     } else if (type === "smartwatch") {
         content =
-            <div className={styles.productOptions}>
+            <div className={styles["product__options"]}>
                 <i>Характеристики: </i>
                 <p><span>Память: </span>{options.memory}</p>
                 <p><span>Оперативная память: </span>{options.RAM}</p>
@@ -80,29 +90,29 @@ const ProductCart = (props) => {
     }
 
     return (
-        <div className={styles.product}>
-            <div className={styles.imgWrapper}>
+        <div className={styles["product"]}>
+            <div className={styles["img__wrapper"]}>
                 <Image src={image} alt={`Изображение: ${productName}`} />
             </div>
-            <div className={styles.productInformation}>
-                <div className={styles.productInfo}>
-                    <p className={styles.productName}>{productName}</p>
-                    <p className={styles.cost}><span>Цена: </span>{cost} руб.</p>
-                    <p className={styles.description}><span>Описание: </span> {description}</p>
+            <div className={styles["product__information"]}>
+                <div className={styles["product__info"]}>
+                    <p className={styles["product__name"]}>{productName}</p>
+                    <p className={styles["cost"]}><span>Цена: </span>{cost} руб.</p>
+                    <p className={styles["description"]}><span>Описание: </span> {description}</p>
                 </div>
-                <div className={styles.productOptions}>
+                <div className={styles["product__options"]}>
                     {content}
                 </div>
-                <div className={styles.productActions}>
-                    <div className={styles.choiseQuontityActions}>
-                        <button className={styles.incrementButton} onClick={incrementQuontityHandler}>+</button>
-                        <div className={styles.productQuantity}>
+                <div className={styles["product__actions"]}>
+                    <div className={styles["choise__quontity_actions"]}>
+                        <button className={styles["increment__button"]} onClick={incrementQuontityHandler}>+</button>
+                        <div className={styles["product__quantity"]}>
                             <p>{productQuantity}</p>
                         </div>
-                        <button className={styles.decrementButton} onClick={decrementQuontityHandler}>-</button>
+                        <button className={styles["decrement__button"]} onClick={decrementQuontityHandler}>-</button>
                     </div>
                     <div className={styles["product__action"]}>
-                        <button className={styles.btnAddBasket} onClick={addProductBasketHandler}>Добавить в корзину</button>
+                        <button className={styles["btn__add_basket"]} onClick={addProductBasketHandler}>Добавить в корзину</button>
                         {
                             isLinkReviewsState && location.pathname !== `/products/${id}/reviews` ?
                                 <Link className={styles["reviews__link"]} onClick={reviewsShowLinkHandler} to={`reviews`}>Смотреть отзывы</Link>

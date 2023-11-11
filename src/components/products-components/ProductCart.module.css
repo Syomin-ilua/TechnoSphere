@@ -3,32 +3,37 @@
     justify-content: space-evenly;
     align-items: center;
     column-gap: 50px;
+    background-color: #FFF;
+    box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25);
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-radius: 10px;
 }
 
-.imgWrapper {
+.img__wrapper {
     width: 200px;
     height: 220px;
 }
 
-.imgWrapper img {
+.img__wrapper img {
     width: 100%;
     height: 100%;
 }
 
-.productInformation {
+.product__information {
     display: flex;
     flex-direction: column;
     max-width: 650px;
     width: 100%;
 }
 
-.productName {
+.product__name {
     font-family: "Montserrat-Bold";
     font-size: 19px;
     line-height: 24px;
 }
 
-.productInfo {
+.product__info {
     display: flex;
     flex-direction: column;
     row-gap: 10px;
@@ -57,100 +62,100 @@
     line-height: 24px;
 }
 
-.productOptions {
+.product__options {
     display: flex;
     flex-direction: column;
     row-gap: 15px;
 }
 
-.productOptions i {
+.product__options i {
     font-family: "Montserrat-Regular";
     font-size: 16px;
 }
 
-.productOptions p {
+.product__options p {
     font-family: "Montserrat-Regular";
     font-size: 14px;
 }
 
-.productOptions p span {
+.product__options p span {
     font-family: "Montserrat-Bold";
 }
 
-.productActions {
+.product__actions {
     margin-top: 20px;
 }
 
-.choiseQuontityActions {
+.choise__quontity_actions {
     display: flex;
     align-items: center;
 }
 
-.choiseQuontityActions button {
+.choise__quontity_actions button {
     font-family: "Montserrat-Bold";
     font-size: 16px;
     color: #fff;
     transition: all 0.3s;
 }
 
-.choiseQuontityActions button:active {
+.choise__quontity_actions button:active {
     transform: scale(0.9);
     transition: all 0.3s;
 }
 
-.incrementButton {
+.increment__button {
     border: 1px solid #4AB8A1;
     background-color: #4AB8A1;
     width: 35px;
     height: 35px;
 }
 
-.incrementButton:hover {
+.increment__button:hover {
     background-color: #fff;
     color: #4AB8A1;
     transition: all 0.3s;
 }
 
-.productQuantity {
+.product__quantity {
     width: 35px;
     height: 35px;
-    background-color: rgb(236, 236, 236);
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.productQuantity p {
+.product__quantity p {
     font-size: 14px;
-    font-family: "Montserrat-Bold";
+    font-family: "Montserrat-SemiBold";
 }
 
-.decrementButton {
+.decrement__button {
     background-color: #000;
     width: 35px;
     height: 35px;
     border: 1px solid #000;
 }
 
-.decrementButton:hover {
+.decrement__button:hover {
     background-color: #fff;
     color: #000;
     transition: all 0.3s;
 }
 
-.btnAddBasket {
+.btn__add_basket {
     width: 250px;
     height: 35px;
-    border: 1px solid rgb(0, 220, 0);
-    background-color: rgb(0, 220, 0);
+    border: 1px solid #4AB8A1;
+    background-color: #4AB8A1;
     font-family: "Montserrat-Bold";
     font-size: 16px;
     color: #fff;
     transition: all 0.3s;
 }
 
-.btnAddBasket:active {
-    transform: scale(0.9);
+.btn__add_basket:hover {
+    background-color: #fff;
+    color: #4AB8A1;
     transition: all 0.3s;
 }
 
