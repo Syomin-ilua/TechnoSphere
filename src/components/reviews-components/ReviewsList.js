@@ -5,24 +5,32 @@ const ReviewsList = (props) => {
 
     const reviews = props.reviews;
 
+    const reviewsEmpty =
+        <div className={styles["reviews__empty"]}>
+            <p>У этого товара пока нету отзывов</p>
+        </div>;
+
     return (
-        <ul className={styles["reviews__list"]}>
-            {
-                reviews.map(review => (
-                    <ReviewsItem
-                        key={review.id}
-                        productReview={{
-                            id: review.id,
-                            userSurname: review.userSurname,
-                            userName: review.userName,
-                            userPatronymic: review.userPatronymic,
-                            date: review.date,
-                            reviewData: review.reviewData
-                        }}
-                    />
-                ))
+        <div className="reviews__list_wrapper">
+            {reviews.length === 0 ? reviewsEmpty :
+                <ul className={styles["reviews__list"]}>
+                    {
+                        reviews.map(review => (
+                            <ReviewsItem
+                                key={review.id}
+                                productReview={{
+                                    id: Math.random(),
+                                    date: review.date,
+                                    reviewData: review.reviewData,
+                                    productID: review.productId,
+                                    userId: review.userId,
+                                }}
+                            />
+                        ))
+                    }
+                </ul>
             }
-        </ul>
+        </div>
     )
 }
 

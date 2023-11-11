@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from "./UserOrders.module.css";
-import Order from './Order';
+import Order from '../basket-components/Order';
 
 const orders = [
 	{

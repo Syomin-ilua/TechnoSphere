@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { productsActions } from "../../store/products-slice";
+import { useDispatch, useSelector } from "react-redux";
 import styles from "./ReviewsForm.module.css";
+import { reviewsActions } from "../../store/reviews-slice";
+import { changeReviews } from "../../store/reviews-slice";
 
 const now = new Date();
 
@@ -16,11 +17,13 @@ const date = new Intl.DateTimeFormat("ru", {
 
 const ReviewsForm = (props) => {
 
-
     const dispatchAction = useDispatch();
+
     const [comment, setComment] = useState("");
     const [InvalidMessage, setInvalidMessage] = useState(null);
+    
     const productId = props.productId;
+    const userId = useSelector((state) => state.user.user.id);
 
     const commentHandler = (event) => {
         setComment(event.target.value);
@@ -46,15 +49,12 @@ const ReviewsForm = (props) => {
             date: date.format(now),
             reviewData: comment,
             productID: productId,
-            userId: 1,
-            userSurname: "Сёмин",
-            userName: "Илья",
-            userPatronymic: "Александрович"
+            userId: userId,
+            userDisplayName: "wearlord" 
         }
-
         
-        dispatchAction(productsActions.addReviewProduct(review))
-        
+        dispatchAction(reviewsActions.addReviewProduct(review));
+        setComment("");
     }
 
     return (

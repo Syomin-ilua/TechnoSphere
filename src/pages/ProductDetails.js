@@ -5,66 +5,22 @@ import Container from "../components/layout-components/Container";
 import ProductCart from "../components/products-components/ProductCart";
 import Loader from "../components/UI-components/Loader";
 import Reviews from "../components/reviews-components/Reviews";
-
-const URLFirebase = `https://react-course-http-cae26-default-rtdb.firebaseio.com/`;
-
-const reviews = [
-    {
-        id: Math.random(),
-        date: String(new Date()),
-        reviewData: "dsadas",
-        productID: "1",
-        userId: 1,
-        userSurname: "Сёмин",
-        userName: "Илья",
-        userPatronymic: "Александрович"
-    },
-    {
-        id: Math.random(),
-        date: String(new Date()),
-        reviewData: "dsadas",
-        productID: "1",
-        userId: 1,
-        userSurname: "Сёмин",
-        userName: "Илья",
-        userPatronymic: "Александрович"
-    }
-]
+import { useDispatch, useSelector } from "react-redux";
+import { getProduct } from "../store/productDetails-slice";
 
 const ProductDetails = () => {
 
     const params = useParams();
+    const productId = params.productID;
 
-    const [product, setProduct] = useState({});
-    const [isLoading, setIsLoading] = useState(true);
-    const [isHttpErrorMessage, setIsHttpErrorMessage] = useState(false);
+    const dispatchAction = useDispatch();
+    const product = useSelector((state) => state.product);
 
     useEffect(() => {
 
         window.scrollTo(0, 0);
 
-        const getProduct = async (url) => {
-            setIsLoading(true);
-
-            const URLFirebaseProduct = `${url}/products/${params.productID}.json`;
-
-            const response = await fetch(URLFirebaseProduct);
-
-            if (!response.ok) {
-                throw new Error("Ошибка получения данных о товаре");
-            }
-
-            const responseData = await response.json();
-
-
-            setProduct(responseData);
-            setIsLoading(false);
-        }
-
-        getProduct(URLFirebase).catch(error => {
-            setIsHttpErrorMessage(error + "");
-            setIsLoading(false);
-        });
+        dispatchAction(getProduct(productId));
 
     }, []);
 
@@ -79,22 +35,25 @@ const ProductDetails = () => {
                     <p className={styles["product__text_back"]}>Назад</p>
                 </Link>
             </div>
-            {
-                isLoading ? <Loader /> :
-                    <ProductCart
-                        product={{
-                            id: product.id,
-                            productName: product.productName,
-                            type: product.type,
-                            description: product.description,
-                            cost: product.cost,
-                            image: product.image,
-                            options: product.options ? product.options : null
-                        }}
-                    />
+            {product.status === "loading" && <Loader />}
+            {product.status === "resolved" &&
+                <ProductCart
+                    product={{
+                        id: product.product.id,
+                        productName: product.product.productName,
+                        type: product.product.type,
+                        description: product.product.description,
+                        cost: product.product.cost,
+                        image: product.product.image,
+                        options: product.product.options ? product.product.options : null
+                    }}
+                />
             }
+            {product.error && <p>{product.error}</p>}
             <Routes>
-                <Route path="reviews" element={<Reviews productId={product.id} reviews={reviews || []} />} />
+                <Route path="reviews" element={
+                    <Reviews productId={productId} />}
+                />
             </Routes>
         </Container>
     )

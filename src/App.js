@@ -1,8 +1,9 @@
 import './App.css';
 import { Fragment, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { basketGetOrders, basketChangeOrders } from './store/basket-slice';
+import { productChangeReviews } from './store/productDetails-slice';
 
 import Header from './components/layout-components/Header';
 import Footer from './components/layout-components/Footer';
@@ -16,6 +17,7 @@ import Basket from './pages/Basket';
 import PageNotFound from './pages/PageNotFound';
 import RequireAuth from './hoc/RequireAuth';
 import Profile from './pages/Profile';
+// import { postProducts } from './store/products-slice';
 
 let isInitialRunning = true;
 
@@ -23,10 +25,12 @@ function App() {
 
   const userId = useSelector((state) => state.user.user.id);
   const basket = useSelector((state) => state.basket);
+  const products = useSelector((state) => state.products.fetchedProducts);
   
   const dispatchAction = useDispatch();
 
   useEffect(() => {
+    // dispatchAction(postProducts());
     dispatchAction(basketGetOrders({userId}));
   }, []);
 

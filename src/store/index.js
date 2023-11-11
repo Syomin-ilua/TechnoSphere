@@ -6,6 +6,8 @@ import mainSlice from "./main-slice";
 import basketSlice from "./basket-slice";
 import productsSlice from "./products-slice";
 import userSlice from "./user-slice";
+import productDetailsSlice from "./productDetails-slice";
+import reviewsSlice from "./reviews-slice";
 
 const userReducer = combineReducers({
     user: userSlice.reducer,
@@ -23,6 +25,8 @@ const store = configureStore({
         user: persistedReducer,
         main: mainSlice.reducer,
         products: productsSlice.reducer,
+        product: productDetailsSlice.reducer,
+        reviews: reviewsSlice.reducer,
         basket: basketSlice.reducer,
     },
     middleware: getDefaultMiddleware =>

@@ -7,12 +7,11 @@ const ReviewsItem = (props) => {
     return (
         <li className={styles["review__product"]}>
             <div className={styles["review__info"]}>
-                <p className={styles["review__name"]}><span>От кого:</span> {review.userSurname} {review.userName} {review.userPatronymic}</p>
-                <p className={styles["review__date"]}><span>Время публикации:</span> {review.date}</p>
+                <p className={styles["review__name"]}><span>Пользователь: </span> {review.userId} </p>
+                <p className={styles["review__date"]}>{review.date}</p>
             </div>
 
             <div className={styles["review__description"]}>
-                <span>Комментарий: </span>
                 {review.reviewData}
             </div>
         </li>

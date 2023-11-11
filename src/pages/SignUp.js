@@ -14,17 +14,23 @@ const SignUp = () => {
 
     const navigate = useNavigate();
 
+    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const [invalidMessageName, setInvalidMessageName] = useState(null);
     const [invalidMessageEmail, setInvalidMessageEmail] = useState(null);
     const [invalidMessagePassword, setInvalidMessagePassword] = useState(null);
 
     const [isRegisterState, setIsRegisterState] = useState({
         text: null,
-        stateReg: null, 
+        stateReg: null,
         isShow: false,
     });
+
+    const nameChangeHandler = (event) => {
+        setName(event.target.value);
+    }
 
     const emailChangeHandler = (event) => {
         setEmail(event.target.value);
@@ -36,6 +42,16 @@ const SignUp = () => {
 
     const signUpHandler = (event) => {
         event.preventDefault();
+
+        if (name.length === 0) {
+            setInvalidMessageName("Имя не должно быть пустым");
+            return;
+        }
+
+        if (name.length < 2) {
+            setInvalidMessageName("Имя не должно быть меньше 2 симовлов");
+            return;
+        }
 
         if (!validateRegexEmail.test(email)) {
             setInvalidMessageEmail("Введите корректную эл. почту!");
@@ -52,12 +68,16 @@ const SignUp = () => {
             return;
         }
 
+        setInvalidMessageName(null);
+        setInvalidMessageEmail(null);
+        setInvalidMessagePassword(null);
+
         registerUser(email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 setDoc(doc(db, 'users', user.uid), {
                     surname: "",
-                    name: "",
+                    name: name,
                     patronymic: "",
                     email: email,
                     dateOfBirth: "",
@@ -68,7 +88,7 @@ const SignUp = () => {
                     registeredAt: Timestamp.fromDate(new Date()),
                 });
                 setDoc(doc(db, 'baskets', user.uid), {
-                    basket: [],
+                    items: [],
                     itemsQuantity: 0
                 });
                 setDoc(doc(db, 'orders', user.uid), {
@@ -95,13 +115,13 @@ const SignUp = () => {
                         stateReg: null,
                         isShow: false
                     });
-                }, 3000);
+                }, 1000);
             });
     }
 
     const registerText =
         <div className="auth__state">
-            <img src={isRegisterState.stateReg ? IconSuccesStatus : IconFailedStatus} alt="Icon: Состояние регистрации"/>
+            <img src={isRegisterState.stateReg ? IconSuccesStatus : IconFailedStatus} alt="Icon: Состояние регистрации" />
             <p>{isRegisterState.text}</p>
         </div>;
 
@@ -117,13 +137,20 @@ const SignUp = () => {
                         </div>
                         <div className={styles["auth__form_wrapper"]}>
                             <form onSubmit={signUpHandler} className={styles["auth__form"]}>
+                                <label htmlFor="name" className={styles["auth__label"]}>
+                                    Имя
+                                    <input autoComplete="off" className={styles["auth__input"]} type="text" id="name" onChange={nameChangeHandler} value={name} />
+                                    {invalidMessageName && <p className={styles["invalid__input_message"]}>{invalidMessageName}</p>}
+                                </label>
                                 <label htmlFor="email" className={styles["auth__label"]}>
                                     Эл. почта
                                     <input autoComplete="off" className={styles["auth__input"]} type="email" id="email" onChange={emailChangeHandler} value={email} />
+                                    {invalidMessageEmail && <p className={styles["invalid__input_message"]}>{invalidMessageEmail}</p>}
                                 </label>
                                 <label htmlFor="password" className={styles["auth__label"]}>
                                     Пароль
                                     <input autoComplete="off" className={styles["auth__input"]} type="password" id="password" onChange={passwordChangeHandler} value={password} />
+                                    {invalidMessagePassword && <p className={styles["invalid__input_message"]}>{invalidMessagePassword}</p>}
                                 </label>
                                 <button className={styles["auth__button"]} type="submit">Зарегистрироваться</button>
                             </form>

@@ -7,7 +7,6 @@ const BasketEmpty = () => {
     return (
         <div className={styles.basketEmpty}>
             <img src={EmptyBasketIcon} alt="Иконка пустой корзины"/>          
-            <p className={styles.basketEmptyText}>Корзина пустая</p>
             <Link to="/products" className={styles.addProductsBtn}>Добавить товары</Link>
         </div>
     );

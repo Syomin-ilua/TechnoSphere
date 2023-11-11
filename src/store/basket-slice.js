@@ -36,7 +36,7 @@ export const basketGetOrders = createAsyncThunk(
 				const basket = docSnap.data();
                 return basket;
 			} else {
-				throw new Error("No such document!");
+				throw new Error("Документ не существует!");
 			}
 
         } catch(error) {

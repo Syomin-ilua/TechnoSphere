@@ -16,7 +16,7 @@ const SignIn = () => {
     const dispatchAction = useDispatch();
 
     const userInfo = useSelector((state) => state.user);
-    console.log(userInfo); 
+    console.log(userInfo);
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -61,15 +61,13 @@ const SignIn = () => {
             return;
         }
 
-        console.log("sadas");
-
         loginUser(email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
                 setIsLoginState({
                     text: "Авторизация прошла успешно!",
                     stateLogin: true,
-                    isShow: true 
+                    isShow: true
                 });
                 dispatchAction(userActions.setUser({
                     email: user.email,
@@ -84,14 +82,14 @@ const SignIn = () => {
                 setIsLoginState({
                     text: "Произошла ошибка!",
                     stateLogin: false,
-                    isShow: true 
+                    isShow: true
                 });
                 console.error(error)
                 setTimeout(() => {
                     setIsLoginState({
                         text: null,
                         stateLogin: null,
-                        isShow: false 
+                        isShow: false
                     });
                 }, 3000);
             });
@@ -119,10 +117,12 @@ const SignIn = () => {
                                 <label htmlFor="email" className={styles["auth__label"]}>
                                     Эл. почта
                                     <input autoComplete="off" className={styles["auth__input"]} type="email" id="email" onChange={emailChangeHandler} />
+                                    {invalidMessageEmail && <p className={styles["invalid__input_message"]}>{invalidMessageEmail}</p>}
                                 </label>
                                 <label htmlFor="password" className={styles["auth__label"]}>
                                     Пароль
                                     <input autoComplete="off" className={styles["auth__input"]} type="password" id="password" onChange={passwordChangeHandler} />
+                                    {invalidMessagePassword && <p className={styles["invalid__input_message"]}>{invalidMessagePassword}</p>}
                                 </label>
                                 <button className={styles["auth__button"]} type="submit">Войти</button>
                             </form>
