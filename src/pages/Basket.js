@@ -8,7 +8,7 @@ import Container from "../components/layout-components/Container";
 
 const Basket = () => {
 
-    const orders = useSelector((state) => state.basket.items);
+    const { items, totalCostBasket } = useSelector((state) => state.basket);
 
     const [isFormOrderVisible, setIsFormOrderVisible] = useState(false);
 
@@ -24,35 +24,43 @@ const Basket = () => {
     return (
         <Container class="basket__container">
             <div className={styles["basket"]}>
-                    <div className={styles["basket__header"]}>
-                        <h1 className={styles["basket__header_text"]}>Корзина</h1>
-                    </div>
-                <div className={styles["basket__body"]}>
+                <div className={styles["basket__header"]}>
+                    <h1 className={styles["basket__header_text"]}>Корзина</h1>
+                </div>
+                <div className={styles["basket__body_wrapper"]}>
                     {
-                        orders.length === 0 ?
+                        items.length === 0 ?
                             <BasketEmpty /> :
-                            <div className={styles["basket__orders"]}>
-                                {
-                                    orders.map((item) => (
-                                        <OrderItem
-                                            key={item.id}
-                                            order={{
-                                                id: item.id,
-                                                orderName: item.productName,
-                                                orderImage: item.productImage,
-                                                quantity: item.quantity,
-                                                totalPrice: item.totalPrice,
-                                                price: item.cost,
-                                            }}
-                                        />
-                                    ))
-                                }
+                            <div className={styles["basket__body"]}>
+                                <div className={styles["basket__orders"]}>
+                                    {
+                                        items.map((item) => (
+                                            <OrderItem
+                                                key={item.id}
+                                                order={{
+                                                    id: item.id,
+                                                    orderName: item.productName,
+                                                    orderImage: item.productImage,
+                                                    quantity: item.quantity,
+                                                    totalPrice: item.totalPrice,
+                                                    price: item.cost,
+                                                }}
+                                            />
+                                        ))
+                                    }
+                                </div>
+                                <div className={styles["basket__total_wrapper"]}>
+                                    <div className={styles["basket__total"]}>
+                                        <h3 className={styles["total__title"]}>Итого: </h3>
+                                        <p className={styles["total__text"]}>{totalCostBasket} руб.</p>
+                                    </div>
+                                    <div className={styles["order__actions"]}>
+                                        {isFormOrderVisible && <button className={styles["btn__cancel_formorder"]} onClick={orderFormCancelHandler}>Закрыть форму</button>}
+                                        {items.length !== 0 && !isFormOrderVisible && <button className={styles["btn__show_formorder"]} onClick={orderFormHandler}>Оформить заказ</button>}
+                                    </div>
+                                </div>
                             </div>
                     }
-                    <div className={styles["order__actions"]}>
-                        {isFormOrderVisible && <button className={styles["btn__cancel_formorder"]} onClick={orderFormCancelHandler}>Закрыть форму</button>}
-                        {orders.length !== 0 && !isFormOrderVisible && <button className={styles["btn__show_formorder"]} onClick={orderFormHandler}>Оформить заказ</button>}
-                    </div>
                     {isFormOrderVisible && <FormOrder />}
                 </div>
             </div>

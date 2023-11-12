@@ -6,14 +6,15 @@ export const basketChangeOrders = createAsyncThunk(
     "basket/basketChangeOrders",
     async function({userId}, {rejectWithValue, getState}) {
 
-        const {items, itemsQuantity} = getState().basket;
+        const {items, itemsQuantity, totalCostBasket} = getState().basket;
         const userBasketDocRef = doc(db, "baskets", userId);
 
         try {
 
             await updateDoc(userBasketDocRef, {
                 items,
-                itemsQuantity
+                itemsQuantity,
+                totalCostBasket
             });
 
 
@@ -48,6 +49,7 @@ export const basketGetOrders = createAsyncThunk(
 const basketActionsInitialState = {
     items: [],
     itemsQuantity: 0,
+    totalCostBasket: 0 ,
     status: null,
     error: null,
     isBasketContentChanged: false,
@@ -75,6 +77,9 @@ const basketSlice = createSlice({
                 existingItem.quantity += newProduct.quantity;
                 existingItem.totalPrice = existingItem.cost * existingItem.quantity;
             }
+            state.totalCostBasket = state.items.reduce((acc, item) => {
+                return acc + item.totalPrice
+            }, 0);
         },
         removeItem(state, action) {
             const id = action.payload;
@@ -88,10 +93,20 @@ const basketSlice = createSlice({
                 existingItem.quantity--;
                 existingItem.totalPrice = existingItem.totalPrice - existingItem.cost;
             }
+
+            state.totalCostBasket = state.items.reduce((acc, item) => {
+                return acc + item.totalPrice
+            }, 0);
         },
         updatedBasket(state, action) {
             state.items = action.payload.items;
             state.itemsQuantity = action.payload.itemsQuantity;
+        },
+        clearingBasket(state) {
+            state.items = [];
+            state.itemsQuantity = 0;
+            state.totalCostBasket = 0;
+            state.isBasketContentChanged = true;
         }
     },
     extraReducers: {
@@ -106,8 +121,10 @@ const basketSlice = createSlice({
         [basketGetOrders.fulfilled]: (state, action) => {
             const payload = action.payload; 
             state.status = "resolved";
+            state.error = null;
             state.items = payload.items || [];
             state.itemsQuantity = payload.itemsQuantity;
+            state.totalCostBasket = payload.totalCostBasket;
         },
         [basketChangeOrders.rejected]: (state, action) => {
             state.status = "rejected";

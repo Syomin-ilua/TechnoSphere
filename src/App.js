@@ -3,7 +3,7 @@ import { Fragment, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { basketGetOrders, basketChangeOrders } from './store/basket-slice';
-import { productChangeReviews } from './store/productDetails-slice';
+import { getOrders, changeOrders } from './store/orders-slice';
 
 import Header from './components/layout-components/Header';
 import Footer from './components/layout-components/Footer';
@@ -25,13 +25,16 @@ function App() {
 
   const userId = useSelector((state) => state.user.user.id);
   const basket = useSelector((state) => state.basket);
+  const orders = useSelector((state) => state.orders); 
   const products = useSelector((state) => state.products.fetchedProducts);
   
+
   const dispatchAction = useDispatch();
 
   useEffect(() => {
     // dispatchAction(postProducts());
     dispatchAction(basketGetOrders({userId}));
+    dispatchAction(getOrders(userId));
   }, []);
 
   useEffect(() => {
@@ -46,6 +49,19 @@ function App() {
     }
 
   }, [basket]);
+
+  useEffect(() => {
+    if (isInitialRunning) {
+      isInitialRunning = false;
+      return;
+    }
+    
+    if (orders.isOrdersContentChanged) {
+      dispatchAction(changeOrders(userId));
+    }
+
+
+  }, [orders]);
 
   return (
     <Fragment>

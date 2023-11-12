@@ -8,6 +8,7 @@ import productsSlice from "./products-slice";
 import userSlice from "./user-slice";
 import productDetailsSlice from "./productDetails-slice";
 import reviewsSlice from "./reviews-slice";
+import ordersSlice from "./orders-slice";
 
 const userReducer = combineReducers({
     user: userSlice.reducer,
@@ -28,6 +29,7 @@ const store = configureStore({
         product: productDetailsSlice.reducer,
         reviews: reviewsSlice.reducer,
         basket: basketSlice.reducer,
+        orders: ordersSlice.reducer
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({

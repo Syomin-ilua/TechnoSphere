@@ -1,8 +1,8 @@
-.formOrder {
-    max-width: 650px;
+.form__order {
+    max-width: 100%;
     width: 100%;
     margin: 0 auto;
-    margin-top: 20px;
+    margin-top: 50px;
     padding: 20px;
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
     border-radius: 10px;
@@ -44,6 +44,84 @@ label select {
     height: 25px;
 } */
 
+.form__label {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.order__form_title {
+    font-size: 18px;
+    font-family: "Montserrat-Bold";
+    color: rgb(255, 45, 45);
+    margin-bottom: 20px;
+}
+
+.order__form_subtitle {
+    font-size: 12px;
+    font-family: "Montserrat-Medium";
+    color: rgb(255, 45, 45);
+}
+
+.order__info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.order__info_item {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+}
+
+.order__info_item span {
+    font-size: 16px;
+    font-family: "Montserrat-Bold";
+    color: #333;
+}
+
+.order__info_item p {
+    font-size: 14px;
+    font-family: "Montserrat-Medium";
+    color: #333;
+} 
+
+.form__label p {
+    font-size: 16px;
+    font-family: "Montserrat-Bold";
+    color: #333;
+    min-width: max-content;
+}
+
+.form__label input {
+    width: 100%;
+    height: 30px;
+    padding: 15px;
+    font-size: 14px;
+    font-family: "Montserrat-Regular";
+    color: #333;
+    box-shadow: 0px 5px 5px 4px rgba(34, 60, 80, 0.2);
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.form__label input:hover {
+    box-shadow: 0px 5px 7px 4px rgba(34, 60, 80, 0.2);
+    transition: all 0.3s;
+}
+
+.form__label input:focus {
+    box-shadow: 0px 5px 10px 4px rgba(34, 60, 80, 0.2);
+    transition: all 0.3s;
+}
+
+
+
+.form__label:not(:last-child) {
+    margin-bottom: 20px;
+}
+
 .btnAddOrder {
     height: 35px;
     border-radius: 5px;
@@ -74,10 +152,25 @@ label select {
 .pushable:active .front {
     transform: translateY(-2px);
 }
+
+.method__payment_wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.method__payment_wrapper p {
+    font-size: 16px;
+    font-family: "Montserrat-Bold";
+    color: #333;
+    min-width: max-content;
+}
+
 .method__payment_wrapper select {
-    width: 70px;
+    width: 100%;
     cursor: pointer;
     font-family: "Montserrat-Regular";
+    font-size: 14px;
     padding: 3px;
     border: 1px solid #4a4a4a;
 }

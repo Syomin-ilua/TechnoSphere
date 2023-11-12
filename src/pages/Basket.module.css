@@ -22,7 +22,6 @@
     row-gap: 20px;
 }
 .order__actions {
-    margin-top: 59px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -53,4 +52,24 @@
 .btn__show_formorder:active {
     transform: scale(0.98);
     transition: all 0.3s;
+}
+.basket__total_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+.basket__total {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.total__title {
+    font-family: "Montserrat-Bold";
+    font-size: 18px;
+}
+
+.total__text {
+    font-family: "Montserrat-Regular";
+    font-size: 16px;
 }
