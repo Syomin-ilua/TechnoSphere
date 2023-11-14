@@ -5,6 +5,7 @@ import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 import { ordersActions } from "../../store/orders-slice";
 import { basketActions } from "../../store/basket-slice";
+import useInput from "../../hooks/use-input";
 
 const now = new Date();
 
@@ -17,9 +18,40 @@ const date = new Intl.DateTimeFormat("ru", {
     second: "numeric"
 });
 
+const regExpNumberCard = /^(5[1-5]|222[1-9]|22[3-9]|2[3-6]|27[01]|2720)[0-9]{0,}/;
+const regExpDateCard = /^(?:0[1-9]|1[0-2])\/[0-9]{2}/;
+const regExpCardCVC = /^\d {3}/;
+
 const FormOrder = () => {
 
     const dispatchAction = useDispatch();
+
+    const {
+        value: enteredNumberCard,
+        hasError: hasNumberCardInputError,
+        isValid: isEnteredNumberCardValid,
+        inputChangeHandler: numberCardInputChangeHandler,
+        inputLostFocusHandler: numberCardInputLostFocusHandler,
+        resetValues: resetNumberCardInputValues
+    } = useInput((val) => regExpNumberCard.test(val));
+
+    const {
+        value: enteredCardDate,
+        hasError: hasCardDateInputError,
+        isValid: isEnteredCardDateValid,
+        inputChangeHandler: cardDateInputChangeHandler,
+        inputLostFocusHandler: cardDateInputLostFocusHandler,
+        resetValues: resetCardDateInputValues
+    } = useInput((val) => regExpDateCard.test(val));
+
+    const {
+        value: enteredCardCVC,
+        hasError: hasCardCVCInputError,
+        isValid: isEnteredCardCVCValid,
+        inputChangeHandler: cardCVCInputChangeHandler,
+        inputLostFocusHandler: cardCVCInputLostFocusHandler,
+        resetValues: resetCardCVCInputValues
+    } = useInput((val) => regExpCardCVC.test(val));
 
     const userId = useSelector((state) => state.user.user.id);
     const basket = useSelector((state) => state.basket);
@@ -58,8 +90,13 @@ const FormOrder = () => {
     const submutFormOrderHandler = (event) => {
         event.preventDefault();
 
-        if (!user.surname || !user.patronymic || !user.address) {
-            console.log("Заполните профиль для оформления заказа!");
+        if(!user.surname || !user.patronymic || !user.tel || !user.address) {
+            alert("Заполните все поля в профиле!")
+            return;
+        }
+        
+        
+        if (!isEnteredNumberCardValid || !isEnteredCardDateValid || !isEnteredCardCVCValid) {
             return;
         }
 
@@ -78,7 +115,22 @@ const FormOrder = () => {
         dispatchAction(ordersActions.makingOrder(order));
         dispatchAction(basketActions.clearingBasket());
 
+        resetNumberCardInputValues();
+        resetCardDateInputValues();
+        resetCardCVCInputValues();
     }
+
+    const cardNumberInputClasses = hasNumberCardInputError
+        ? "auth__label invalid"
+        : "auth__label";
+
+    const cardDateInputClasses = hasCardDateInputError
+        ? "auth__label invalid"
+        : "auth__label";
+
+    const cardCVCInputClasses = hasCardCVCInputError
+        ? "auth__label invalid"
+        : "auth__label";
 
     return (
         <form onSubmit={submutFormOrderHandler} className={styles["form__order"]}>
@@ -112,24 +164,46 @@ const FormOrder = () => {
                 </select>
             </label>
             {isPaymentMethod === "Банковская карта" &&
-                <label className={styles["input__bankCard"]}>
+                <label className={styles["inputs__bankCard"]}>
                     <div className={styles["input__item"]}>
-                        <input className={styles["input__bank_card"]} type="number" />
+                        <input
+                            type="number"
+                            placeholder="Введите номер карты"
+                            className={styles["input__bank_card"]}
+                            onChange={numberCardInputChangeHandler}
+                            onBlur={numberCardInputLostFocusHandler}
+                            value={enteredNumberCard}
+                        />
+                        {hasNumberCardInputError && <p className="error__text">Введите корректный номер карты</p>}
                     </div>
-                    <div>
+                    <div className={styles["inputs__item"]}>
                         <div className={styles["input__item"]}>
-                            <input type="text" className={styles["input__bank_card"]} />
+                            <input
+                                type="text"
+                                placeholder="Введите срок действия карты"
+                                className={styles["input__bank_card"]}
+                                onChange={cardDateInputChangeHandler}
+                                onBlur={cardDateInputLostFocusHandler}
+                                value={enteredCardDate}
+                            />
+                            {hasCardDateInputError && <p className="error__text">Введите корректную срок действия</p>}
                         </div>
                         <div className={styles["input__item"]}>
-                            <input type="number" className={styles["input__bank_card"]} />
+                            <input
+                                type="number"
+                                placeholder="Введите CVV код" 
+                                className={styles["input__bank_card"]}
+                                onChange={cardCVCInputChangeHandler}
+                                onBlur={cardCVCInputLostFocusHandler}
+                                value={enteredCardCVC}
+                            />
+                            {hasCardCVCInputError && <p className="error__text">Введите корректный CVV код</p>}
                         </div>
                     </div>
                 </label>
             }
-            <button className={styles["pushable"]}>
-                <span className={styles["front"]}>
-                    Заказать
-                </span>
+            <button className={styles["btn__add_order"]}>
+                Заказать
             </button>
         </form>
     )

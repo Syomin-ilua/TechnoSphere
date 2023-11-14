@@ -66,37 +66,11 @@
     margin-top: 50px;
 }
 
-.auth__label {
-    color: #333;
-    font-family: "Montserrat-Bold";
-    font-size: 18px;
-    display: flex;
-    flex-direction: column;
-    row-gap: 9px;
-    cursor: pointer;
-}
-
-.auth__label:not(:last-child) {
-    margin-top: 27px;
-}
-
-.auth__label input {
-    background-color: #FFF;
-    height: 30px;
-    padding: 10px;
-    font-family: "Montserrat-Regular";
-    font-size: 14px;
-    box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
-    transition: all 0.3s;
-}
-
-.auth__label input:hover {
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
-    transition: all 0.3s;
-}
-
-.auth__label input:focus {
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+.error__text {
+    font-size: 12px;
+    font-family: "Montserrat-Medium";
+    line-height: 20px;
+    color: rgb(219, 0, 0);
 }
 
 .auth__button {

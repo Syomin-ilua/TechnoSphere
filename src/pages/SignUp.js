@@ -8,21 +8,48 @@ import LogoBanner from "../images/logo-banner.svg";
 import IconSuccesStatus from "../images/status-success.svg";
 import IconFailedStatus from "../images/status-failed.svg";
 import { useAuth } from "../hooks/use-auth";
+import useInput from "../hooks/use-input";
 
 const validateRegexEmail = /^\S+@\S+\.\S+$/;
 
 const SignUp = () => {
 
     const navigate = useNavigate();
-    const { isAuth } = useAuth(); 
 
-    const [name, setName] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const { isAuth } = useAuth();
 
-    const [invalidMessageName, setInvalidMessageName] = useState(null);
-    const [invalidMessageEmail, setInvalidMessageEmail] = useState(null);
-    const [invalidMessagePassword, setInvalidMessagePassword] = useState(null);
+    const {
+        value: enteredName,
+        hasError: hasNameInputError,
+        isValid: isEnteredNameValid,
+        inputChangeHandler: nameInputChangeHandler,
+        inputLostFocusHandler: nameInputLostFocusHandler,
+        resetValues: resetNameInputValues
+    } = useInput((val) => val.trim().length > 2);
+
+    const {
+        value: enteredEmail,
+        hasError: hasEmailInputError,
+        isValid: isEnteredEmailValid,
+        inputChangeHandler: emailInputChangeHandler,
+        inputLostFocusHandler: emailInputLostFocusHandler,
+        resetValues: resetEmailInputValues
+    } = useInput((val) => validateRegexEmail.test(val));
+
+    const {
+        value: enteredPassword,
+        hasError: hasPasswordInputError,
+        isValid: isEnteredPasswordValid,
+        inputChangeHandler: passwordInputChangeHandler,
+        inputLostFocusHandler: passwordInputLostFocusHandler,
+        resetValues: resetPasswordInputValues
+    } = useInput((val) => val.trim().length > 7);
+
+    let isFormValid = false;
+
+    if (isEnteredEmailValid && isEnteredPasswordValid) {
+        isFormValid = true;
+    }
 
     const [isRegisterState, setIsRegisterState] = useState({
         text: null,
@@ -31,66 +58,28 @@ const SignUp = () => {
     });
 
     useEffect(() => {
-        
-        if(isAuth) {
+
+        if (isAuth) {
             navigate("/home");
         }
 
-
     }, []);
-
-    const nameChangeHandler = (event) => {
-        setName(event.target.value);
-    }
-
-    const emailChangeHandler = (event) => {
-        setEmail(event.target.value);
-    }
-
-    const passwordChangeHandler = (event) => {
-        setPassword(event.target.value);
-    }
 
     const signUpHandler = (event) => {
         event.preventDefault();
 
-        if (name.length === 0) {
-            setInvalidMessageName("Имя не должно быть пустым");
+        if (!isEnteredNameValid || !isEnteredEmailValid || !isEnteredPasswordValid) {
             return;
         }
 
-        if (name.length < 2) {
-            setInvalidMessageName("Имя не должно быть меньше 2 симовлов");
-            return;
-        }
-
-        if (!validateRegexEmail.test(email)) {
-            setInvalidMessageEmail("Введите корректную эл. почту!");
-            return;
-        }
-
-        if (password.length === 0) {
-            setInvalidMessagePassword("Пароль не должен быть пустым");
-            return;
-        }
-
-        if (password.length < 8) {
-            setInvalidMessagePassword("Пароль не должен быть меньше 8 символов!");
-            return;
-        }
-
-        setInvalidMessageName(null);
-        setInvalidMessageEmail(null);
-        setInvalidMessagePassword(null);
-
-        registerUser(email, password)
+        registerUser(enteredEmail, enteredPassword)
             .then((userCredential) => {
                 const user = userCredential.user;
                 setDoc(doc(db, 'users', user.uid), {
                     surname: "",
-                    name: name,
+                    name: enteredName,
                     patronymic: "",
-                    email: email,
+                    email: enteredEmail,
                     dateOfBirth: "",
                     gender: "",
                     userRole: "user",
@@ -110,6 +99,9 @@ const SignUp = () => {
                     stateReg: true,
                     isShow: true
                 });
+                resetNameInputValues();
+                resetEmailInputValues();
+                resetPasswordInputValues();
                 setTimeout(() => {
                     navigate("/auth/login");
                 }, 1500);
@@ -136,6 +128,18 @@ const SignUp = () => {
             <p>{isRegisterState.text}</p>
         </div>;
 
+    const nameInputClasses = hasEmailInputError
+        ? "auth__label invalid"
+        : "auth__label";
+
+    const emailInputClasses = hasEmailInputError
+        ? "auth__label invalid"
+        : "auth__label";
+
+    const passwordInputClasses = hasPasswordInputError
+        ? "auth__label invalid"
+        : "auth__label";
+
 
     return (
         <div className={styles["auth"]}>
@@ -148,22 +152,43 @@ const SignUp = () => {
                         </div>
                         <div className={styles["auth__form_wrapper"]}>
                             <form onSubmit={signUpHandler} className={styles["auth__form"]}>
-                                <label htmlFor="name" className={styles["auth__label"]}>
+                                <label htmlFor="name" className={nameInputClasses}>
                                     Имя
-                                    <input autoComplete="off" className={styles["auth__input"]} type="text" id="name" onChange={nameChangeHandler} value={name} />
-                                    {invalidMessageName && <p className={styles["invalid__input_message"]}>{invalidMessageName}</p>}
+                                    <input
+                                        id="name"
+                                        type="text"
+                                        className={styles["auth__input"]}
+                                        onChange={nameInputChangeHandler}
+                                        onBlur={nameInputLostFocusHandler}
+                                        value={enteredName}
+                                    />
+                                    {hasNameInputError && <p className="error__text">Имя не должно содержать меньше 2 симовлов</p>}
                                 </label>
-                                <label htmlFor="email" className={styles["auth__label"]}>
+                                <label htmlFor="email" className={emailInputClasses}>
                                     Эл. почта
-                                    <input autoComplete="off" className={styles["auth__input"]} type="email" id="email" onChange={emailChangeHandler} value={email} />
-                                    {invalidMessageEmail && <p className={styles["invalid__input_message"]}>{invalidMessageEmail}</p>}
+                                    <input
+                                        id="email"
+                                        type="email"
+                                        className={styles["auth__input"]}
+                                        onChange={emailInputChangeHandler}
+                                        onBlur={emailInputLostFocusHandler}
+                                        value={enteredEmail}
+                                    />
+                                    {hasEmailInputError && <p className="error__text">Введите корректную эл. почту</p>}
                                 </label>
-                                <label htmlFor="password" className={styles["auth__label"]}>
+                                <label htmlFor="password" className={passwordInputClasses}>
                                     Пароль
-                                    <input autoComplete="off" className={styles["auth__input"]} type="password" id="password" onChange={passwordChangeHandler} value={password} />
-                                    {invalidMessagePassword && <p className={styles["invalid__input_message"]}>{invalidMessagePassword}</p>}
+                                    <input
+                                        id="password"
+                                        type="password"
+                                        className={styles["auth__input"]}
+                                        onChange={passwordInputChangeHandler}
+                                        onBlur={passwordInputLostFocusHandler}
+                                        value={enteredPassword}
+                                    />
+                                    {hasPasswordInputError && <p className="error__text">Пароль не должен содержать меньше 8 символов</p>}
                                 </label>
-                                <button className={styles["auth__button"]} type="submit">Зарегистрироваться</button>
+                                <button disabled={!isFormValid} className={styles["auth__button"]} type="submit">Зарегистрироваться</button>
                             </form>
                         </div>
                         <div className={styles["link__auth__wrapper"]}>
