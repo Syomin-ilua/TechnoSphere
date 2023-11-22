@@ -7,6 +7,7 @@ const initialProductsState = {
     fetchedProducts: [],
     currentProducts: [],
     listSearchProducts: [],
+    categoriesProducts: [],
     status: null,
     error: null,
 }
@@ -30,14 +31,18 @@ export const getProducts = createAsyncThunk(
             return rejectWithValue(error.message);
         }
     }
-);
+); 
 
 // const products = [
 //     {
 //         "id": "0",
 //         "productName": "iPhone 13",
 //         "type": "smartphone",
-//         "image": "product-images/smartphones/iphone13.webp",
+//         "images": [
+//             "product-images/smartphones/iphone13.webp",
+//             "product-images/smartphones/iphone13_2.webp",
+//             "product-images/smartphones/iphone13_3.webp"
+//         ],
 //         "cost": 79990,
 //         "description": "Новый смартфон от Apple с процессором A15 Bionic и высококачественной камерой.",
 //         "options": {
@@ -51,7 +56,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "1",
 //         "productName": "Смартфон Samsung Galaxy S21",
 //         "type": "smartphone",
-//         "image": "product-images/smartphones/samsung_galaxy_s21.webp",
+//         "images": [
+//             "product-images/smartphones/samsung_galaxy_s21.webp",
+//             "product-images/smartphones/samsung_galaxy_s21_2.webp",
+//             "product-images/smartphones/samsung_galaxy_s21_3.webp"
+//         ],
 //         "description": "Новый смартфон Samsung с выдающимся экраном и мощной камерой.",
 //         "cost": 59990,
 //         "options": {
@@ -65,7 +74,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "2",
 //         "productName": "Смартфон iPhone 13 Pro",
 //         "type": "smartphone",
-//         "image": "product-images/smartphones/iphone_13_pro.webp",
+//         "images": [
+//             "product-images/smartphones/iphone_13_pro.webp",
+//             "product-images/smartphones/iphone_13_pro_2.webp",
+//             "product-images/smartphones/iphone_13_pro_3.webp"
+//         ],
 //         "description": "Премиальный смартфон от Apple с передовыми технологиями и iOS 15.",
 //         "cost": 89990,
 //         "options": {
@@ -79,7 +92,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "3",
 //         "productName": "Смартфон Google Pixel 6",
 //         "type": "smartphone",
-//         "image": "product-images/smartphones/google_pixel_6.webp",
+//         "images": [
+//             "product-images/smartphones/google_pixel_6.webp",
+//             "product-images/smartphones/google_pixel_6_2.webp",
+//             "product-images/smartphones/google_pixel_6_3.webp"
+//         ],
 //         "description": "Смартфон с фокусом на камеру и операционной системой Android 12.",
 //         "cost": 64990,
 //         "options": {
@@ -93,7 +110,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "4",
 //         "productName": "Смартфон OnePlus 9 Pro",
 //         "type": "smartphone",
-//         "image": "product-images/smartphones/oneplus_9_pro.webp",
+//         "images": [
+//             "product-images/smartphones/oneplus_9_pro.webp",
+//             "product-images/smartphones/oneplus_9_pro_2.webp",
+//             "product-images/smartphones/oneplus_9_pro_3.webp"
+//         ],
 //         "description": "Мощный смартфон с высокой частотой обновления экрана и быстрой зарядкой.",
 //         "cost": 56990,
 //         "options": {
@@ -107,7 +128,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "5",
 //         "productName": "Смартфон Xiaomi Mi 11",
 //         "type": "smartphone",
-//         "image": "product-images/smartphones/xiaomi_mi_11.webp",
+//         "images": [
+//             "product-images/smartphones/xiaomi_mi_11.webp",
+//             "product-images/smartphones/xiaomi_mi_11_2.webp",
+//             "product-images/smartphones/xiaomi_mi_11_3.webp"
+//         ],
 //         "description": "Смартфон с флагманскими характеристиками и доступной ценой.",
 //         "cost": 39990,
 //         "options": {
@@ -121,7 +146,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "6",
 //         "productName": "Ноутбук Dell XPS 15",
 //         "type": "laptop",
-//         "image": "product-images/laptops/dell_xps_15.jpg",
+//         "images": [
+//             "product-images/laptops/dell_xps_15.jpg",
+//             "product-images/laptops/dell_xps_15_2.webp",
+//             "product-images/laptops/dell_xps_15_3.webp"
+//         ],
 //         "description": "Мощный ноутбук с высококачественным дисплеем и процессором Intel Core i7.",
 //         "cost": 89990,
 //         "options": {
@@ -135,7 +164,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "7",
 //         "productName": "Ноутбук Apple MacBook Pro 13",
 //         "type": "laptop",
-//         "image": "product-images/laptops/macbook_pro_13.webp",
+//         "images": [
+//             "product-images/laptops/macbook_pro_13.webp",
+//             "product-images/laptops/macbook_pro_13_2.webp",
+//             "product-images/laptops/macbook_pro_13_3.webp"
+//         ],
 //         "description": "Ноутбук от Apple с Retina-дисплеем и процессором Apple M1.",
 //         "cost": 79990,
 //         "options": {
@@ -149,7 +182,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "8",
 //         "productName": "Ноутбук HP Spectre x360",
 //         "type": "laptop",
-//         "image": "product-images/laptops/hp_spectre_x360.webp",
+//         "images": [
+//             "product-images/laptops/hp_spectre_x360.webp",
+//             "product-images/laptops/hp_spectre_x360_2.webp",
+//             "product-images/laptops/hp_spectre_x360_3.webp"
+//         ],
 //         "description": "Ультрабук с сенсорным экраном и поддержкой стилуса HP Pen.",
 //         "cost": 69990,
 //         "options": {
@@ -163,7 +200,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "9",
 //         "productName": "Смарт-часы Apple Watch Series 7",
 //         "type": "smartwatch",
-//         "image": "product-images/smartwatches/apple_watch_series_7.webp",
+//         "images": [
+//             "product-images/smartwatches/apple_watch_series_7.webp",
+//             "product-images/smartwatches/apple_watch_series_7_2.webp",
+//             "product-images/smartwatches/apple_watch_series_7_3.webp"
+//         ],
 //         "description": "Смарт-часы от Apple с крупным дисплеем и множеством функций.",
 //         "cost": 34990,
 //         "options": {
@@ -176,7 +217,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "10",
 //         "productName": "Смарт-часы Samsung Galaxy Watch 4",
 //         "type": "smartwatch",
-//         "image": "product-images/smartwatches/samsung_galaxy_watch_4.webp",
+//         "images": [
+//             "product-images/smartwatches/samsung_galaxy_watch_4.webp",
+//             "product-images/smartwatches/samsung_galaxy_watch_4_2.webp",
+//             "product-images/smartwatches/samsung_galaxy_watch_4_3.webp"
+//         ],
 //         "description": "Смарт-часы от Samsung с экосистемой Tizen и мониторингом здоровья.",
 //         "cost": 19990,
 //         "options": {
@@ -189,7 +234,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "11",
 //         "productName": "Смарт-часы Fitbit Versa 3",
 //         "type": "smartwatch",
-//         "image": "product-images/smartwatches/fitbit_versa_3.webp",
+//         "images": [
+//             "product-images/smartwatches/fitbit_versa_3.webp",
+//             "product-images/smartwatches/fitbit_versa_3_2.webp",
+//             "product-images/smartwatches/fitbit_versa_3_3.webp"
+//         ],
 //         "description": "Фитнес-часы Fitbit с встроенным GPS и долгим временем работы от батареи.",
 //         "cost": 8990,
 //         "options": {
@@ -202,7 +251,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "12",
 //         "productName": "Смарт-часы Garmin Forerunner 945",
 //         "type": "smartwatch",
-//         "image": "product-images/smartwatches/garmin_forerunner_945.webp",
+//         "images": [
+//             "product-images/smartwatches/garmin_forerunner_945.webp",
+//             "product-images/smartwatches/garmin_forerunner_945_2.webp",
+//             "product-images/smartwatches/garmin_forerunner_945_3.webp"
+//         ],
 //         "description": "Спортивные смарт-часы Garmin с поддержкой множества видов активности.",
 //         "cost": 25990,
 //         "options": {
@@ -215,7 +268,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "13",
 //         "productName": "Смарт-часы Huawei Watch GT 3",
 //         "type": "smartwatch",
-//         "image": "product-images/smartwatches/huawei_watch_gt_3.webp",
+//         "images": [
+//             "product-images/smartwatches/huawei_watch_gt_3.webp",
+//             "product-images/smartwatches/huawei_watch_gt_3_2.webp",
+//             "product-images/smartwatches/huawei_watch_gt_3_3.webp"
+//         ],
 //         "description": "Смарт-часы Huawei с длительным временем работы и мониторингом сна.",
 //         "cost": 14990,
 //         "options": {
@@ -228,7 +285,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "14",
 //         "productName": "Наушники Apple AirPods Pro",
 //         "type": "headphone",
-//         "image": "product-images/headphones/apple_airpods_pro.webp",
+//         "images": [
+//             "product-images/headphones/apple_airpods_pro.webp",
+//             "product-images/headphones/airpods_pro_2.jpeg",
+//             "product-images/headphones/apple-airpods-pro_3.jpg"
+//         ],
 //         "description": "Беспроводные наушники Apple с активным шумоподавлением и качественным звуком.",
 //         "cost": 21990
 //     },
@@ -236,7 +297,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "15",
 //         "productName": "Наушники Bose QuietComfort 35 II",
 //         "type": "headphone",
-//         "image": "product-images/headphones/bose_quietcomfort_35_ii.webp",
+//         "images": [
+//             "product-images/headphones/bose_quietcomfort_35_ii.webp",
+//             "product-images/headphones/bose_quietcomfort_35_ii_2.webp",
+//             "product-images/headphones/bose_quietcomfort_35_ii_3.webp"
+//         ],
 //         "description": "Беспроводные наушники Bose с технологией шумоподавления и комфортной посадкой.",
 //         "cost": 19990
 //     },
@@ -244,7 +309,11 @@ export const getProducts = createAsyncThunk(
 //         "id": "16",
 //         "productName": "Беспроводные наушники Sony WH-1000XM4",
 //         "type": "headphone",
-//         "image": "product-images/headphones/sony_wh_1000xm4.webp",
+//         "images": [
+//             "product-images/headphones/sony_wh_1000xm4.webp",
+//             "product-images/headphones/sony_wh_1000xm4_2.webp",
+//             "product-images/headphones/sony_wh_1000xm4_3.webp"
+//         ], 
 //         "cost": 24990,
 //         "description": "Беспроводные наушники с шумоподавлением и высоким качеством звука."
 //     }

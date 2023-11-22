@@ -5,39 +5,26 @@ import { db } from "../../firebase";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
+const monthValid = {
+	"01": "янв.",
+	"02": "фев.",
+	"03": "мар.",
+	"04": "апр.",
+	"05": "мая",
+	"06": "июня",
+	"07": "июля",
+	"08": "авг.",
+	"09": "сент.",
+	"10": "окт.",
+	"11": "нояб.",
+	"12": "дек.",
+};
+
 const UserInfo = () => {
 
 	const navaigate = useNavigate();
-	const userId = useSelector((state) => state.user.user.id);
-	const [user, setUser] = useState({});
-	const [isLoading, setIsLoading] = useState(false);
-
-
-	useEffect(() => {
-
-		const getUserData = async () => {
-			setIsLoading(true);
-
-			const docRef = doc(db, "users", userId);
-			const docSnap = await getDoc(docRef);
-
-			if (docSnap.exists()) {
-				const userInfo = docSnap.data();
-				setUser(userInfo);
-				setIsLoading(false);
-			} else {
-				setIsLoading(false);
-				throw new Error("No such document!");
-			}
-		}
-
-		getUserData().catch(error => {
-			console.log(error);
-		});
-
-
-	}, []);
-
+	const user = useSelector((state) => state.user.user.user);
+	const [ year, month, day ] = user.dateOfBirth.split("-"); 
 
 	const changeProfileHandler = () => {
 		navaigate("edit");
@@ -55,19 +42,19 @@ const UserInfo = () => {
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Фамилия: </span>
-									{isLoading && !user.surname ? "загрузка" : !isLoading && !!user.surname ? user.surname : "не указано"}
+									{!user.surname ? "не указано" : user.surname}
 								</p>
 							</div>
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Имя: </span>
-									{isLoading && !user.name ? "загрузка" : !isLoading && !!user.name ? user.name : "не указано"}
+									{!user.name ? "не указано" : user.name}
 								</p>
 							</div>
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Отчество: </span>
-									{isLoading && !user.patronymic ? "загрузка" : !isLoading && !!user.patronymic ? user.patronymic : "не указано"}
+									{!user.patronymic ? "не указано" : user.patronymic}
 								</p>
 							</div>
 						</div>
@@ -75,19 +62,19 @@ const UserInfo = () => {
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Дата рождения: </span>
-									{isLoading && !user.dateOfBirth ? "загрузка" : !isLoading && !!user.dateOfBirth ? user.dateOfBirth : "не указано"}
+									{!user.dateOfBirth ? "не указано" : `${day + " " + monthValid[month ]+ " " + year} г.`}
 								</p>
 							</div>
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Пол: </span>
-									{isLoading && !user.gender ? "загрузка" : !isLoading && !!user.gender ? user.gender : "не указано"}
+									{!user.gender ? "не указано" : user.gender}
 								</p>
 							</div>
 							<div className={styles["info__item"]}>
 								<p className={styles["info__text"]}>
 									<span>Роль: </span>
-									{isLoading && !user.userRole ? "загрузка" : !isLoading && !!user.userRole ? user.userRole : "не указано"}
+									{user.userRole === true ? "администратор" : "пользователь"} 
 								</p>
 							</div>
 						</div>
@@ -101,19 +88,19 @@ const UserInfo = () => {
 						<div className={styles["info__item"]}>
 							<p className={styles["info__text"]}>
 								<span>Эл. почта: </span>
-								{isLoading && !user.email ? "загрузка" : !isLoading && !!user.email ? user.email : "не указано"}
+								{!user.email ? "не указано" : user.email}
 							</p>
 						</div>
 						<div className={styles["info__item"]}>
 							<p className={styles["info__text"]}>
 								<span>Номер телефона: </span>
-								{isLoading && !user.tel ? "загрузка" : !isLoading && !!user.tel ? user.tel : "не указано"}
+								{!user.tel ? "не указано" : user.tel}
 							</p>
 						</div>
 						<div className={styles["info__item"]}>
 							<p className={styles["info__text"]}>
-								<span>Адрес: </span>
-								{isLoading && !user.address ? "загрузка" : !isLoading && !!user.address ? user.address : "не указано"}
+								<span>Адрес доставки: </span>
+								{!user.address ? "не указано" : user.address}
 							</p>
 						</div>
 					</div>

@@ -5,10 +5,9 @@ import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../hooks/use-auth";
 
-
 const Product = (props) => {
 
-    const { id, image, productName, cost } = props.product;
+    const { id, images, productName, cost } = props.product;
 
     const { isAuth } = useAuth();
     const navigate = useNavigate();
@@ -24,7 +23,7 @@ const Product = (props) => {
 
         dispatchAction(basketActions.addItem({
             id: id,
-            image: image,
+            image: images[0],
             productName: productName,
             cost: cost,
             quantity: 1
@@ -34,7 +33,7 @@ const Product = (props) => {
     return (
         <div className={styles.product}>
             <div className={styles.imageWrapper}>
-                <Image src={image} alt={`Изображение: ${productName}`} className="imageProduct" />
+                <Image src={images[0]} alt={`Изображение: ${productName}`} className="imageProduct" />
             </div>
             <div className={styles.productInfo}>
                 <p className={styles.productName}>{productName}</p>

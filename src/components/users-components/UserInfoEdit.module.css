@@ -5,6 +5,7 @@
     background-color: #FFF;
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
     padding: 25px;
+    position: relative;
 }
 
 h2 {
@@ -32,9 +33,25 @@ h2 {
 
 .edit__item_label {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     column-gap: 10px;
     cursor: pointer;
+}
+
+.edit__item_label-gender {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    column-gap: 10px;
+    cursor: pointer;
+    max-width: max-content;
+}
+
+.edit__item_label-gender p {
+    font-family: "Montserrat-Bold";
+    font-size: 14px;
+    color: #333;
 }
 
 .edit__item_label p {
@@ -46,10 +63,12 @@ h2 {
 .edit__item_label input {
     background-color: #FFF;
     box-shadow: 0px 1px 1px 0px rgba(0, 0, 0, 0.25);
-    height: 20px;
+    border: 1px solid rgb(181, 181, 181);
+    width: 220px;
+    height: 25px;
     padding: 10px;
     font-family: "Montserrat-Regular";
-    font-size: 12px;
+    font-size: 14px;
     transition: all 0.3s;
 }
 
@@ -65,7 +84,8 @@ h2 {
 
 select {
     font-family: "Montserrat-Regular";
-    font-size: 12px;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 .edit__actions {
@@ -73,6 +93,9 @@ select {
     display: flex;
     align-items: center;
     column-gap: 15px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
 }
 
 .edit__actions button {

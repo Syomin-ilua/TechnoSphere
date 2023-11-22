@@ -1,14 +1,15 @@
 import styles from "./UserInfoEdit.module.css";
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
-import { db } from '../../firebase';
-import { doc, getDoc, collection, updateDoc } from 'firebase/firestore';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from "react-router-dom";
+import { userActions } from "../../store/user-slice";
 
 const UserInfoEdit = () => {
 
   const navigate = useNavigate();
-  const userId = useSelector((state) => state.user.user.id);
+  const dispatchAction = useDispatch();
+
+  const user = useSelector((state) => state.user.user.user);
 
   const [name, setName] = useState("");
   const [surname, setSurname] = useState("");
@@ -21,33 +22,16 @@ const UserInfoEdit = () => {
 
   useEffect(() => {
 
-    const getUserData = async () => {
-      // setIsLoading(true);
-
-      const docRef = doc(db, "users", userId);
-      const docSnap = await getDoc(docRef);
-
-      if (docSnap.exists()) {
-        const userInfo = docSnap.data();
-        setName(userInfo.name);
-        setSurname(userInfo.surname);
-        setPatronymic(userInfo.patronymic);
-        setEmail(userInfo.email);
-        setTel(userInfo.tel);
-        setDateOfBirth(userInfo.dateOfBirth);
-        setAddress(userInfo.address);
-        setGender(userInfo.gender);
-        // setIsLoading(false);
-      } else {
-        // setIsLoading(false);
-        throw new Error("No such document!");
-      }
+    if (user) {
+      setName(user.name);
+      setSurname(user.surname);
+      setPatronymic(user.patronymic);
+      setEmail(user.email);
+      setTel(user.tel);
+      setDateOfBirth(user.dateOfBirth);
+      setAddress(user.address);
+      setGender(user.gender);
     }
-
-    getUserData().catch(error => {
-      console.log(error);
-    });
-
 
   }, []);
 
@@ -91,34 +75,26 @@ const UserInfoEdit = () => {
   const editSaveHandler = async (event) => {
     event.preventDefault();
 
-    const userDocRef = doc(db, "users", userId);
-
     const userChangeData = {
       surname: surname,
       name: name,
-      patronymic: patronymic, 
+      patronymic: patronymic,
       dateOfBirth: dateOfBirth,
       gender: gender,
       email: email,
       tel: tel,
       address: address,
-    } 
-
-    try {
-      await updateDoc(userDocRef, userChangeData);
-      setTimeout(() => {
-        navigate("/profile/info");
-      }, 1000);
-    } catch (error) {
-      alert(error);
     }
+
+    dispatchAction(userActions.changeUser(userChangeData));
+    navigate("/profile/info");
   }
 
   return (
     <div className={styles["profile__edit"]}>
       <form className={styles["profile__edit_wrapper"]}>
         <div className={styles["profile__edit_general-info"]}>
-          <h2>Общая инофрмация</h2>
+          <h2>Общая информация</h2>
           <div className={styles["edit__sections"]}>
             <div className={styles["edit__section"]}>
               <div className={styles["edit__item"]}>
@@ -148,7 +124,7 @@ const UserInfoEdit = () => {
                 </label>
               </div>
               <div className={styles["edit__item"]}>
-                <label className={styles["edit__item_label"]} htmlFor='gender'>
+                <label className={styles["edit__item_label-gender"]} htmlFor='gender'>
                   <p>Пол:</p>
                   <select value={gender} onChange={genderChangeHandler} id='gender'>
                     <option>мужчина</option>
@@ -178,7 +154,7 @@ const UserInfoEdit = () => {
               </div>
               <div className={styles["edit__item"]}>
                 <label className={styles["edit__item_label"]} htmlFor='address'>
-                  <p>Адрес:</p>
+                  <p>Адрес доставки:</p>
                   <input id='address' value={address} onChange={addressChangeHandler} type="text" />
                 </label>
               </div>
@@ -187,8 +163,12 @@ const UserInfoEdit = () => {
         </div>
 
         <div className={styles["edit__actions"]}>
-          <button onClick={editCancelHandler} type="submit" className={styles["edit__cancel"]}>Отмена</button>
-          <button onClick={editSaveHandler} type="submit" className={styles["edit__save"]}>Сохранить</button>
+          <button onClick={editCancelHandler} type="submit" className={styles["edit__cancel"]}>
+            Отмена
+          </button>
+          <button onClick={editSaveHandler} type="submit" className={styles["edit__save"]}>
+            Сохранить
+          </button>
         </div>
       </form>
     </div>

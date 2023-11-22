@@ -5,12 +5,16 @@ import Logo from "../../images/logo.svg";
 import BasketLink from "../basket-components/BasketLink";
 import ProfileLink from "../users-components/ProfileLink";
 import { useAuth } from "../../hooks/use-auth";
+import { useSelector } from "react-redux";
 
 const setActive = ({ isActive }) => isActive ? "active__link" : '';
 
 const Header = () => {
 
     const { isAuth } = useAuth();
+
+    const { userRole } = useSelector((state) => state.user.user.user) || false;
+
 
     return (
         <header className={styles["header"]}>
@@ -26,6 +30,11 @@ const Header = () => {
                         <li>
                             <NavLink className={setActive} to="/products">Каталог товаров</NavLink>
                         </li>
+                        {isAuth && !!userRole &&
+                            <li>
+                                <NavLink className={setActive} to="/admin">Админка</NavLink>
+                            </li>
+                        }
                     </ul>
                 </nav>
                 {!isAuth &&

@@ -12,12 +12,38 @@
 
 .img__wrapper {
     width: 200px;
-    height: 220px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
 }
 
-.img__wrapper img {
-    width: 100%;
-    height: 100%;
+.images__product {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.image__product {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image__product img {
+    width: 200px;
+    height: 230px;
+}
+
+.image__slide {
+    width: 70px;
+    height: 70px;
+    cursor: pointer;
+}
+
+.image {
+    width: 200px;
+    height: 200px;
 }
 
 .product__information {
@@ -178,6 +204,7 @@
     cursor: pointer;
     transition: all 0.3s;
 }
+
 .btn__reviews_hide:hover {
     color: #676767;
     transition: all 0.3s;

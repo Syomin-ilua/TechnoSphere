@@ -1,0 +1,25 @@
+.admin__title_wrapper {
+    width: 100%;
+}
+
+.admin__title_wrapper h1 {
+    font-size: 24px;
+    font-family: "Montserrat-Bold";
+    color: #333;
+    text-align: center;
+}
+.admin__btn_actions {
+    display: flex;
+    align-items: center;
+    column-gap: 15px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.admin__btn_actions button {
+    width: 200px;
+    height: 35px;
+    font-family: "Montserrat-Bold";
+    color: #fff;
+    background-color: #4AB8A1;
+    border-radius: 5px;
+}

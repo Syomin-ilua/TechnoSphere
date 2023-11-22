@@ -39,11 +39,13 @@ const SearchForm = () => {
     const dispatchAction = useDispatch();
 
     const productsList = useSelector((state) => state.products.listSearchProducts);
+    const { status, error, categoriesProducts } = useSelector((state) => state.categorieProducts);
+    console.log(status, error, categoriesProducts);
 
     const [inputSearchValue, setInputSearchValue] = useState("");
     const [categoryProducts, setCategoryProducts] = useState("all");
     const [isSearchListState, setIsSearchListState] = useState(false);
-    
+
     const [searchParams, setSearchParams] = useSearchParams();
 
     const queryCategory = searchParams.get("category");
@@ -63,13 +65,13 @@ const SearchForm = () => {
     }, [inputSearchValue, categoryProducts]);
 
     useEffect(() => {
-        
+
         if (isFirstLoading) {
             isFirstLoading = false;
             return;
         }
 
-        dispatchAction(productsActions.searchProduct({queryCategory, querySearch}));
+        dispatchAction(productsActions.searchProduct({ queryCategory, querySearch }));
 
     }, [queryCategory, querySearch]);
 
@@ -84,12 +86,10 @@ const SearchForm = () => {
 
     }, []);
 
-    // Обработчики событий select
     const selectTypeProductHandler = (event) => {
         setCategoryProducts(event.target.value);
     }
 
-    // Обработчики событий инпута
     const inputSearchHandler = (event) => {
         setInputSearchValue(event.target.value);
     }
@@ -114,15 +114,12 @@ const SearchForm = () => {
         searchInput.current.blur();
     }
 
-    // Обрабочик отправки формы 
     const searchFormSubmitHandler = (event) => {
         event.preventDefault();
     }
 
-
     return (
         <form onSubmit={searchFormSubmitHandler} className={styles.searchForm}>
-            {/* Инпут поиска */}
             <div className={styles.searchInputWrapper}>
                 <label htmlFor="inputSearch" className={styles.searchIconWrapper}>
                     <img src={SearchIcon} alt="Иконка поиска" />
@@ -144,21 +141,24 @@ const SearchForm = () => {
                     </button>
                 }
 
-                { isSearchListState ? <SearchList onProductHanler={productHanler} products={productsList} /> : null }
+                {isSearchListState ? <SearchList onProductHanler={productHanler} products={productsList} /> : null}
 
             </div>
 
-            {/* Select фильтрации */}
-            <div className={styles.sortForm}>
-                <select value={categoryProducts} onChange={selectTypeProductHandler} >
-                    {
-                        filterTypes.map(filterType => {
-                            return (
-                                <option value={filterType.filterValue}>{filterType.filterTypeText}</option>
-                            )
-                        })
-                    }
-                </select>
+            <div>
+                {status === "loading" && <p className={styles["loading__categories_products"]}>Загрузка категорий товаров!</p>}
+                {error && <p className={styles["loading__categories_products"]}>Произошла ошибка при загрузке категорий</p>}
+                {status === "resolved" &&
+                    <select className={styles.sortForm} value={categoryProducts} onChange={selectTypeProductHandler} >
+                        {
+                            categoriesProducts.map((categorie) => {
+                                return (
+                                    <option value={categorie.filterValue}>{categorie.filterTypeText}</option>
+                                )
+                            })
+                        }
+                    </select>
+                }
             </div>
         </form>
     );

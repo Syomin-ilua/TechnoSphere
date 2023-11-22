@@ -1,14 +1,15 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import styles from "./Basket.module.css";
 import OrderItem from "../components/basket-components/OrderItem";
 import BasketEmpty from "../components/basket-components/BasketEmpty";
 import FormOrder from "../components/basket-components/FormOrder";
 import Container from "../components/layout-components/Container";
+import Loader from "../components/UI-components/Loader";
 
 const Basket = () => {
 
-    const { items, totalCostBasket } = useSelector((state) => state.basket);
+    const { items, totalCostBasket, status, error } = useSelector((state) => state.basket);
 
     const [isFormOrderVisible, setIsFormOrderVisible] = useState(false);
 
@@ -20,6 +21,10 @@ const Basket = () => {
         setIsFormOrderVisible(false);
     }
 
+    useEffect(() => {
+        window.scrollTo(0, 0);
+    }, []);
+
 
     return (
         <Container class="basket__container">
@@ -27,9 +32,14 @@ const Basket = () => {
                 <div className={styles["basket__header"]}>
                     <h1 className={styles["basket__header_text"]}>Корзина</h1>
                 </div>
-                <div className={styles["basket__body_wrapper"]}>
-                    {
-                        items.length === 0 ?
+                {status === "loading" &&
+                <div className={styles["loader__wrapper"]}>
+                    <Loader />
+                </div>
+                }
+                {status === "resolved" &&
+                    <div className={styles["basket__body_wrapper"]}>
+                        {items.length === 0 ?
                             <BasketEmpty /> :
                             <div className={styles["basket__body"]}>
                                 <div className={styles["basket__orders"]}>
@@ -60,10 +70,13 @@ const Basket = () => {
                                     </div>
                                 </div>
                             </div>
-                    }
-                    {isFormOrderVisible && <FormOrder />}
-                </div>
+                        }
+                        {isFormOrderVisible && <FormOrder />}
+                    </div>
+                }
+                {error && <p>Произошла ошибка!!!</p>}
             </div>
+
         </Container>
     );
 }

@@ -20,11 +20,11 @@ export const getProduct = createAsyncThunk(
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
-                const products = docSnap.data();
-                if (!products.items[idProduct]) {
+                const { products } = docSnap.data();
+                if (!products[idProduct]) {
                     throw new Error("Такого товара не сущетсвует!");
                 }
-                return products.items[idProduct];
+                return products[idProduct];
             } else {
                 throw new Error("Документ не существует!");
             }

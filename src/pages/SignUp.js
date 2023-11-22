@@ -82,7 +82,7 @@ const SignUp = () => {
                     email: enteredEmail,
                     dateOfBirth: "",
                     gender: "",
-                    userRole: "user",
+                    userRole: false,
                     tel: "",
                     address: "",
                     registeredAt: Timestamp.fromDate(new Date()),

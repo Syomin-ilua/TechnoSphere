@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { basketGetOrders, basketChangeOrders } from './store/basket-slice';
 import { getOrders, changeOrders } from './store/orders-slice';
+import { getProducts } from './store/products-slice';
 
 import Header from './components/layout-components/Header';
 import Footer from './components/layout-components/Footer';
@@ -17,6 +18,10 @@ import Basket from './pages/Basket';
 import PageNotFound from './pages/PageNotFound';
 import RequireAuth from './hoc/RequireAuth';
 import Profile from './pages/Profile';
+import Admin from './pages/Admin';
+import { changeUserInfo, getUserInfo } from './store/user-slice';
+import RequireAdminAuth from './hoc/RequireAdminAuth';
+import { changeCategoriesProducts, getCategoriesProducts } from './store/categoriesProducts-slice';
 // import { postProducts } from './store/products-slice';
 
 let isInitialRunning = true;
@@ -24,17 +29,27 @@ let isInitialRunning = true;
 function App() {
 
   const userId = useSelector((state) => state.user.user.id);
+  const user = useSelector((state) => state.user.user);
   const basket = useSelector((state) => state.basket);
-  const orders = useSelector((state) => state.orders); 
+  const orders = useSelector((state) => state.orders);
+  const categorieProducts = useSelector((state) => state.categorieProducts);
   const products = useSelector((state) => state.products.fetchedProducts);
-  
 
   const dispatchAction = useDispatch();
 
   useEffect(() => {
     // dispatchAction(postProducts());
-    dispatchAction(basketGetOrders({userId}));
-    dispatchAction(getOrders(userId));
+
+    if (userId) {
+      dispatchAction(basketGetOrders({ userId }));
+      dispatchAction(getOrders(userId));
+      dispatchAction(getUserInfo(userId));
+      dispatchAction(getOrders(userId));
+    }
+
+    dispatchAction(getProducts());
+    dispatchAction(getCategoriesProducts());
+
   }, []);
 
   useEffect(() => {
@@ -45,7 +60,7 @@ function App() {
 
 
     if (basket.isBasketContentChanged) {
-      dispatchAction(basketChangeOrders({userId}));
+      dispatchAction(basketChangeOrders({ userId }));
     }
 
   }, [basket]);
@@ -55,13 +70,37 @@ function App() {
       isInitialRunning = false;
       return;
     }
-    
+
     if (orders.isOrdersContentChanged) {
       dispatchAction(changeOrders(userId));
     }
 
-
   }, [orders]);
+
+  useEffect(() => {
+
+    if (isInitialRunning) {
+      isInitialRunning = false;
+      return;
+    }
+
+    if (user.isUserContentChanged) {
+      dispatchAction(changeUserInfo(userId));
+    }
+
+  }, [user]);
+
+  useEffect(() => {
+    if (isInitialRunning) {
+      isInitialRunning = false;
+      return;
+    }
+
+    if (categorieProducts.isCategoriesProductsContentChanges) {
+      dispatchAction(changeCategoriesProducts());
+    }
+
+  }, []);
 
   return (
     <Fragment>
@@ -71,7 +110,7 @@ function App() {
             <Header />
             <Routes>
               <Route path='/' element={
-                <Navigate to="/home" replace={true}/>
+                <Navigate to="/home" replace={true} />
               } />
               <Route path='/home' element={<About />} />
               <Route path='/products' element={<Catalog />} />
@@ -89,6 +128,14 @@ function App() {
                   <Profile />
                 </RequireAuth>
               } />
+              <Route
+                path='/admin'
+                element={
+                  <RequireAdminAuth>
+                    <Admin />
+                  </RequireAdminAuth>
+                }
+              />
               <Route path='/*' element={<PageNotFound />} />
             </Routes>
             <Footer />

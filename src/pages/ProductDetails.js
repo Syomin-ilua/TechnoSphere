@@ -16,11 +16,11 @@ const ProductDetails = () => {
 
     const dispatchAction = useDispatch();
     const product = useSelector((state) => state.product);
+    console.log(product);
 
     useEffect(() => {
 
         window.scrollTo(0, 0);
-
         dispatchAction(getProduct(productId));
 
     }, []);
@@ -48,7 +48,7 @@ const ProductDetails = () => {
                         type: product.product.type,
                         description: product.product.description,
                         cost: product.product.cost,
-                        image: product.product.image,
+                        images: product.product.images,
                         options: product.product.options ? product.product.options : null
                     }}
                 />

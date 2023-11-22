@@ -23,10 +23,6 @@ const UserOrders = () => {
 
 	const { orders, status, error } = useSelector((state) => state.orders);
 
-	useEffect(() => {
-		dispatchAction(getOrders(userId));
-	}, []);
-
 	return (
 		<div className={styles["user__wrapper"]}>
 			<div className={styles["user__orders_wrapper"]}>
@@ -49,7 +45,11 @@ const UserOrders = () => {
 											id: order.id,
 											date: order.date.format(now),
 											totalPrice: order.totalPrice,
-											products: order.products,
+											cardInfo: order.cardInfo,
+											datePlacingOrder: order.datePlacingOrder,
+											orderProducts: order.orderProducts,
+											address: order.address,
+											methodPayment: order.methodPayment
 										}}
 									/>
 								))
