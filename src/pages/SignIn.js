@@ -1,14 +1,13 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../firebase";
 import { userActions } from "../store/user-slice";
 import styles from "./Auth.module.css";
 import LogoBanner from "../images/logo-banner.svg"
-import IconSuccesStatus from "../images/status-success.svg";
-import IconFailedStatus from "../images/status-failed.svg";
-import { useDispatch, useSelector } from "react-redux";
 import { useAuth } from "../hooks/use-auth";
 import useInput from "../hooks/use-input";
+import { ToastContainer, toast } from "react-toastify";
 
 const validateRegexEmail = /^\S+@\S+\.\S+$/;
 
@@ -43,16 +42,10 @@ const SignIn = () => {
         isFormValid = true;
     }
 
-    const [isLoginState, setIsLoginState] = useState({
-        text: null,
-        stateLogin: null,
-        isShow: false,
-    });
-
     useEffect(() => {
 
         if (isAuth) {
-            navigate("/home");
+            navigate("/home", {replace: true});
         }
 
     }, []);
@@ -67,11 +60,7 @@ const SignIn = () => {
         loginUser(enteredEmail, enteredPassword)
             .then((userCredential) => {
                 const user = userCredential.user;
-                setIsLoginState({
-                    text: "Авторизация прошла успешно!",
-                    stateLogin: true,
-                    isShow: true
-                });
+                toast.success("Авторизация прошла успешно!");
                 dispatchAction(userActions.setUser({
                     email: user.email,
                     id: user.uid,
@@ -81,31 +70,13 @@ const SignIn = () => {
                 resetPasswordInputValues();
                 setTimeout(() => {
                     navigate('/home', { replace: true });
-                }, 1500);
+                }, 500);
             })
             .catch((error) => {
-                setIsLoginState({
-                    text: "Произошла ошибка!",
-                    stateLogin: false,
-                    isShow: true
-                });
-                console.error(error)
-                setTimeout(() => {
-                    setIsLoginState({
-                        text: null,
-                        stateLogin: null,
-                        isShow: false
-                    });
-                }, 3000);
+                toast.warning("Произошла ошибка авторизации!");
             });
 
     }
-
-    const loginText =
-        <div className="auth__state">
-            <img src={isLoginState.stateLogin ? IconSuccesStatus : IconFailedStatus} alt="Icon: Состояние регистрации" />
-            <p>{isLoginState.text}</p>
-        </div>;
 
     const emailInputClasses = hasEmailInputError
         ? "auth__label invalid"
@@ -117,7 +88,6 @@ const SignIn = () => {
 
     return (
         <div className={styles["auth"]}>
-            {isLoginState.isShow && loginText}
             <div className={styles["auth__container"]}>
                 <div className={styles["auth__wrapper"]}>
                     <div className={styles["auth__wrapper__container"]}>
@@ -175,6 +145,7 @@ const SignIn = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 }

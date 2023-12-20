@@ -34,7 +34,6 @@ const About = () => {
                             <li>REACT-ROUTER-DOM V6</li>
                             <li>REDUX (REDUX-TOLKIT)</li>
                             <li>FIREBASE</li>
-                            <li>TYPESCRIPT</li>
                         </ul>
                     </div>
                 </div>

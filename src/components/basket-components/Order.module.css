@@ -42,6 +42,11 @@
 .order__prev p {
     color: #333;
     font-family: "Montserrat-Medium";
+    font-size: 14px;
+}
+
+.order__prev p b {
+    font-family: "Montserrat-SemiBold";
     font-size: 16px;
 }
 
@@ -53,24 +58,62 @@
 
 .about__order_title h2 {
     color: #000;
-    font-family: "Montserrat-SemiBold";
+    font-family: "Montserrat-Bold";
     font-size: 16px;
 }
 .order__products {
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 20px;
 }
 .order__product {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 18px;
-    border: 1px solid #333;
-    background-color: #EBEBEB;
+    box-shadow: 0px 4px 4px 4px rgba(0, 0, 0, 0.25);
+    user-select: none;
 }
 
 .order__product p {
     color: #000;
     font-family: "Montserrat-Regular";
     font-size: 14px;
+}
+
+.image__product {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    column-gap: 20px;
+}
+
+.image__product img {
+    width: 50px;
+    height: 50px;
+}
+
+.order__product_info {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    row-gap: 10px;
+} 
+
+.order__productName_link {
+    font-size: 14px;
+    font-family: "Montserrat-SemiBold";
+    color: #333;
+    transition: all 0.3s;
+}
+
+.order__productName_link:hover {
+    color: #585858;
+    transition: all 0.3s;
+}
+
+.order__price {
+    font-size: 14px;
+    font-family: "Montserrat-Medium";
+    color: #333;
 }

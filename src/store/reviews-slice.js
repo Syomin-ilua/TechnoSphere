@@ -64,6 +64,9 @@ const reviewsSlice = createSlice({
             const review = action.payload;
             state.reviews.push(review);
             state.reviewsAddState = true;  
+        },
+        resetReviewProductContentChangedState(state) {
+            state.reviewsAddState = false;
         }
     },
     extraReducers: {

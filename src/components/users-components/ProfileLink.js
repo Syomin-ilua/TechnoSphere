@@ -1,17 +1,93 @@
 import React from 'react';
 import styles from "./ProfileLink.module.css";
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { getAuth, signOut } from 'firebase/auth';
+import { userActions } from '../../store/user-slice';
+import { useAuth } from '../../hooks/use-auth';
+import storage from '../../firebase';
+import { ref, getDownloadURL } from 'firebase/storage';
+import { ReactComponent as AccountIcon } from "../../images/account-icon.svg";
+import { ReactComponent as OrdersIcon } from "../../images/orders-icon.svg";
+import { ReactComponent as LogoutIcon } from "../../images/logout-icon.svg";
+import { ReactComponent as AdminIcon } from "../../images/admin-icon.svg";
+import { ToastContainer, toast } from 'react-toastify';
 
 const ProfileLink = () => {
+
+    const { isAuth } = useAuth();
+    const { status, error, user } = useSelector((state) => state.user.user);
+
+    const dispatchAction = useDispatch();
+    const navigate = useNavigate();
+
+    const [profileLinksShowState, setProfileLinksShowState] = useState(false);
+
+    const logoutUser = () => {
+        const auth = getAuth();
+        signOut(auth).then(() => {
+            dispatchAction(userActions.removeUser());
+            toast.warning("Вы успешно вышли из аккаунта!");
+            setTimeout(() => {
+                navigate("/home");
+            }, 500);
+        }).catch((error) => {
+            toast.warning("Произошла ошибка выхода!");
+        })
+    }
+
+    const profileLinkHandler = () => {
+        setProfileLinksShowState(prevState => !prevState);
+    }
+
+    const exitProfileHandler = () => {
+        logoutUser();
+    }
+
+    const linkHandler = () => {
+        setProfileLinksShowState(prevState => !prevState);
+    }
+
     return (
-        <Link to="/profile/info" className={styles["profile__link"]}>
-            <div className={styles["profile__link_icon-wrapper"]}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none">
-                    <path d="M12 2C6.477 2 2 6.477 2 12C2 17.523 6.477 22 12 22C17.523 22 22 17.523 22 12C22 6.477 17.523 2 12 2Z" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
-                    <path d="M4.271 18.346C4.271 18.346 6.5 15.5 12 15.5C17.5 15.5 19.73 18.346 19.73 18.346M12 12C12.7956 12 13.5587 11.6839 14.1213 11.1213C14.6839 10.5587 15 9.79565 15 9C15 8.20435 14.6839 7.44129 14.1213 6.87868C13.5587 6.31607 12.7956 6 12 6C11.2043 6 10.4413 6.31607 9.87868 6.87868C9.31607 7.44129 9 8.20435 9 9C9 9.79565 9.31607 10.5587 9.87868 11.1213C10.4413 11.6839 11.2043 12 12 12Z" stroke="white" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" />
-                </svg>
-            </div>
-        </Link>
+        <div className={styles["profile_link"]}>
+            <button onClick={profileLinkHandler} className={styles["btn__profile_link"]}>
+                <div className={styles["profile__link_icon-wrapper"]}>
+                    {status === "loading" && <p>...</p>}
+                    {status === "resolved" && 
+                        <img src={user.gender === "мужчина" || user.gender.length === 0 ? "/users-images/men.png" : "/users-images/women.png"} alt="Изоражение профиля" />
+                    }
+                    {error && "?"}
+                </div>
+            </button>
+
+            {profileLinksShowState &&
+
+                <div className={styles["profile__links_wrapper"]}>
+                    <div className={styles["profile__links"]}>
+                        <Link onClick={linkHandler} to="profile/info">
+                            <AccountIcon />
+                            Личный кабинет
+                        </Link>
+                        <Link onClick={linkHandler} to="profile/orders">
+                            <OrdersIcon />
+                            История заказов
+                        </Link>
+                        {isAuth && !!user.userRole &&
+                            <Link onClick={linkHandler} to="/admin">
+                                <AdminIcon />
+                                Админка
+                            </Link>
+                        }
+                        <button onClick={exitProfileHandler} className={styles["btn__exit_profile"]}>
+                            <LogoutIcon />
+                            Выйти из профиля
+                        </button>
+                    </div>
+                </div>
+            }
+            <ToastContainer />
+        </div>
     )
 }
 

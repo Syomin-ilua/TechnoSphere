@@ -1,27 +1,135 @@
+import { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
+import { db } from "../../firebase";
+import { doc, getDoc } from "firebase/firestore";
+import { toast, ToastContainer } from "react-toastify";
+import Skeleton from "react-loading-skeleton";
 import styles from "./ReviewsItem.module.css";
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const ReviewsItem = (props) => {
 
     const review = props.productReview;
 
+    const { id } = useSelector((state) => state.user.user) || false;
+    const [userDataReview, setUserDataReview] = useState(null);
+    const { userRole } = useSelector((state) => state.user.user.user) || false;
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    useEffect(() => {
+
+        const getUserReview = async () => {
+            setIsLoading(true);
+
+            const userDocRef = doc(db, "users", id);
+
+            const userSnap = await getDoc(userDocRef);
+
+            if (userSnap.exists()) {
+                const userData = userSnap.data();
+                setUserDataReview(userData);
+                setIsLoading(false)
+            } else {
+                setIsLoading(false);
+                throw new Error("Произошла ошибка!");
+            }
+
+        }
+
+        getUserReview().catch((error) => {
+            toast.warning("Произошла ошибка!");
+        });
+
+    }, []);
+
     return (
         <li className={styles["review__product"]}>
-            <div className={styles["review__user_info"]}>
-                <div className={styles["avatar__wrapper"]}>
-                    <img src={`${review.gender === "мужчина" ? "/users-images/men.png" : "/users-images/women.png"}`} alt="Фото пользователя" />
+            <div>
+                <div className={styles["review__user_info"]}>
+                    <div className={styles["avatar__wrapper"]}>
+                        {isLoading ?
+                            <Skeleton
+                                speed={2}
+                                width={50}
+                                height={50}
+                                viewBox="0 0 400 160"
+                                backgroundColor="#f3f3f3"
+                                foregroundColor="#ecebeb"
+                                borderRadius={`50%`}
+                            /> :
+                            <img src={`${userDataReview.gender === "мужчина" ? "/users-images/men.png" : "/users-images/women.png"}`} alt="Фото пользователя" />
+                        }
+                    </div>
+                    <div className={styles["review__info"]}>
+                        <p className={styles["review__name"]}>
+                            {isLoading ?
+                                <Skeleton
+                                    speed={2}
+                                    width={50}
+                                    height={10}
+                                    viewBox="0 0 400 160"
+                                    backgroundColor="#f3f3f3"
+                                    foregroundColor="#ecebeb"
+                                /> :
+                                userDataReview.userName
+                            }
+                            {isLoading ?
+                                <Skeleton
+                                    speed={2}
+                                    height={10}
+                                    viewBox="0 0 400 160"
+                                    backgroundColor="#f3f3f3"
+                                    foregroundColor="#ecebeb"
+                                /> :
+                                review.userId === id && <p className={styles["user__review"]}>Ваш отзыв</p>
+                            }
+                        </p>
+                        <p className={styles["review__date"]}>
+                            {isLoading ?
+                                <Skeleton
+                                    height={10}
+                                    speed={2}
+                                    width={162}
+                                    viewBox="0 0 400 160"
+                                    backgroundColor="#f3f3f3"
+                                    foregroundColor="#ecebeb"
+                                /> :
+                                review.date
+                            }
+                        </p>
+                    </div>
                 </div>
-                <div className={styles["review__info"]}>
-                    <p className={styles["review__name"]}> 
-                        {review.userName} 
-                        <span className={styles["review__address"]}>г. {review.address}</span>
-                    </p>
-                    <p className={styles["review__date"]}>{review.date}</p>
+                <div className={styles["review__description"]}>
+                    {isLoading ?
+                        <div>
+                            <Skeleton
+                                height={10}
+                                speed={2}
+                                viewBox="0 0 400 160"
+                                backgroundColor="#f3f3f3"
+                                foregroundColor="#ecebeb"
+                            />
+                            <Skeleton
+                                height={10}
+                                speed={2}
+                                viewBox="0 0 400 160"
+                                backgroundColor="#f3f3f3"
+                                foregroundColor="#ecebeb"
+                            />
+                            <Skeleton
+                                height={10}
+                                speed={2}
+                                viewBox="0 0 400 160"
+                                backgroundColor="#f3f3f3"
+                                foregroundColor="#ecebeb"
+                            />
+                        </div> :
+                        review.reviewData
+                    }
                 </div>
             </div>
-                <div className={styles["review__description"]}>
-                    {review.reviewData}
-                </div>
-
+            <ToastContainer />
         </li>
     );
 }

@@ -33,7 +33,7 @@
 .catalog__container {
     padding-top: 150px;
     min-height: 100vh;
-    max-height: auto;
+    height: 100%;
 }
 
 .productDetails__container {

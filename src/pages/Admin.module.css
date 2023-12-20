@@ -1,6 +1,10 @@
 .admin__title_wrapper {
     width: 100%;
 }
+.admin__wrapper {
+    width: 100%;
+    height: auto;
+}
 
 .admin__title_wrapper h1 {
     font-size: 24px;
@@ -22,4 +26,16 @@
     color: #fff;
     background-color: #4AB8A1;
     border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.admin__btn_actions button:hover {
+    background-color: #358f7b;
+    transition: all 0.3s;
+}
+
+.admin__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

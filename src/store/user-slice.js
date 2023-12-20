@@ -78,6 +78,9 @@ const userSlice = createSlice({
             state.user.dateOfBirth = userChangeData.dateOfBirth;
             state.user.address = userChangeData.address;
             state.isUserContentChanged = true;
+        },
+        resetUserContentChangedState(state) {
+            state.isUserContentChanged = false;
         }
     }, 
     extraReducers: {

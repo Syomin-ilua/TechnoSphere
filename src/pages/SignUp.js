@@ -1,14 +1,12 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { registerUser, db } from "../firebase";
 import { doc, setDoc, Timestamp } from "firebase/firestore";
-import styles from "./Auth.module.css";
-import LogoBanner from "../images/logo-banner.svg";
-import IconSuccesStatus from "../images/status-success.svg";
-import IconFailedStatus from "../images/status-failed.svg";
+import { ToastContainer, toast } from "react-toastify";
 import { useAuth } from "../hooks/use-auth";
 import useInput from "../hooks/use-input";
+import styles from "./Auth.module.css";
+import LogoBanner from "../images/logo-banner.svg";
 
 const validateRegexEmail = /^\S+@\S+\.\S+$/;
 
@@ -51,12 +49,6 @@ const SignUp = () => {
         isFormValid = true;
     }
 
-    const [isRegisterState, setIsRegisterState] = useState({
-        text: null,
-        stateReg: null,
-        isShow: false,
-    });
-
     useEffect(() => {
 
         if (isAuth) {
@@ -94,39 +86,18 @@ const SignUp = () => {
                 setDoc(doc(db, 'orders', user.uid), {
                     orders: []
                 });
-                setIsRegisterState({
-                    text: "Регистрация прошла успешно!",
-                    stateReg: true,
-                    isShow: true
-                });
+                toast.success("Регистрация прошла успешно!");
                 resetNameInputValues();
                 resetEmailInputValues();
                 resetPasswordInputValues();
                 setTimeout(() => {
                     navigate("/auth/login");
-                }, 1500);
+                }, 500);
             })
             .catch((error) => {
-                setIsRegisterState({
-                    text: "Произошла ошибка!",
-                    stateReg: false,
-                    isShow: true
-                });
-                setTimeout(() => {
-                    setIsRegisterState({
-                        text: null,
-                        stateReg: null,
-                        isShow: false
-                    });
-                }, 1500);
+                toast.success("Произошла ошибка регистрации!");
             });
     }
-
-    const registerText =
-        <div className="auth__state">
-            <img src={isRegisterState.stateReg ? IconSuccesStatus : IconFailedStatus} alt="Icon: Состояние регистрации" />
-            <p>{isRegisterState.text}</p>
-        </div>;
 
     const nameInputClasses = hasEmailInputError
         ? "auth__label invalid"
@@ -143,7 +114,6 @@ const SignUp = () => {
 
     return (
         <div className={styles["auth"]}>
-            {isRegisterState.isShow && registerText}
             <div className={styles["auth__container"]}>
                 <div className={styles["auth__wrapper"]}>
                     <div className={styles["auth__wrapper__container"]}>
@@ -213,6 +183,7 @@ const SignUp = () => {
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 }

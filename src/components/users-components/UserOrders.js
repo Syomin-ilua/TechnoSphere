@@ -22,6 +22,7 @@ const UserOrders = () => {
 	const userId = useSelector((state) => state.user.user.id);
 
 	const { orders, status, error } = useSelector((state) => state.orders);
+	console.log(orders);
 
 	return (
 		<div className={styles["user__wrapper"]}>
@@ -43,13 +44,12 @@ const UserOrders = () => {
 										key={order.id}
 										order={{
 											id: order.id,
-											date: order.date.format(now),
+											address: order.address,
 											totalPrice: order.totalPrice,
+											methodPayment: order.methodPayment,
 											cardInfo: order.cardInfo,
 											datePlacingOrder: order.datePlacingOrder,
 											orderProducts: order.orderProducts,
-											address: order.address,
-											methodPayment: order.methodPayment
 										}}
 									/>
 								))

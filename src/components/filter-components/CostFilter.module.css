@@ -1,0 +1,36 @@
+.cost__filter {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.cost__filter_title {
+    font-family: "Montserrat-SemiBold";
+    color: #333;
+    font-size: 14px;
+}
+.costs__wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 20px;
+}
+.cost__input {
+    font-size: 12px;
+    font-family: "Montserrat-Regular";
+    width: 100px;
+    border: 2px solid rgb(74 184 161);
+    padding: 10px;
+    transition: all 0.3s;
+}
+
+.cost__input::-webkit-outer-spin-button,
+.cost__input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.cost__input:focus {
+    box-shadow: 2px 2px 2px 2px #d3d3d3;
+    transition: all 0.3s;
+}

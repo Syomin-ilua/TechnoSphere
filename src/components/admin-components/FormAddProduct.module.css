@@ -1,0 +1,219 @@
+.form__add_product {
+    max-width: 700px;
+    width: 100%;
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.add__product_title {
+    margin-bottom: 30px;
+}
+
+.add__product_title h2 {
+    font-size: 18px;
+    font-family: "Montserrat-Bold";
+    color: #333;
+    text-align: center;
+}
+
+.subtitle__text {
+    font-size: 14px;
+    color: #333;
+    font-family: "Montserrat-SemiBold";
+    margin-bottom: 10px;
+}
+
+.subtitle__inputs {
+    color: #333;
+    font-size: 16px;
+    font-family: "Montserrat-Bold";
+    margin-bottom: 10px;
+}
+
+.options__product {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    margin-top: 20px;
+}
+
+.subtitle__text {
+    color: #333;
+    font-size: 14px;
+    font-family: "Montserrat-SemiBold";
+    margin-bottom: 0px;
+}
+
+.label__select {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.category__products_select {
+    width: 256px;
+    height: 25px;
+    border: 1px solid #333;
+    border-radius: 3px;
+}
+
+.label__input {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    cursor: pointer;
+}
+
+.label__input input {
+    box-shadow: 0px 2px 2px 2px rgba(34, 60, 80, 0.2);
+    width: 250px;
+    height: 35px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-radius: 3px;
+    font-size: 14px;
+    font-family: "Montserrat-Regular";
+    color: #333;
+    transition: all 0.3s;
+}
+
+.label__input input:hover {
+    box-shadow: 0px 4px 4px 2px rgba(34, 60, 80, 0.2);
+    transition: all 0.3s;
+}
+
+.label__input input:focus {
+    box-shadow: 0px 6px 6px 2px rgba(34, 60, 80, 0.2);
+    transition: all 0.3s;
+}
+
+.label__input_images {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.images__wrapper {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.input__image_wrapper {
+    width: 100%;
+}
+
+.input__image_wrapper input {
+    color: #333;
+    font-size: 12px;
+    font-family: "Montserrat-Regular";
+}
+
+.input__image_wrapper input::file-selector-button {
+    width: 150px;
+    height: 30px;
+    background-color: #9f9f9f;
+    color: #fff;
+    font-family: "Montserrat-Bold";
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.input__image_wrapper input::file-selector-button:hover {
+    background-color: #bdbdbd;
+    transition: all 0.3s;
+}
+
+.image__product {
+    width: 260px;
+    height: 200px;
+    margin-top: 10px;
+}
+
+.image__product img {
+    width: 100%;
+    height: 100%;
+}
+
+.label__input_description {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+
+.label__input_description textarea {
+    box-shadow: 0px 2px 2px 2px rgba(34, 60, 80, 0.2);
+    height: 60px;
+    padding: 10px;
+    color: #333;
+    font-size: 12px;
+    font-family: "Montserrat-Regular";
+}
+
+.btn__add_product {
+    width: 300px;
+    height: 35px;
+    background-color: #333;
+    color: #fff;
+    font-size: 14px;
+    font-family: "Montserrat-Bold";
+    margin: 0 auto;
+    margin-top: 30px;
+    border-radius: 3px;
+    transition: all 0.3s;
+}
+
+.btn__add_product:hover {
+    background-color: #515151;
+    transition: all 0.3s;
+}
+
+.input__file {
+    display: none;
+}
+
+.btn__add_file {
+    max-width: 280px;
+    width: 100%;
+    height: 35px;
+    background-color: rgb(174, 0, 0);
+    color: #fff;
+    font-size: 14px;
+    font-family: "Montserrat-SemiBold";
+    margin-bottom: 15px;
+}
+
+.empty__images {
+    font-size: 14px;
+    font-family: "Montserrat-Regular";
+}
+
+.images__list {
+    font-size: 14px;
+    font-family: "Montserrat-Regular";
+    padding-left: 15px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.uploaded__images {
+    width: 100%;
+    height: 150px;
+    display: flex;
+    column-gap: 10px;
+}
+
+.input__wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+        

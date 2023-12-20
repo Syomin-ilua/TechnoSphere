@@ -13,18 +13,15 @@ export const getProduct = createAsyncThunk(
     "productDetails/getProduct",
     async function (idProduct, { rejectWithValue }) {
 
-        const docRef = doc(db, "products", "products");
+        const docRef = doc(db, "products", `${idProduct}`);
 
         try {
 
             const docSnap = await getDoc(docRef);
 
             if (docSnap.exists()) {
-                const { products } = docSnap.data();
-                if (!products[idProduct]) {
-                    throw new Error("Такого товара не сущетсвует!");
-                }
-                return products[idProduct];
+                const product = docSnap.data();
+                return product;
             } else {
                 throw new Error("Документ не существует!");
             }
@@ -38,7 +35,7 @@ export const getProduct = createAsyncThunk(
 // export const productChangeReviews = createAsyncThunk(
 //     "productDetails/productChangeReviews",
 //     async function (_, {rejectWithValue, getState}) {
-        
+
 //         const { fetchedProducts } = getState().products;
 //         console.log(fetchedProducts);
 //         const docRef = doc(db, "products", "products");
@@ -60,7 +57,7 @@ const productDetailsSlice = createSlice({
     name: "productDetails",
     initialState: productDetailsInitialState,
     reducers: {
-        
+
     },
     extraReducers: {
         [getProduct.pending]: (state) => {

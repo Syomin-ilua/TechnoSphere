@@ -1,0 +1,42 @@
+.categories__filter {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    row-gap: 10px;
+}
+
+.sort__form {
+    width: 100%;
+    height: 35px;
+    border: 2px solid rgb(74 184 161);
+    border-radius: 3px;
+    padding-left: 2px;
+    padding-right: 2px;
+    cursor: pointer;
+    font-family: "Montserrat-Medium";
+    font-size: 13px;
+    outline: none;
+    transition: all 0.3s;
+}
+
+.sort__form:focus {
+    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    transition: all 0.3s;
+}
+
+.option__category {
+    padding: 20px;
+}
+
+.loading__categories_products {
+    font-size: 14px;
+    font-family: "Montserrat-SemiBold";
+    color: #333;
+}
+.categories__filter_title {
+    font-family: "Montserrat-SemiBold";
+    color: #333;
+    font-size: 14px;
+}

@@ -98,15 +98,30 @@ const basketSlice = createSlice({
                 return acc + item.totalPrice
             }, 0);
         },
-        updatedBasket(state, action) {
-            state.items = action.payload.items;
-            state.itemsQuantity = action.payload.itemsQuantity;
+        deleteProductInBasket(state, action) {
+            const idProduct = action.payload;
+            const { quantity, totalPrice } = state.items.find((product) =>
+                product.id === idProduct
+            );
+            state.items = state.items.filter((product) => 
+                product.id !== idProduct
+            );
+            state.itemsQuantity -= quantity;
+            state.totalCostBasket -= totalPrice; 
+            state.isBasketContentChanged = true;
         },
+        // updatedBasket(state, action) {
+        //     state.items = action.payload.items;
+        //     state.itemsQuantity = action.payload.itemsQuantity;
+        // },
         clearingBasket(state) {
             state.items = [];
             state.itemsQuantity = 0;
             state.totalCostBasket = 0;
             state.isBasketContentChanged = true;
+        },
+        resetBasketContentChangedState(state) {
+            state.isBasketContentChanged = false;
         }
     },
     extraReducers: {

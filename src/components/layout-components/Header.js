@@ -6,15 +6,14 @@ import BasketLink from "../basket-components/BasketLink";
 import ProfileLink from "../users-components/ProfileLink";
 import { useAuth } from "../../hooks/use-auth";
 import { useSelector } from "react-redux";
+import { ReactComponent as HomeIcon } from "../../images/home.svg";
+import { ReactComponent as CatalogIcon } from "../../images/catalog.svg";
 
 const setActive = ({ isActive }) => isActive ? "active__link" : '';
 
 const Header = () => {
 
     const { isAuth } = useAuth();
-
-    const { userRole } = useSelector((state) => state.user.user.user) || false;
-
 
     return (
         <header className={styles["header"]}>
@@ -23,19 +22,16 @@ const Header = () => {
                     <img src={Logo} alt="Логотип" />
                 </NavLink>
                 <nav className={styles["navigation"]}>
-                    <ul>
-                        <li>
-                            <NavLink className={setActive} to="/home">Главная</NavLink>
-                        </li>
-                        <li>
-                            <NavLink className={setActive} to="/products">Каталог товаров</NavLink>
-                        </li>
-                        {isAuth && !!userRole &&
-                            <li>
-                                <NavLink className={setActive} to="/admin">Админка</NavLink>
-                            </li>
-                        }
-                    </ul>
+                    <div>
+                        <NavLink className={setActive} to="/home">
+                            <HomeIcon className={styles["icon__navigation"]} />
+                            Главная
+                        </NavLink>
+                        <NavLink className={setActive} to="/products">
+                            <CatalogIcon className={styles["icon__navigation"]} />
+                            Каталог товаров
+                        </NavLink>
+                    </div>
                 </nav>
                 {!isAuth &&
                     <div className={styles["auth__links"]}>
@@ -44,8 +40,10 @@ const Header = () => {
                     </div>
                 }
                 {isAuth &&
-                    <div className={styles["profile__links"]}>
-                        <BasketLink />
+                    <div className={styles["important__links"]}>
+                        <NavLink to="/basket">
+                            <BasketLink />
+                        </NavLink>  
                         <ProfileLink />
                     </div>
                 }

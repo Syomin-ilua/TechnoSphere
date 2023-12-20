@@ -1,13 +1,14 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { basketActions } from "../../store/basket-slice";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link, useLocation } from "react-router-dom";
+import { basketActions } from "../../store/basket-slice";
 import { useAuth } from "../../hooks/use-auth";
-import styles from "./ProductCart.module.css";
-import Image from "../UI-components/Image";
-import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
+import { ToastContainer, toast } from "react-toastify";
+import { ReactComponent as DeleteProductInBasketIcon } from "../../images/delete-icon.svg";
+import styles from "./ProductCart.module.css";
+import "swiper/css";
 
 const ProductCart = (props) => {
 
@@ -17,8 +18,12 @@ const ProductCart = (props) => {
     const { isAuth } = useAuth();
 
     const { id, productName, type, description, cost, images, options } = props.product;
+    const basket = useSelector((state) => state.basket.items);
 
-    const [productQuantity, setProductQuantity] = useState(0);
+    const existingBasketProduct = basket.find((product) =>
+        product.id === id
+    );
+
     const [isLinkReviewsState, setIsLinkReviewsState] = useState(true);
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
@@ -35,21 +40,10 @@ const ProductCart = (props) => {
 
     let content;
 
-    const incrementQuontityHandler = () => {
-        setProductQuantity(productQuantity => productQuantity + 1);
-    }
-
-    const decrementQuontityHandler = () => {
-        if (productQuantity === 0) {
-            return;
-        }
-
-        setProductQuantity(productQuantity => productQuantity - 1);
-    }
-
     const addProductBasketHandler = () => {
 
         if (!isAuth) {
+            toast.warn("Аавторизуйтесь!");
             navigate("/auth/login");
             return;
         }
@@ -59,12 +53,29 @@ const ProductCart = (props) => {
             image: images[0],
             productName: productName,
             cost: cost,
-            quantity: productQuantity
+            quantity: 1
         }));
-        setProductQuantity(0);
     }
 
-    if (type === "smartphone") {
+    const addProductHandler = () => {
+        dispatchAction(basketActions.addItem({
+            id: id,
+            image: images[0],
+            productName: productName,
+            cost: cost,
+            quantity: 1
+        }));
+    }
+
+    const removeProductHandler = () => {
+        dispatchAction(basketActions.removeItem(id));
+    }
+
+    const deleteProductBasketHandler = () => {
+        dispatchAction(basketActions.deleteProductInBasket(id));
+    }
+
+    if (type === "smartphones") {
         content =
             <div className={styles["product__options"]}>
                 <i>Характеристики: </i>
@@ -73,7 +84,9 @@ const ProductCart = (props) => {
                 <p><span>Оперативная память: </span>{options.RAM}</p>
                 <p><span>Процессор: </span>{options.processor}</p>
             </div>;
-    } else if (type === "laptop") {
+    }
+
+    if (type === "laptops") {
         content =
             <div className={styles["product__options"]}>
                 <i>Характеристики: </i>
@@ -82,7 +95,9 @@ const ProductCart = (props) => {
                 <p><span>Оперативная память: </span>{options.RAM}</p>
                 <p><span>Процессор: </span>{options.processor}</p>
             </div>;
-    } else if (type === "smartwatch") {
+    }
+
+    if (type === "smartwatches") {
         content =
             <div className={styles["product__options"]}>
                 <i>Характеристики: </i>
@@ -91,6 +106,39 @@ const ProductCart = (props) => {
                 <p><span>Процессор: </span>{options.processor}</p>
             </div>;
     }
+
+    const productExistsBasketContent =
+        <div className={styles["choise__quontity_actions"]}>
+            <div className={styles["quontity__actions"]}>
+                <button className={styles["increment__button"]} onClick={addProductHandler}>+</button>
+                <div className={styles["product__quantity"]}>
+                    <p>{existingBasketProduct && existingBasketProduct.quantity}</p>
+                </div>
+                <button className={styles["decrement__button"]} onClick={removeProductHandler}>-</button>
+            </div>
+            <div className={styles["delete__product_basket_wrapper"]}>
+                <button onClick={deleteProductBasketHandler} className={styles["btn__delete_product-basket"]}>
+                    <DeleteProductInBasketIcon />
+                    Убрать из корзины
+                </button>
+            </div>
+            {
+                isLinkReviewsState && location.pathname !== `/products/${id}/reviews` ?
+                    <Link className={styles["reviews__link"]} onClick={reviewsShowLinkHandler} to="reviews">Смотреть отзывы</Link>
+                    :
+                    <p className={styles["btn__reviews_hide"]} onClick={reviewsHideLinkHandler}>Закрыть отзывы</p>
+            }
+        </div>;
+
+    const productNotExistsBasketContent = <div className={styles["product__action"]}>
+        <button className={styles["btn__add_basket"]} onClick={addProductBasketHandler}>Добавить в корзину</button>
+        {
+            isLinkReviewsState && location.pathname !== `/products/${id}/reviews` ?
+                <Link className={styles["reviews__link"]} onClick={reviewsShowLinkHandler} to="reviews">Смотреть отзывы</Link>
+                :
+                <p className={styles["btn__reviews_hide"]} onClick={reviewsHideLinkHandler}>Закрыть отзывы</p>
+        }
+    </div>
 
     return (
         <div className={styles["product"]}>
@@ -113,7 +161,7 @@ const ProductCart = (props) => {
                     <div className={styles["images__product"]}>
                         {images.map((image, idx) => (
                             <SwiperSlide>
-                                <img className={styles["image"]} src={`/${image}`} alt={idx} />
+                                <img className={styles["image"]} src={`/products-images/${image}`} alt={idx} />
                             </SwiperSlide>
                         ))}
                     </div>
@@ -129,13 +177,13 @@ const ProductCart = (props) => {
                     style={{
                         'cursor': "pointer",
                         'width': '200px',
-                        'height': '100px',                        
+                        'height': '100px',
                         'overflow': 'hidden',
                         'display': 'flex',
                         'alignItems': 'center',
                         'columnGap': '20px',
                         'userSelect': 'none'
-                    }}  
+                    }}
                 >
                     {images.map((image, idx) => (
                         <SwiperSlide
@@ -144,7 +192,7 @@ const ProductCart = (props) => {
                                 'height': '70px'
                             }}
                         >
-                            <img className={styles["image__slide"]} src={`/${image}`} alt={idx} />
+                            <img className={styles["image__slide"]} src={`/products-images/${image}`} alt={idx} />
                         </SwiperSlide>
                     ))}
                 </Swiper>
@@ -159,24 +207,16 @@ const ProductCart = (props) => {
                     {content}
                 </div>
                 <div className={styles["product__actions"]}>
-                    <div className={styles["choise__quontity_actions"]}>
-                        <button className={styles["increment__button"]} onClick={incrementQuontityHandler}>+</button>
-                        <div className={styles["product__quantity"]}>
-                            <p>{productQuantity}</p>
-                        </div>
-                        <button className={styles["decrement__button"]} onClick={decrementQuontityHandler}>-</button>
-                    </div>
                     <div className={styles["product__action"]}>
-                        <button className={styles["btn__add_basket"]} onClick={addProductBasketHandler}>Добавить в корзину</button>
                         {
-                            isLinkReviewsState && location.pathname !== `/products/${id}/reviews` ?
-                                <Link className={styles["reviews__link"]} onClick={reviewsShowLinkHandler} to={`reviews`}>Смотреть отзывы</Link>
-                                :
-                                <p className={styles["btn__reviews_hide"]} onClick={reviewsHideLinkHandler}>Закрыть отзывы</p>
+                            existingBasketProduct ?
+                                productExistsBasketContent :
+                                productNotExistsBasketContent
                         }
                     </div>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     );
 }

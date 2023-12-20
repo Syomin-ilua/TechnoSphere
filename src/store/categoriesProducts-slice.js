@@ -19,7 +19,6 @@ export const getCategoriesProducts = createAsyncThunk(
 
             if (categoriesProductsDocSnap.exists()) {
                 const { categoriesProducts } = categoriesProductsDocSnap.data();
-                console.log(categoriesProducts);
                 return categoriesProducts;
             } else {
                 throw new Error("Произошла ошибка!");
@@ -35,11 +34,12 @@ export const changeCategoriesProducts = createAsyncThunk(
     "categoriesProducts/changeCategoriesProducts",
     async function (_, { rejectWithValue, getState }) {
         const categoriesProductsDocRef = doc(db, "categoriesProducts", "categoriesProducts");
-        const categorieProducts = getState().categoriesProducts;
+        const { categoriesProducts } = getState().categoriesProducts;
         
         try {
-            await updateDoc(categoriesProductsDocRef, categorieProducts);
-
+            await updateDoc(categoriesProductsDocRef, {
+                categoriesProducts
+            });
         } catch (error) {
             return rejectWithValue(error.message);
         }
@@ -70,6 +70,9 @@ const categoriesProductsSlice = createSlice({
                 return categorie.id !== idCategorie
             });
             state.isCategoriesProductsContentChanges = true;
+        },
+        resetCategoriesProductsContentChangedState(state) {
+            state.isCategoriesProductsContentChanges = false;
         }
     },
     extraReducers: {

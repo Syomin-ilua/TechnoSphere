@@ -3,7 +3,7 @@
 }
 .basket__header {
     width: 100%;
-    margin-bottom: 30px;
+    margin-bottom: 50px;
 }
 .basket__header_text {
     text-align: center;
@@ -17,7 +17,7 @@
 }
 .basket__orders {
     display: grid;
-    grid-template-columns: repeat(2, minmax(500px, 600px));
+    grid-template-columns: repeat(3, minmax(200px, 300px));
     column-gap: 20px;
     row-gap: 20px;
 }

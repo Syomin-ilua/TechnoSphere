@@ -8,16 +8,21 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "classnames": "^2.3.2",
+    "express": "^4.18.2",
+    "express-fileupload": "^1.4.3",
     "firebase": "^10.5.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-input-mask": "^2.0.4",
+    "react-loading-skeleton": "^3.3.1",
     "react-redux": "^8.1.2",
     "react-router-dom": "^6.17.0",
     "react-scripts": "5.0.1",
+    "react-toastify": "^9.1.3",
     "redux-persist": "^6.0.0",
     "swiper": "^11.0.4",
+    "uuidv4": "^6.2.13",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -43,5 +48,6 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  }
+  },
+  "proxy": "http://localhost:3001"
 }

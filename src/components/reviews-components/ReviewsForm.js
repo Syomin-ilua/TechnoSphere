@@ -82,9 +82,6 @@ const ReviewsForm = (props) => {
             reviewData: comment,
             productID: productId,
             userId: userId,
-            userName: user.name,
-            gender: user.gender,
-            address: user.address
         }
 
         dispatchAction(reviewsActions.addReviewProduct(review));

@@ -4,7 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { basketGetOrders, basketChangeOrders } from './store/basket-slice';
 import { getOrders, changeOrders } from './store/orders-slice';
-import { getProducts } from './store/products-slice';
+import { getProducts, changeProducts, productsActions } from './store/products-slice';
+import { changeUserInfo, getUserInfo } from './store/user-slice';
+import { changeCategoriesProducts, getCategoriesProducts } from './store/categoriesProducts-slice';
+import { productActions } from './store/productDetails-slice';
+import { categoriesProductsActions } from './store/categoriesProducts-slice';
+import { reviewsActions } from './store/reviews-slice';
+import { ordersActions } from './store/orders-slice';
+import { basketActions } from './store/basket-slice';
+import { userActions } from './store/user-slice';
 
 import Header from './components/layout-components/Header';
 import Footer from './components/layout-components/Footer';
@@ -16,13 +24,10 @@ import Catalog from './pages/Catalog';
 import ProductDetails from './pages/ProductDetails';
 import Basket from './pages/Basket';
 import PageNotFound from './pages/PageNotFound';
-import RequireAuth from './hoc/RequireAuth';
 import Profile from './pages/Profile';
 import Admin from './pages/Admin';
-import { changeUserInfo, getUserInfo } from './store/user-slice';
+import RequireAuth from './hoc/RequireAuth';
 import RequireAdminAuth from './hoc/RequireAdminAuth';
-import { changeCategoriesProducts, getCategoriesProducts } from './store/categoriesProducts-slice';
-// import { postProducts } from './store/products-slice';
 
 let isInitialRunning = true;
 
@@ -32,13 +37,12 @@ function App() {
   const user = useSelector((state) => state.user.user);
   const basket = useSelector((state) => state.basket);
   const orders = useSelector((state) => state.orders);
-  const categorieProducts = useSelector((state) => state.categorieProducts);
-  const products = useSelector((state) => state.products.fetchedProducts);
+  const categoriesProducts = useSelector((state) => state.categoriesProducts);
+  const products = useSelector((state) => state.products);
 
   const dispatchAction = useDispatch();
 
   useEffect(() => {
-    // dispatchAction(postProducts());
 
     if (userId) {
       dispatchAction(basketGetOrders({ userId }));
@@ -47,60 +51,63 @@ function App() {
       dispatchAction(getOrders(userId));
     }
 
-    dispatchAction(getProducts());
     dispatchAction(getCategoriesProducts());
+    dispatchAction(getProducts());
 
-  }, []);
+  }, [userId]);
 
   useEffect(() => {
-    if (isInitialRunning) {
+    if (!basket.isBasketContentChanged) {
       isInitialRunning = false;
       return;
     }
 
-
     if (basket.isBasketContentChanged) {
       dispatchAction(basketChangeOrders({ userId }));
+      dispatchAction(basketActions.resetBasketContentChangedState());
     }
 
   }, [basket]);
 
   useEffect(() => {
-    if (isInitialRunning) {
+    if (!orders.isOrdersContentChanged) {
       isInitialRunning = false;
       return;
     }
 
     if (orders.isOrdersContentChanged) {
       dispatchAction(changeOrders(userId));
+      dispatchAction(ordersActions.resetOrdersContentChangedState());
     }
 
   }, [orders]);
 
   useEffect(() => {
 
-    if (isInitialRunning) {
+    if (!user.isUserContentChanged) {
       isInitialRunning = false;
       return;
     }
 
     if (user.isUserContentChanged) {
       dispatchAction(changeUserInfo(userId));
+      dispatchAction(userActions.resetUserContentChangedState());
     }
 
   }, [user]);
 
   useEffect(() => {
-    if (isInitialRunning) {
+    if (!categoriesProducts.isCategoriesProductsContentChanges) {
       isInitialRunning = false;
       return;
     }
 
-    if (categorieProducts.isCategoriesProductsContentChanges) {
+    if (categoriesProducts.isCategoriesProductsContentChanges) {
       dispatchAction(changeCategoriesProducts());
+      dispatchAction(categoriesProductsActions.resetCategoriesProductsContentChangedState());
     }
 
-  }, []);
+  }, [categoriesProducts]);
 
   return (
     <Fragment>

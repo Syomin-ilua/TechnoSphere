@@ -59,6 +59,9 @@ const ordersSlice = createSlice({
             const order = action.payload;
             state.orders.push(order);
             state.isOrdersContentChanged = true
+        },
+        resetOrdersContentChangedState(state) {
+            state.isOrdersContentChanged = false;
         }
     },
     extraReducers: {

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styles from "./Order.module.css";
+import { Link } from 'react-router-dom';
 
 const Order = (props) => {
 
     const order = props.order;
+    console.log(order);
 
     const [orderActiveState, setOrderActiveState] = useState(false);
 
@@ -14,8 +16,8 @@ const Order = (props) => {
     return (
         <li className={`${styles["order__wrapper"]} ${orderActiveState ? `${styles["active__order"]}` : ""}`}>
             <div className={styles["order__prev"]}>
-                <p>Заказ от {order.date} г.</p>
-                <p>Итоговая цена {order.totalPrice} рублей</p>
+                <p><b>Заказ от: </b> {order.datePlacingOrder}</p>
+                <p><b>Итоговая цена: </b> {order.totalPrice} рублей</p>
                 <button onClick={btnOpenOrderHandler} type='button' className={styles["btn__open_order"]}>
                     {orderActiveState ?
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
@@ -33,13 +35,17 @@ const Order = (props) => {
                 </div>
                 <div className={styles["order__products"]}>
                     {
-                        order.products.map((product) => {
+                        order.orderProducts.map((order) => {
                             return (
-                                <div key={product.id} className={styles["order__product"]}>
-                                    <p>{product.productName}</p>
-                                    <p>{product.memory} гб</p>
-                                    <p>{product.RAM} гб</p>
-                                    <p>{product.price}</p>
+                                <div key={order.id} className={styles["order__product"]}>
+                                    <div className={styles["image__product"]} >
+                                        <img src={`/products` + order.productImage} alt="Изображение товара" />
+                                        <div className={styles["order__product_info"]}>
+                                            <Link className={styles["order__productName_link"]} to={`/products/${order.id}`}>{order.productName}</Link>
+                                            <p>Кол-во: {order.quantity} шт.</p>
+                                        </div>
+                                    </div>
+                                    <p className={styles["order__price"]}>{order.totalPrice} руб.</p>
                                 </div>
                             );
                         })

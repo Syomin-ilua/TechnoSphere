@@ -1,8 +1,47 @@
-.products {
+.products__list {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.products__column {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(4, minmax(200px, 250px));
     align-items: center;
     justify-content: space-between;
     column-gap: 20px;
     row-gap: 20px;
+}
+.products__row {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+.empty__products_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+.empty__products_wrapper img {
+    width: 100px;
+    height: 100px;
+}
+.empty__products_title {
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    font-size: 16px;
+    font-family: "Montserrat-SemiBold";
+    color: #000;
+    margin-top: 20px;
+    line-height: 20px;
+}
+@media(max-width: 1240px) {
+    .products__column {
+        grid-template-columns: repeat(3, minmax(200px, 250px));
+    }
 }

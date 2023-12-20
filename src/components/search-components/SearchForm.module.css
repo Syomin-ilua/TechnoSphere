@@ -1,10 +1,10 @@
 .searchForm {
+    max-width: 600px;
     width: 100%;
     height: 35px;
     display: flex;
     align-items: flex-start;
     column-gap: 20px;
-    margin-bottom: 20px;
 }
 
 /* стилизация инпута */
@@ -13,11 +13,11 @@
     width: 100%;
     height: 100%;
     border-radius: 3px;
-    padding-left: 40px;
+    padding-left: 45px;
     padding-right: 15px;
     font-size: 14px;
     font-family: "Montserrat-SemiBold";
-    color: #000000;
+    color: #333;
     box-shadow: 0px 5px 10px -5px rgba(34, 60, 80, 0.2);
     transition: all 0.3s;
 }
@@ -40,9 +40,10 @@
     left: 10px;
 }
 
-.searchIconWrapper img {
+.searchIconWrapper svg {
     width: 100%;
     height: 100%;
+    fill: #333;
 }
 
 .searchInputWrapper {
@@ -65,27 +66,8 @@
     background-color: transparent;
 }
 
-.btn__close_searchList img {
+.btn__close_searchList svg {
     width: 100%;
     height: 100%;
-}
-
-/* стилизация  select*/
-
-.sortForm {
-    width: 230px;
-    height: 35px;
-    border: 2px solid rgb(74 184 161);
-    border-radius: 3px;
-    padding-left: 2px;
-    padding-right: 2px;
-    cursor: pointer;
-    font-family: "Montserrat-SemiBold";
-    outline: none;
-}
-
-.loading__categories_products {
-    font-size: 14px;
-    font-family: "Montserrat-SemiBold";
-    color: #333;
+    fill: #333;
 }

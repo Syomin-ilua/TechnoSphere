@@ -1,11 +1,11 @@
 .itemsQuantityWrapper {
-    width: 22px;
-    height: 22px;
+    width: 19px;
+    height: 19px;
     border-radius: 50%;
     background-color: red;
     position: absolute;
-    bottom: -4px;
-    right: 0px;
+    bottom: -2px;
+    right: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -16,8 +16,8 @@
     font-family: "Montserrat-Bold";
 }
 .basket {
-    width: 45px;
-    height: 45px;
+    width: 100%;
+    height: 100%;
     cursor: pointer;
     background-color: transparent;
     border: none;
@@ -25,7 +25,6 @@
     align-items: center;
     justify-content: center;
     column-gap: 20px;
-    border: 2px solid #fff;
     border-radius: 50%;
     transition: border all 0.3s;
     position: relative;
@@ -35,9 +34,9 @@
     border-bottom: none;
     transition: border 0.3s;
 }
-.basket a img {
-    width: 50%;
-    height: 50%;
+.basket img {
+    width: 60%;
+    height: 60%;
 }
 .basket a {
     display: flex;

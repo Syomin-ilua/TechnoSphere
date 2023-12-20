@@ -1,0 +1,23 @@
+
+.uploaded__image_wrapper {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    position: relative;
+    border-radius: 5px;
+}
+.uploaded__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.btn__delete_image {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: red;
+    font-family: "Montserrat-Bold";
+    font-size: 16px;
+    background-color: transparent;
+}

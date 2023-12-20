@@ -1,12 +1,11 @@
-import { useEffect, useState } from "react";
-import styles from "./FormOrder.module.css";
+import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../firebase";
 import { ordersActions } from "../../store/orders-slice";
 import { basketActions } from "../../store/basket-slice";
-import useInput from "../../hooks/use-input";
+import { toast, ToastContainer } from "react-toastify";
 import InputMask from "react-input-mask";
+import useInput from "../../hooks/use-input";
+import styles from "./FormOrder.module.css";
 
 const now = new Date();
 
@@ -26,6 +25,7 @@ const regExpCardCVV = /^[0-9]{3}$/;
 const FormOrder = () => {
 
     const dispatchAction = useDispatch();
+    const userId = useSelector((state) => state.user.user.id);
 
     const {
         value: enteredNumberCard,
@@ -67,23 +67,24 @@ const FormOrder = () => {
         event.preventDefault();
 
         if (!user.surname || !user.patronymic || !user.tel || !user.address) {
-            alert("Заполните все поля в профиле!")
+            toast.warning("Заполните профиль для оформления заказа!");
             return;
         }
 
 
         if (!isEnteredNumberCardValid || !isEnteredCardDateValid || !isEnteredCardCVVValid) {
+            toast.warning("Заполните поля для оформления заказа!");
             return;
         }
 
         const order = {
-            nameBuyer: user.name,
-            surnameBuyer: user.surname,
-            patronymicBuyer: user.patronymic,
-            orderProducts: basket.items,
-            totalPrice: basket.totalCostBasket,
+            id: Math.random(),
+            userBuyerId: userId,
+            fioBuyer: user.name + " " + user.surname + " " + user.patronymic, 
             tel: user.tel,
             address: user.address,
+            orderProducts: basket.items,
+            totalPrice: basket.totalCostBasket,
             methodPayment: isPaymentMethod,
             cardInfo: {
                 numberCard: enteredNumberCard,
@@ -100,18 +101,6 @@ const FormOrder = () => {
         resetCardDateInputValues();
         resetCardCVVInputValues();
     }
-
-    const cardNumberInputClasses = hasNumberCardInputError
-        ? "auth__label invalid"
-        : "auth__label";
-
-    const cardDateInputClasses = hasCardDateInputError
-        ? "auth__label invalid"
-        : "auth__label";
-
-    const cardCVVInputClasses = hasCardCVVInputError
-        ? "auth__label invalid"
-        : "auth__label";
 
     return (
         <form onSubmit={submutFormOrderHandler} className={styles["form__order"]}>
@@ -195,6 +184,7 @@ const FormOrder = () => {
             <button className={styles["btn__add_order"]}>
                 Заказать
             </button>
+            <ToastContainer />
         </form>
     )
 }

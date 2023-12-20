@@ -31,7 +31,7 @@ const store = configureStore({
         reviews: reviewsSlice.reducer,
         basket: basketSlice.reducer,
         orders: ordersSlice.reducer,
-        categorieProducts: categoriesProductsSlice.reducer
+        categoriesProducts: categoriesProductsSlice.reducer,
     },
     middleware: getDefaultMiddleware =>
         getDefaultMiddleware({

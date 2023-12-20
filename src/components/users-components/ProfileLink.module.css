@@ -4,8 +4,16 @@
 }
 
 .profile__link_icon-wrapper {
+    width: 50px;
+    height: 50px;
+}
+
+.profile__link_icon-wrapper img {
     width: 100%;
     height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
 }
 
 .profile__link_icon-wrapper {
@@ -15,4 +23,114 @@
 .profile__link_icon-wrapper:hover svg path {
     stroke: #ededed;
     transition: all 0.3s;
+}
+
+.btn__profile_link {
+    border-radius: 50%;
+}
+
+.profile__links_wrapper {
+    width: 200px;
+    height: auto;
+    background-color: #fff;
+    border-radius: 5px;
+    position: absolute;
+    top: 60px;
+    right: 0px;
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    padding: 20px 10px;
+}
+.profile__links {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 10px;
+}
+.profile__links a {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    font-family: "Montserrat-SemiBold";
+    column-gap: 10px;
+    color: #4a4a4a;
+    transition: all 0.3s;
+    border-radius: 0px;
+}
+
+.profile__links a:nth-child(3) {
+    color: red;
+}
+
+.profile__links a:nth-child(3):hover {
+    color:rgb(255, 55, 55);
+}
+
+.profile__links a:nth-child(3):hover svg {
+    fill:rgb(255, 55, 55);
+}
+
+.profile__links a:nth-child(3) svg {
+    fill: red;
+}
+
+.profile__links a:hover {
+    color: #333;
+    transition: all 0.3s;
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    padding: 15px;
+    border-radius: 3px;
+}
+
+.profile__links a:hover svg {
+    fill: #333;
+    transition: all 0.3s;
+}
+
+.profile__links a svg {
+    width: 15px;
+    height: 15px;
+    fill: #333;
+}
+
+.profile__links a:nth-child(2) svg {
+    width: 20px;
+    height: 20px;
+}
+
+.profile__links a svg {
+    fill: #333;
+}
+
+.btn__exit_profile {
+    width: 100%;
+    height: 30px;
+    background-color: rgb(255, 55, 55);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    column-gap: 5px;
+    transition: all 0.3s;
+    border-radius: 3px;
+    font-size: 12px;
+    font-family: "Montserrat-Medium";
+}
+
+.btn__exit_profile:hover {
+    background-color: rgb(255, 30, 30);
+    transition: all 0.3s;
+}
+
+.btn__exit_profile svg {
+    width: 15px;
+    height: 15px;
+    fill: #fff;
+}
+.profile_link {
+    position: relative;
 }

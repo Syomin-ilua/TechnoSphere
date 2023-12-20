@@ -1,24 +1,32 @@
 .order {
     width: 100%;
-    height: 120px;
+    height: 220px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     column-gap: 20px;
-    padding-right: 10px;
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
     border-radius: 10px;
 }
 
 .orderImageWrapper {
-    width: 180px;
+    width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;
+    align-items: start;
+    padding: 10px;
+    column-gap: 10px;
 }
 
 .orderImageWrapper img {
-    padding: 10px;
+    width: 90px;
+    height: 115px;
+}
+
+.order {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
 }
 
 .orderPrice {
@@ -43,13 +51,14 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     padding: 10px;
+    row-gap: 15px;
 }
 
 .orderName {
     font-family: "Montserrat-Bold";
     font-size: 16px;
+    margin-top: 5px;
 }
 
 .cost {
@@ -62,19 +71,23 @@
 }
 
 .orderActions {
+    width: 100%;
     display: flex;
     column-gap: 10px;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .btnAddOrder {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     background-color: #4AB8A1;
     border: 1px solid #4AB8A1;
     font-family: "Montserrat-Bold";
     font-size: 16px;
     transition: all 0.3s;
     color: #fff;
+    border-radius: 5px;
 }
 
 .btnAddOrder:hover {
@@ -84,14 +97,15 @@
 }
 
 .btnRemoveOrder {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
     font-family: "Montserrat-Bold";
     font-size: 16px;
     background-color: #000;
     border: 1px solid #000;
     color: #fff;
     transition: all 0.3s;
+    border-radius: 5px;
 }
 
 .btnRemoveOrder:hover {
@@ -102,7 +116,37 @@
 
 .orderInfo {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
+}
+.btn__delete_product-basket {
+    max-width: 190px;
+    width: 100%;
+    height: 35px;
+    background-color: rgb(255, 50, 50);
+    display: flex;
+    justify-content: center;
     align-items: center;
-    column-gap: 20px;
+    column-gap: 10px;
+    transition: all 0.3s;
+    font-size: 12px;
+    font-family: "Montserrat-SemiBold";
+    color: #fff;
+    border-radius: 5px;
+}
+.btn__delete_product-basket svg {
+    width: 17px;
+    height: 18px;
+    fill: transparent;
+}
+.btn__delete_product-basket svg path {
+    stroke: #fff;
+}
+.btn__delete_product-basket:hover {
+    background-color: rgb(186, 25, 25);
+    transition: all 0.3s;
+}
+.order__change_actions {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
 }

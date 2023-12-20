@@ -1,9 +1,9 @@
 import { NavLink, useNavigate } from "react-router-dom";
-import styles from "./ProfileActionsSide.module.css";
-import { signOut } from "firebase/auth";
-import { getAuth } from "firebase/auth";
-import { useDispatch } from "react-redux";
+import { signOut, getAuth } from "firebase/auth";
+import { useDispatch, useSelector } from "react-redux";
 import { userActions } from "../../store/user-slice";
+import styles from "./ProfileActionsSide.module.css";
+import { ToastContainer, toast } from "react-toastify";
 
 const setActive = ({ isActive }) => isActive ? styles["active__profile-link"] : '';
 
@@ -12,30 +12,19 @@ const ProfileActionsSide = () => {
     const dispatchAction = useDispatch();
     const navigate = useNavigate();
 
-    const userINFO = {
-        id: "1",
-        surname: "Сёмин",
-        name: "Илья",
-        patronymic: "Александрович",
-        gender: "мужской",
-        email: "semin574@yandex.ru",
-        tel: "+79610344485",
-        dateOfBirth: "12.01.2000",
-        country: "Российсикая Федерация"
-    }
+    const gender = useSelector((state) => state.user.user.user.gender);
 
     const logoutUser = () => {
         const auth = getAuth();
         signOut(auth).then(() => {
+            toast.success("Вы успешно вышли из аккаунта!");
             dispatchAction(userActions.removeUser());
             setTimeout(() => {
-                navigate("/auth/login");
-            }, 1000);
+                navigate("/home");
+            }, 500);
         }).catch((error) => {
-            alert("Произошла ошибка");
-            const errorCode = error.code;
-            console.log(errorCode);
-        })
+            toast.warning("Произошла ошибка при выходе из аккаунта!");
+        });
     }
 
     const exitProfileHandler = () => {
@@ -45,11 +34,11 @@ const ProfileActionsSide = () => {
     return (
         <div className={styles["profile__actions_side"]}>
             <div className={styles["profile__avatar_wrapper"]}>
-                <img src={userINFO.gender === "мужской" ? "/users-images/men.png" : "/users-images/women.png"} alt="Изоражение профиля" />
+                <img src={gender === "мужчина" || gender.length === 0 ? "/users-images/men.png" : "/users-images/women.png" } alt="Изоражение профиля" />
             </div>
             <div className={styles["profile__links"]}>
                 <div className={styles["profile__link"]}>
-                    <NavLink className={setActive} to="/profile/info">Информация о пользователе</NavLink>
+                    <NavLink className={setActive} to="/profile/info">Личный кабинет</NavLink>
                 </div>
                 <div className={styles["profile__link"]}>
                     <NavLink className={setActive} to="/profile/orders">История заказов</NavLink>
@@ -58,6 +47,7 @@ const ProfileActionsSide = () => {
                     <button onClick={exitProfileHandler} type="button" className={styles["btn__exit_profile"]}>Выйти из профиля</button>
                 </div>
             </div>
+            <ToastContainer />
         </div>
     )
 }

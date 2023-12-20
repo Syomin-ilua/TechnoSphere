@@ -39,11 +39,13 @@
     width: 70px;
     height: 70px;
     cursor: pointer;
+    object-fit: contain;
 }
 
 .image {
     width: 200px;
     height: 200px;
+    object-fit: contain;
 }
 
 .product__information {
@@ -57,6 +59,7 @@
     font-family: "Montserrat-Bold";
     font-size: 19px;
     line-height: 24px;
+    color: #333;
 }
 
 .product__info {
@@ -64,28 +67,33 @@
     flex-direction: column;
     row-gap: 10px;
     margin-bottom: 20px;
+    color: #333;
 }
 
 .cost span {
     font-family: "Montserrat-Bold";
     font-size: 16px;
+    color: #333;
 }
 
 .cost {
     font-family: "Montserrat-Regular";
     font-size: 14px;
     line-height: 24px;
+    color: #333;
 }
 
 .description span {
     font-family: "Montserrat-Bold";
     font-size: 16px;
+    color: #333;
 }
 
 .description {
     font-family: "Montserrat-Regular";
     font-size: 14px;
     line-height: 24px;
+    color: #333;
 }
 
 .product__options {
@@ -97,15 +105,18 @@
 .product__options i {
     font-family: "Montserrat-Regular";
     font-size: 16px;
+    color: #333;
 }
 
 .product__options p {
     font-family: "Montserrat-Regular";
     font-size: 14px;
+    color: #333;
 }
 
 .product__options p span {
     font-family: "Montserrat-Bold";
+    color: #333;
 }
 
 .product__actions {
@@ -115,30 +126,29 @@
 .choise__quontity_actions {
     display: flex;
     align-items: center;
+    column-gap: 10px;
 }
 
-.choise__quontity_actions button {
+.increment__button {
     font-family: "Montserrat-Bold";
     font-size: 16px;
     color: #fff;
     transition: all 0.3s;
-}
-
-.choise__quontity_actions button:active {
-    transform: scale(0.9);
-    transition: all 0.3s;
-}
-
-.increment__button {
     border: 1px solid #4AB8A1;
     background-color: #4AB8A1;
     width: 35px;
     height: 35px;
+    border-radius: 5px;
 }
 
 .increment__button:hover {
     background-color: #fff;
     color: #4AB8A1;
+    transition: all 0.3s;
+}
+
+.increment__button:active {
+    scale: 0.96;
     transition: all 0.3s;
 }
 
@@ -153,18 +163,29 @@
 .product__quantity p {
     font-size: 14px;
     font-family: "Montserrat-SemiBold";
+    color: #333;
 }
 
 .decrement__button {
-    background-color: #000;
+    font-family: "Montserrat-Bold";
+    font-size: 16px;
+    color: #fff;
+    transition: all 0.3s;
+    background-color: #333;
     width: 35px;
     height: 35px;
-    border: 1px solid #000;
+    border: 1px solid #333;
+    border-radius: 5px;
 }
 
 .decrement__button:hover {
     background-color: #fff;
     color: #000;
+    transition: all 0.3s;
+}
+
+.decrement__button:active {
+    scale: 0.96;
     transition: all 0.3s;
 }
 
@@ -177,11 +198,17 @@
     font-size: 16px;
     color: #fff;
     transition: all 0.3s;
+    border-radius: 5px;
 }
 
 .btn__add_basket:hover {
     background-color: #fff;
     color: #4AB8A1;
+    transition: all 0.3s;
+}
+
+.btn__add_basket:active {
+    scale: 0.96;
     transition: all 0.3s;
 }
 
@@ -215,4 +242,45 @@
     align-items: center;
     column-gap: 15px;
     margin-top: 20px;
+}
+
+.btn__delete_product-basket {
+    width: 100%;
+    height: 35px;
+    background-color: rgb(255, 50, 50);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    font-family: "Montserrat-SemiBold";
+    font-size: 13px;
+    column-gap: 5px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.btn__delete_product-basket:active {
+    scale: 0.96;
+    transition: all 0.3s;
+}
+
+.btn__delete_product-basket svg {
+    width: 18px;
+    height: 20px;
+    fill: transparent;
+}
+
+.btn__delete_product-basket svg path {
+    stroke: #fff;
+}
+
+.btn__delete_product-basket:hover {
+    background-color: rgb(186, 25, 25);
+    transition: all 0.3s;
+}
+
+.quontity__actions {
+    display: flex;
+    align-items: center;
 }
