@@ -56,6 +56,10 @@
     padding-top: 150px;
 }
 
+.favourites__container {
+    padding-top: 150px;
+}
+
 @media(max-width: 1350px) {
     .container {
         width: 95%;

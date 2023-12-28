@@ -8,6 +8,7 @@
     padding-top: 50px;
     padding-bottom: 50px;
     border-radius: 10px;
+    position: relative;
 }
 
 .img__wrapper {
@@ -245,7 +246,7 @@
 }
 
 .btn__delete_product-basket {
-    width: 100%;
+    width: 180px;
     height: 35px;
     background-color: rgb(255, 50, 50);
     display: flex;
@@ -283,4 +284,20 @@
 .quontity__actions {
     display: flex;
     align-items: center;
+}
+
+.rating__wrapper {
+    position: absolute;
+    top: 50px;
+    right: 70px;
+}
+.rating__wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.rating__number {
+    font-size: 14px;
+    font-family: "Montserrat-Medium";
+    color: #878787;
 }

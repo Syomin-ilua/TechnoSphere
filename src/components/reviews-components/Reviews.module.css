@@ -20,6 +20,10 @@
     font-family: "Montserrat-SemiBold";
     transition: all 0.3s;
 }
+.add__reviews:active {
+    scale: 0.96;
+    transition: all 0.3s;
+}
 .add__reviews_wrapper {
     width: 100%;
     display: flex;

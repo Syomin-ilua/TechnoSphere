@@ -21,12 +21,12 @@ const ReviewsList = (props) => {
                                 productReview={{
                                     id: Math.random(),
                                     date: review.date,
+                                    estimation: review.estimation,
                                     reviewData: review.reviewData,
+                                    reviewDignities: review.reviewDignities,
+                                    reviewDisadvantages: review.reviewDisadvantages,
                                     productID: review.productId,
                                     userId: review.userId,
-                                    userName: review.userName,
-                                    gender: review.gender,
-                                    address: review.address
                                 }}
                             />
                         ))

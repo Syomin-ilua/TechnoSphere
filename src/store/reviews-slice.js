@@ -7,6 +7,7 @@ const initialReviewsState = {
     error: null,
     status: null,
     reviews: [],
+    rating: 0,
     reviewsAddState: false,
 }
 
@@ -22,7 +23,7 @@ export const getReviews = createAsyncThunk(
 
             if(docSnap.exists()) {
 
-                const { reviews } = docSnap.data();
+                const reviews = docSnap.data();
                 return reviews;
 
             } else {
@@ -40,14 +41,15 @@ export const changeReviews = createAsyncThunk(
     "reviews/changeReviews", 
     async function (idProduct, {rejectWithValue, getState}) {
         
-        const { reviews } = getState().reviews;
+        const { reviews, rating } = getState().reviews;
 
         const reviewsDocRef = doc(db, "reviews", idProduct);
         
         try {
 
             await updateDoc(reviewsDocRef, {
-                reviews
+                reviews,
+                rating
             });
 
         } catch (error) {
@@ -63,6 +65,11 @@ const reviewsSlice = createSlice({
         addReviewProduct(state, action) {
             const review = action.payload;
             state.reviews.push(review);
+            const sumRating = state.reviews.reduce((acc, item) => {
+                return acc + item.estimation
+            }, 0);
+            const countRating = state.reviews.length;
+            state.rating = Number(sumRating) / Number(countRating);
             state.reviewsAddState = true;  
         },
         resetReviewProductContentChangedState(state) {
@@ -79,9 +86,11 @@ const reviewsSlice = createSlice({
             state.error = action.payload;
         },
         [getReviews.fulfilled]: (state, action) => {
+            const { reviews, rating } = action.payload;
             state.status = "resolved";
             state.error = null;
-            state.reviews = action.payload || [];
+            state.reviews = reviews || [];
+            state.rating = rating
         }
     }
 });

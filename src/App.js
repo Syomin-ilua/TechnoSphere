@@ -25,9 +25,11 @@ import ProductDetails from './pages/ProductDetails';
 import Basket from './pages/Basket';
 import PageNotFound from './pages/PageNotFound';
 import Profile from './pages/Profile';
+import Favourites from "./pages/Favourites";
 import Admin from './pages/Admin';
 import RequireAuth from './hoc/RequireAuth';
 import RequireAdminAuth from './hoc/RequireAdminAuth';
+import { getFavouritesProducts } from './store/favourites-slice';
 
 let isInitialRunning = true;
 
@@ -49,6 +51,7 @@ function App() {
       dispatchAction(getOrders(userId));
       dispatchAction(getUserInfo(userId));
       dispatchAction(getOrders(userId));
+      dispatchAction(getFavouritesProducts(userId));
     }
 
     dispatchAction(getCategoriesProducts());
@@ -133,6 +136,11 @@ function App() {
               <Route path='/profile/*' element={
                 <RequireAuth>
                   <Profile />
+                </RequireAuth>
+              } />
+              <Route path='/favourites' element={
+                <RequireAuth>
+                  <Favourites />
                 </RequireAuth>
               } />
               <Route

@@ -173,7 +173,8 @@ const FormAddProduct = () => {
 
 		dispathAction(changeProducts(newProduct));
 		setDoc(doc(db, "reviews", newProduct.id), {
-			reviews: []
+			reviews: [],
+			rating: 0
 		});
 		productUpload();
 

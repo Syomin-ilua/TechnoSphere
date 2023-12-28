@@ -14,9 +14,13 @@
     min-height: 260px;
     height: 100%;
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
-    padding: 10px 15px;
     border-radius: 10px;
     background-color: #fff;
+    position: relative;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 25px;
+    padding-bottom: 15px;
 }
 
 .productInfo {
@@ -87,7 +91,6 @@
 .product__actions {
     display: flex;
     flex-direction: column;
-    align-items: center;
     row-gap: 20px;
 }
 
@@ -98,6 +101,13 @@
     justify-content: space-between;
     column-gap: 10px;
     row-gap: 10px;
+}
+
+.product__actions_add {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    justify-content: space-between;
 }
 
 .btn__add_product {
@@ -156,6 +166,9 @@
 
 .more__detailed_wrapper {
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .actions__wrapper {
@@ -197,4 +210,28 @@
 .btn__delete_product-basket:hover {
     background-color: rgb(186, 25, 25);
     transition: all 0.3s;
+}
+.rating__wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 7px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+.rating__number {
+    font-size: 10px;
+    font-family: "Montserrat-Medium";
+    margin-top: 2.5px;
+    color: #878787;
+}
+.btn__favorites {
+    width: 35px;
+    height: 35px;
+    background-color: transparent;
+    border-radius: 5px;
+}
+.btn__favorites svg {
+    width: 60%;
+    height: 60%;
 }

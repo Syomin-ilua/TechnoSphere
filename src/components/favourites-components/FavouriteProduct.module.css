@@ -1,0 +1,205 @@
+.favorite__product {
+    box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
+    border-radius: 10px;
+    background-color: #fff;
+    padding: 15px;
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    position: relative;
+}
+.favorite__product_image-wrapper {
+    max-width: 100px;
+    width: 100%;
+}
+.favorite__product_image-wrapper img {
+    width: 100%;
+}
+.favorite__product_production {
+    display: flex;
+    align-items: start;
+    column-gap: 15px;
+}
+.favourite__product_info {
+    display: flex;
+    flex-direction: column;
+    row-gap: 5px;
+    margin-top: 5px;
+}
+.favourite__product_info a {
+    font-size: 16px;
+    font-family: "Montserrat-Bold";
+    color: #333;
+    transition: all 0.3s;
+}
+.favourite__product_info a:hover {
+    color: #646464;
+    transition: all 0.3s;
+}
+.favourite__product_info p {
+    font-size: 14px;
+    color: #333;
+    font-family: "Montserrat-Regular";
+}
+.favourite__product_info p span {
+    font-family: "Montserrat-SemiBold";
+}
+.rating__product {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+.btn__add_basket {
+    max-width: 250px;
+    width: 100%;
+    background-color: #4AB8A1;
+    height: 35px;
+    padding-left: 15px;
+    padding-right: 15px;
+    color: #fff;
+    font-size: 14px;
+    font-family: "Montserrat-Bold";
+    border-radius: 5px;
+    transition: all 0.3s;
+    border: 1px solid #4AB8A1;
+    margin-bottom: 15px;
+}
+.rating__wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.rating__number {
+    font-size: 12px;
+    font-family: "Montserrat-Regular";
+    color: #878787;
+} 
+.btn__add_basket:hover {
+    color: #4AB8A1;
+    background-color: #ffffff;
+    transition: all 0.3s;
+} 
+.btn__add_basket:active {
+    scale: 0.96;
+    transition: all 0.3s;
+}
+.product__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.btn__remove_favourites {
+    font-size: 12px;
+    font-family: "Montserrat-Medium";
+    background-color: transparent;
+    color: #616161;
+    transition: all 0.3s;
+}
+.btn__remove_favourites:hover {
+    color: #333;
+    transition: all 0.3s;
+}
+.btn__remove_favourites svg {
+    width: 70%;
+    height: 70%;
+    fill: red;
+    transition: all 0.3s;
+}
+.btn__remove_favourites:hover svg {
+    fill: rgb(219, 15, 15);
+    transition: all 0.3s;
+}
+.product__actions_wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+    margin-bottom: 15px;
+}
+.actions__wrapper {
+    display: flex;
+    align-items: center;
+}
+.btn__add_product {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: #4AB8A1;
+    border: 1px solid #4AB8A1;
+    font-size: 16px;
+    font-family: "Montserrat-Bold";
+    color: #fff;
+}
+.product__quantity_wrapper {
+    width: 35px;
+    height: 35px;
+    font-size: 14px;
+    font-family: "Montserrat-Bold";
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+}
+.btn__remove_product {
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+    background-color: #333;
+    border: 1px solid #333;
+    font-size: 16px;
+    font-family: "Montserrat-Bold";
+    color: #fff;
+    transition: all 0.3s;
+}
+.btn__remove_product:hover {
+    background-color: #fff;
+    transition: all 0.3s;
+    color: #333;
+}
+
+.btn__add_product:hover {
+    background-color: #fff;
+    transition: all 0.3s;
+    color: #4AB8A1;
+}
+
+.btn__add_product:active {
+    scale: 0.96;
+    transition: all 0.3s;
+}
+
+.btn__remove_product:active {
+    scale: 0.96;
+    transition: all 0.3s;
+}
+
+.btn__delete_product-basket {
+    width: 35px;
+    height: 35px;
+    background-color: red;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5px;
+
+}
+.btn__delete_product-basket:hover {
+
+}
+.btn__delete_product-basket svg {
+    width: 60%;
+    height: 60%;
+}
+
+.btn__delete_product-basket svg path {
+    stroke: #fff;
+}
+.delete__product_wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+.product__actions_exist {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

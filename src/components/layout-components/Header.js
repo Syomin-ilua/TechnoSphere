@@ -8,6 +8,7 @@ import { useAuth } from "../../hooks/use-auth";
 import { useSelector } from "react-redux";
 import { ReactComponent as HomeIcon } from "../../images/home.svg";
 import { ReactComponent as CatalogIcon } from "../../images/catalog.svg";
+import FavouriteLink from "../favourites-components/FavouriteLink";
 
 const setActive = ({ isActive }) => isActive ? "active__link" : '';
 
@@ -41,6 +42,9 @@ const Header = () => {
                 }
                 {isAuth &&
                     <div className={styles["important__links"]}>
+                        <NavLink to="/favourites">
+                            <FavouriteLink />
+                        </NavLink>
                         <NavLink to="/basket">
                             <BasketLink />
                         </NavLink>  

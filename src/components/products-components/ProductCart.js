@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, Link, useLocation } from "react-router-dom";
 import { basketActions } from "../../store/basket-slice";
+import { getReviews } from "../../store/reviews-slice";
 import { useAuth } from "../../hooks/use-auth";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { ToastContainer, toast } from "react-toastify";
+import Skeleton from "react-loading-skeleton";
 import { ReactComponent as DeleteProductInBasketIcon } from "../../images/delete-icon.svg";
+import { FaStar } from "react-icons/fa";
 import styles from "./ProductCart.module.css";
 import "swiper/css";
 
@@ -17,15 +20,22 @@ const ProductCart = (props) => {
 
     const { isAuth } = useAuth();
 
-    const { id, productName, type, description, cost, images, options } = props.product;
+    const dispatchAction = useDispatch();
     const basket = useSelector((state) => state.basket.items);
+    const { status, error, reviews, rating } = useSelector((state) => state.reviews);
+
+    const [isLinkReviewsState, setIsLinkReviewsState] = useState(true);
+    const [thumbsSwiper, setThumbsSwiper] = useState(null);
+
+    const { id, productName, type, description, cost, images, options } = props.product;
+
+    useEffect(() => {
+        dispatchAction(getReviews(id));
+    }, []);
 
     const existingBasketProduct = basket.find((product) =>
         product.id === id
     );
-
-    const [isLinkReviewsState, setIsLinkReviewsState] = useState(true);
-    const [thumbsSwiper, setThumbsSwiper] = useState(null);
 
     const reviewsShowLinkHandler = () => {
         setIsLinkReviewsState(false);
@@ -35,8 +45,6 @@ const ProductCart = (props) => {
         setIsLinkReviewsState(true);
         navigate(-1);
     }
-
-    const dispatchAction = useDispatch();
 
     let content;
 
@@ -142,6 +150,37 @@ const ProductCart = (props) => {
 
     return (
         <div className={styles["product"]}>
+            <div className={styles["rating__product_wrapper"]}>
+                {status === "loading" ?
+                    <div className={styles["rating__wrapper"]}>
+                        <Skeleton
+                            speed={2}
+                            width={20}
+                            height={20}
+                            viewBox="0 0 400 160"
+                            backgroundColor="#f3f3f3"
+                            foregroundColor="#ecebeb"
+                            borderRadius={`50%`}
+                        />
+                        <Skeleton
+                            speed={2}
+                            width={40}
+                            height={15}
+                            viewBox="0 0 400 160"
+                            backgroundColor="#f3f3f3"
+                            foregroundColor="#ecebeb"
+                        />
+                    </div>
+                    :
+                    <div className={styles["rating__wrapper"]}>
+                        <FaStar
+                            className={styles["star__icon"]}
+                            color={rating === 0 ? "#e4e5e9" : "#ffc107"}
+                        />
+                        <p className={styles["rating__number"]}>{rating === 0 ? "нет отзывов" : rating}</p>
+                    </div>
+                }
+            </div>
             <div className={styles["img__wrapper"]}>
                 <Swiper
                     style={{

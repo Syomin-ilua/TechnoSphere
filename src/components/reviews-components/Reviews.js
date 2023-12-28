@@ -4,7 +4,7 @@ import ReviewsForm from "./ReviewsForm";
 import ReviewsList from "./ReviewsList";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../UI-components/Loader";
-import { changeReviews, getReviews } from "../../store/reviews-slice";
+import { changeReviews } from "../../store/reviews-slice";
 import { useAuth } from "../../hooks/use-auth";
 
 let isInitialRunning = true;
@@ -19,13 +19,13 @@ const Reviews = (props) => {
     const { status, error, reviews, reviewsAddState } = useSelector((state) => state.reviews);
     const dispatchAction = useDispatch();
 
-    const toggleFormAddReviewState = () => {
-        setIsFormShowState(prevState => prevState = !prevState);
+    const showFormAddReviewStateHandler = () => {
+        setIsFormShowState(true);
     }
 
-    useEffect(() => {
-        dispatchAction(getReviews(productId));
-    }, []);
+    const hideFormAddReviewStateHandler = () => {
+        setIsFormShowState(false);
+    }
 
     useEffect(() => {
 
@@ -45,10 +45,10 @@ const Reviews = (props) => {
             {
                 isAuth &&
                 <div className={styles["add__reviews_wrapper"]}>
-                    <button onClick={toggleFormAddReviewState} className={styles["add__reviews"]}>{isFormShowState ? "Закрыть форму" : "Добавить отзыв"}</button>
+                    <button onClick={showFormAddReviewStateHandler} className={styles["add__reviews"]}>Оставить отзыв</button>
                 </div>
             }
-            {isFormShowState && <ReviewsForm productId={productId} />}
+            {isFormShowState && <ReviewsForm onHideCart={hideFormAddReviewStateHandler} productId={productId} />}
             {status === "loading" && <Loader />}
             {error && <p className={styles["reviews__error"]}>Произошла ошибка - {error} </p>}
             {status === "resolved" && <ReviewsList reviews={reviews} />}
