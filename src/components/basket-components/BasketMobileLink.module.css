@@ -1,0 +1,47 @@
+.mobile__navigation_link-wrapper {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    row-gap: 5px;
+}
+.mobile__navigation_link-wrapper svg {
+    width: 25px;
+    height: 25px;
+    fill: #333;
+}
+.basket__quantity_wrapper {
+    position: absolute;
+    bottom: 11px;
+    right: 3px;
+    background-color: red;
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.basket__quantity_wrapper span {
+    font-size: 9px;
+    font-family: "Montserrat-SemiBold";
+    color: #fff;
+}
+.link__title {
+    font-size: 12px;
+    font-family: "Montserrat-Regular";
+    color: #333;
+    text-align: center;
+}
+@media(max-width: 420px) {
+    .link__title {
+        font-size: 10px;
+    }
+    .mobile__navigation_link-wrapper svg {
+        width: 20px;
+        height: 20px;
+    }
+}

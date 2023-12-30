@@ -19,13 +19,13 @@ const Product = (props) => {
     const { id, image, productName, cost } = props.product;
 
     const basket = useSelector((state) => state.basket.items);
-    const favourites = useSelector((state) => state.favourites.favourites);
+    const favouritesProducts = useSelector((state) => state.favourites.favouritesProducts);
 
     const existingBasketProduct = basket.find((product) =>
         product.id === id
     );
 
-    const existingFavouritesProduct = favourites.find((favouritesProduct) =>
+    const existingFavouritesProduct = favouritesProducts.find((favouritesProduct) =>
         favouritesProduct.id === id
     );
 
@@ -125,6 +125,13 @@ const Product = (props) => {
                         <DeleteProductInBasketIcon />
                     </button>
                 </div>
+                <button onClick={!existingFavouritesProduct ? addProductFavouritesHandler : removeProductFavouritesHandler} className={styles["btn__favorites"]}>
+                    {
+                        !existingFavouritesProduct ?
+                        <MdFavoriteBorder /> :
+                        <IoIosHeart color="red"/>
+                    }
+                </button>
             </div>
             <div className={styles["more__detailed_wrapper"]}>
                 <Link className={styles["more__detailed"]} to={`/products/${id}`}>Подробнее → </Link>

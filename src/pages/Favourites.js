@@ -3,44 +3,47 @@ import { useDispatch, useSelector } from 'react-redux';
 import { changeFavouritesProducts, favouritesActions } from '../store/favourites-slice';
 import FavouritesList from '../components/favourites-components/FavouritesList';
 import Container from '../components/layout-components/Container';
-import { ReactComponent as NotProductsFavouritesIcon } from "../images/not-favourites-product-icon.svg";
 import styles from "./Favourites.module.css";
+import Loader from '../components/UI-components/Loader';
+import { MdError } from "react-icons/md";
+import { IoHeart } from "react-icons/io5";
 
 const Favourites = () => {
 
     const userId = useSelector((state) => state.user.user.id);
-    const favouritesData = useSelector((state) => state.favourites);
-    const dispatchAction = useDispatch();
+    const { favouritesProducts, status, error } = useSelector((state) => state.favourites);
 
     useEffect(() => {
 
         window.scrollTo(0, 0);
 
     }, []);
-    
-    useEffect(() => {
-
-        if(favouritesData.isFavoritesProductsContentChanged) {
-            changeFavouritesProducts(userId);
-            dispatchAction(favouritesActions.resetFavoritesStateChanged());
-        }
-
-    }, [favouritesData.favourites]);
 
     return (
         <Container class="favourites__container">
             <div className={styles["favourites__wrapper"]}>
                 <div className={styles["favourites__title_wrapper"]}>
-                    <h1 className={styles["favourites__title"]}>Избранное</h1>
+                    <h1 className={styles["favourites__title"]}>
+                        <IoHeart />
+                        Избранное
+                    </h1>
                 </div>
-                {favouritesData.favourites.length === 0 ?
-                    <div className={styles["not__products_favourites"]}>
-                        <div className={styles["not__products_favouritesImage-wrapper"]}>
-                            <NotProductsFavouritesIcon />
-                            <p>В списке пока нет ни одного избранного товара</p>
-                        </div>
-                    </div> :
-                    <FavouritesList favourites={favouritesData.favourites} />
+                {
+                    status === "loading" &&
+                    <div className={styles["loader__wrapper"]}>
+                        <Loader />
+                    </div>
+                }
+                {
+                    status === "resolved" &&
+                    <FavouritesList favouritesProducts={favouritesProducts} />
+                }
+                {
+                    error &&
+                    <div className={styles["error__wrapper"]}>
+                        <MdError size={100} color="red" />
+                        <p className={styles["error__text"]}>Произошла ошибка!</p>
+                    </div>
                 }
             </div>
         </Container>

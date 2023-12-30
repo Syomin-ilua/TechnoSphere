@@ -1,12 +1,27 @@
 .order {
     width: 100%;
-    height: 220px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     column-gap: 20px;
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
     border-radius: 10px;
+    position: relative;
+}
+
+.rating__wrapper {
+    display: flex;
+    align-items: center;
+    column-gap: 7px;
+    position: absolute;
+    top: 15px;
+    right: 15px;
+}
+.rating__number {
+    font-size: 10px;
+    font-family: "Montserrat-Medium";
+    margin-top: 2.5px;
+    color: #878787;
 }
 
 .orderImageWrapper {
@@ -14,7 +29,10 @@
     height: 100%;
     display: flex;
     align-items: start;
-    padding: 10px;
+    padding-top: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
     column-gap: 10px;
 }
 
@@ -26,20 +44,23 @@
 .order {
     display: flex;
     flex-direction: column;
-    align-items: start;
+    align-items: center;
 }
 
 .orderPrice {
     font-family: "Montserrat-Regular";
+    color: #333;
 }
 
 .orderPrice span {
     font-family: "Montserrat-Bold";
+    color: #333;
 }
 
 .orderImageWrapper img {}
 
 .productInformation {
+    width: 100%;
     display: flex;
     flex-direction: column;
     row-gap: 15px;
@@ -53,21 +74,34 @@
     flex-direction: column;
     padding: 10px;
     row-gap: 15px;
+    justify-content: flex-end;
 }
 
 .orderName {
     font-family: "Montserrat-Bold";
     font-size: 16px;
     margin-top: 5px;
+    color: #333;
+    transition: all 0.3s;
+    max-width: 135px;
+    width: 100%;
+    line-height: 20px;
+}
+
+.orderName:hover {
+    color: #4c4c4c;
+    transition: all 0.3s;
 }
 
 .cost {
     font-family: "Montserrat-Regular";
     font-size: 14px;
+    color: #333;
 }
 
 .cost span {
     font-family: "Montserrat-Bold";
+    color: #333;
 }
 
 .orderActions {
@@ -79,7 +113,7 @@
 }
 
 .btnAddOrder {
-    width: 35px;
+    min-width: 35px;
     height: 35px;
     background-color: #4AB8A1;
     border: 1px solid #4AB8A1;
@@ -97,12 +131,12 @@
 }
 
 .btnRemoveOrder {
-    width: 35px;
+    min-width: 35px;
     height: 35px;
     font-family: "Montserrat-Bold";
     font-size: 16px;
-    background-color: #000;
-    border: 1px solid #000;
+    background-color: #333;
+    border: 1px solid #333;
     color: #fff;
     transition: all 0.3s;
     border-radius: 5px;
@@ -110,7 +144,7 @@
 
 .btnRemoveOrder:hover {
     background-color: transparent;
-    color: #000;
+    color: #333;
     transition: all 0.3s;
 }
 
@@ -146,7 +180,133 @@
     transition: all 0.3s;
 }
 .order__change_actions {
+    width: 100%;
     display: flex;
     align-items: center;
     column-gap: 10px;
+}
+
+.btn__favorites {
+    min-width: 35px;
+    height: 35px;
+    background-color: transparent;
+    border-radius: 5px;
+}
+.btn__favorites svg {
+    width: 60%;
+    height: 60%;
+}
+
+@media(max-width: 1040px) {
+    .btn__delete_product-basket p {
+        display: none;
+    }
+    .btn__delete_product-basket {
+        max-width: 35px;
+    }
+}
+
+@media(max-width: 900px) {
+    .orderImageWrapper img {
+        width: 70px;
+        height: 90px;
+    }
+    .orderName {
+        font-size: 14px;
+    }
+    .cost {
+        font-size: 12px;
+    }
+    .productInformation {
+        row-gap: 10px;
+    }
+    .orderPrice {
+        font-size: 12px;
+    }
+    .btn__delete_product-basket {
+        font-size: 10px;
+        column-gap: 5px;
+        height: 30px;
+        border-radius: 3px;
+    }
+    .btn__delete_product-basket svg {
+        width: 14px;
+        height: 15px;
+    }
+    .btnAddOrder {
+        min-width: 30px;
+        height: 30px;
+        border-radius: 3px;
+    }
+    .btnRemoveOrder {
+        min-width: 30px;
+        height: 30px;
+        border-radius: 3px;
+    }
+    .btn__favorites {
+        min-width: 30px;
+        height: 30px;
+    }
+    .rating__number {
+        font-size: 9px;
+    }
+}   
+@media(max-width: 790px) {
+    .orderImageWrapper img {
+        width: 60px;
+        height: 80px;
+    }
+    .orderName {
+        font-size: 12px;
+    }
+    .btn__delete_product-basket {
+        width: 30px;
+        height: 30px;
+    }
+    .btn__delete_product-basket p {
+        display: none;
+    }
+} 
+@media(max-width: 750px) {
+    .orderImageWrapper {
+        flex-direction: column;
+    }
+    .orderImageWrapper img {
+        margin: 0 auto;
+    }
+    .productInformation {
+        align-items: center;
+        justify-content: center;
+    }
+    .orderName {
+        text-align: center;
+    }
+    .cost {
+        text-align: center;
+    }
+    .orderPrice {
+        text-align: center;
+    }
+}
+
+@media(max-width: 665px) {
+    .orderImageWrapper {
+        padding-bottom: 0px;
+    }
+    .orderName {
+        margin-bottom: 10px;
+        margin-top: 10px;
+    }
+    .orderInformation {
+        justify-content: flex-end;
+    }
+}
+
+@media(max-width: 420px) {
+    .btn__favorites {
+        min-width: 25px;
+    }
+    .order__change_actions {
+        column-gap: 5px;
+    }
 }

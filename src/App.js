@@ -4,15 +4,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { basketGetOrders, basketChangeOrders } from './store/basket-slice';
 import { getOrders, changeOrders } from './store/orders-slice';
-import { getProducts, changeProducts, productsActions } from './store/products-slice';
+import { getProducts } from './store/products-slice';
 import { changeUserInfo, getUserInfo } from './store/user-slice';
 import { changeCategoriesProducts, getCategoriesProducts } from './store/categoriesProducts-slice';
-import { productActions } from './store/productDetails-slice';
+import { changeFavouritesProducts } from './store/favourites-slice';
 import { categoriesProductsActions } from './store/categoriesProducts-slice';
-import { reviewsActions } from './store/reviews-slice';
 import { ordersActions } from './store/orders-slice';
 import { basketActions } from './store/basket-slice';
 import { userActions } from './store/user-slice';
+import { favouritesActions } from './store/favourites-slice';
 
 import Header from './components/layout-components/Header';
 import Footer from './components/layout-components/Footer';
@@ -30,6 +30,8 @@ import Admin from './pages/Admin';
 import RequireAuth from './hoc/RequireAuth';
 import RequireAdminAuth from './hoc/RequireAdminAuth';
 import { getFavouritesProducts } from './store/favourites-slice';
+import MobileNavigation from './components/layout-components/MobileNavigation';
+import useResize from './hooks/use-resize';
 
 let isInitialRunning = true;
 
@@ -40,9 +42,11 @@ function App() {
   const basket = useSelector((state) => state.basket);
   const orders = useSelector((state) => state.orders);
   const categoriesProducts = useSelector((state) => state.categoriesProducts);
-  const products = useSelector((state) => state.products);
+  const favourites = useSelector((state) => state.favourites);
 
   const dispatchAction = useDispatch();
+
+  const width = useResize();
 
   useEffect(() => {
 
@@ -112,12 +116,24 @@ function App() {
 
   }, [categoriesProducts]);
 
+  useEffect(() => {
+
+    if (favourites.isFavoritesProductsContentChanged) {
+      dispatchAction(changeFavouritesProducts(userId));
+      dispatchAction(favouritesActions.resetFavoritesStateChanged());
+    }
+
+  }, [favourites]);
+
   return (
     <Fragment>
       <Routes>
         <Route path='/*' element={
           <Fragment>
             <Header />
+            {width <= 800 &&
+              <MobileNavigation />
+            }
             <Routes>
               <Route path='/' element={
                 <Navigate to="/home" replace={true} />

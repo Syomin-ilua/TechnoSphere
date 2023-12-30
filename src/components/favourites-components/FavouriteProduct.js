@@ -16,8 +16,6 @@ const FavouriteProduct = (props) => {
 
     const { id, productName, cost, image } = props.product;
 
-    console.log(image);
-
     const basket = useSelector((state) => state.basket.items);
     const dispatchAction = useDispatch();
 
@@ -95,34 +93,36 @@ const FavouriteProduct = (props) => {
     }
 
     const productExistsBasketContent =
-        <div className={styles["product__actions"]}>
-            <div className={styles["product__actions_wrapper"]}>
-                <div className={styles["actions__wrapper"]}>
-                    <button className={styles["btn__add_product"]} onClick={addProductHandler}>+</button>
-                    <div className={styles["product__quantity_wrapper"]}>
-                        <p>{existingBasketProduct && existingBasketProduct.quantity}</p>
+        <div className={styles["product__actions_ex"]}>
+            <div className={styles["product__actions_exsisting"]}>
+                <div className={styles["product__actions_wrapper"]}>
+                    <div className={styles["actions__wrapper"]}>
+                        <button className={styles["btn__add_product"]} onClick={addProductHandler}>+</button>
+                        <div className={styles["product__quantity_wrapper"]}>
+                            <p>{existingBasketProduct && existingBasketProduct.quantity}</p>
+                        </div>
+                        <button className={styles["btn__remove_product"]} onClick={removeProductHandler}>-</button>
                     </div>
-                    <button className={styles["btn__remove_product"]} onClick={removeProductHandler}>-</button>
+                    <div className={styles["delete__product_wrapper"]}>
+                        <button onClick={deleteProductBasketHandler} className={styles["btn__delete_product-basket"]}>
+                            <DeleteProductInBasketIcon />
+                        </button>
+                    </div>
                 </div>
-                <div className={styles["delete__product_wrapper"]}>
-                    <button onClick={deleteProductBasketHandler} className={styles["btn__delete_product-basket"]}>
-                        <DeleteProductInBasketIcon />
-                    </button>
-                </div>
+                <button onClick={removeProductFavouritesHandler} className={styles["btn__remove_favourites"]}>
+                    Удалить из избранное
+                </button>
             </div>
-            <button onClick={removeProductFavouritesHandler} className={styles["btn__remove_favourites"]}>
-                Удалить из избранное
-            </button>
         </div>;
 
     const productNotExistsBasketContent =
         <div className={styles["product__actions"]}>
-            <div className={styles["product__actions_add"]}>
+            <div className={styles["product__actions_wrapp"]}>
                 <button onClick={addProductInBasketHandler} className={styles["btn__add_basket"]}>Добавить в корзину</button>
+                <button onClick={removeProductFavouritesHandler} className={styles["btn__remove_favourites"]}>
+                    Удалить из избранное
+                </button>
             </div>
-            <button onClick={removeProductFavouritesHandler} className={styles["btn__remove_favourites"]}>
-                Удалить из избранное
-            </button>
         </div>;
 
     return (
@@ -131,12 +131,12 @@ const FavouriteProduct = (props) => {
                 <div className={styles["favorite__product_image-wrapper"]}>
                     <img src={`/products-images/${image}`} alt='' />
                 </div>
+            </div>
+            <div className={styles["favorite__product_actions"]}>
                 <div className={styles["favourite__product_info"]}>
                     <Link to={`/products/${id}`}>{productName}</Link>
                     <p><span>Цена: </span>{cost} руб. / 1 шт.</p>
                 </div>
-            </div>
-            <div className={styles["favorite__product_actions"]}>
                 {existingBasketProduct ?
                     productExistsBasketContent :
                     productNotExistsBasketContent
@@ -167,7 +167,7 @@ const FavouriteProduct = (props) => {
                         :
                         <div className={styles["rating__wrapper"]}>
                             <FaStar color={rating === 0 ? "#e4e5e9" : "#ffc107"} />
-                            <p className={styles["rating__number"]}>{rating === 0 ? "нет отзывов" : rating}</p>
+                            <p className={styles["rating__number"]}>{rating !== 0 ? rating : null}</p>
                         </div>
                 }
             </div>

@@ -1,10 +1,20 @@
 .header {
     width: 100%;
+    height: 100px;
     position: fixed;
     top: 0px;
     left: 0px;
     z-index: 1499;
     background-color: #4AB8A1;
+    display: flex;
+    align-items: center;
+}
+.header__wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .logo {
@@ -35,13 +45,14 @@
     column-gap: 6px;
     transition: all 0.3s;
     padding: 7px;
-    border-radius: 5px;    
+    border-radius: 5px;
 }
 
 .navigation div a:hover {
-    box-shadow: 0px 2px 2px 1px rgba(0,0,0,.2);
+    box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, .2);
     transition: all 0.3s;
 }
+
 .important__links {
     display: flex;
     align-items: center;
@@ -72,13 +83,37 @@
     height: 20px;
     fill: #fff;
 }
+
 .important__links a {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     transition: all 0.3s;
 }
+
 .important__links a:hover {
-    box-shadow: 0px 2px 2px 1px rgba(0,0,0,.2);
+    box-shadow: 0px 2px 2px 1px rgba(0, 0, 0, .2);
     transition: all 0.3s;
+}
+
+@media(max-width: 800px) {
+    .header {
+        height: 85px;
+    }
+    .navigation {
+        display: none;
+    }
+    .important__links {
+        display: none;
+    }
+    .header__wrapper {
+        justify-content: center;
+    }
+    .logo {
+        width: 110px;
+    }
+    .logo img {
+        width: 100%;
+        height: 100px;
+    } 
 }

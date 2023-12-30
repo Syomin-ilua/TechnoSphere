@@ -26,12 +26,14 @@
     font-family: "Montserrat-Bold";
     color: rgb(255, 45, 45);
     margin-bottom: 10px;
+    line-height: 20px;
 }
 
 .order__form_subtitle {
     font-size: 12px;
     font-family: "Montserrat-Medium";
     color: rgb(255, 45, 45);
+    line-height: 15px;
 }
 
 .order__info {
@@ -50,12 +52,14 @@
     font-size: 16px;
     font-family: "Montserrat-Bold";
     color: #333;
+    min-width: max-content;
 }
 
 .order__info_item p {
     font-size: 14px;
     font-family: "Montserrat-Medium";
     color: #333;
+    line-height: 20px;
 } 
 
 .btn__add_order {
@@ -121,10 +125,10 @@
     font-family: "Montserrat-Medium";
     color: #333;
     box-shadow: 0px 5px 5px 4px rgba(34, 60, 80, 0.2);
-    padding-top: 20px;
+    /* padding-top: 20px; */
     padding-left: 15px;
     padding-right: 15px;
-    padding-bottom: 20px;
+    /* padding-bottom: 20px; */
     border-radius: 5px;
     margin-bottom: 5px;
     transition: all 0.3s;
@@ -150,13 +154,77 @@
     max-width: 500px;
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
-
+    column-gap: 15px;
 }
 
 .input__bank_card::-webkit-outer-spin-button,
 .input__bank_card::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+@media(max-width: 800px) {
+    .order__info_item span {
+        font-size: 14px;
+    }
+    .order__info_item p {
+        font-size: 12px;
+    }
+    .order__form_title {
+        font-size: 16px;
+    }
+    .order__info_item {
+        column-gap: 10px;
+    }
+    .method__payment_wrapper p {
+        font-size: 14px;
+    }
+    .method__payment_wrapper select {
+        font-size: 12px;
+        max-width: 200px;
+    }
+    .input__bank_card {
+        height: 30px;
+        font-size: 12px;
+        border-radius: 3px;
+    }
+    .btn__add_order {
+        height: 35px;
+        font-size: 14px;
+    }
+}
+
+@media(max-width: 450px) {
+    .order__info_item {
+        flex-direction: column;
+        align-items: start;
+        row-gap: 10px;
+    }
+    .order__info_item span {
+        min-width: none;
+        font-size: 12px;
+    }
+    .order__info_item p {
+        min-width: none;
+        font-size: 12px;
+    }
+    .order__form_title {
+        font-size: 14px;
+    }
+    .order__form_subtitle {
+        font-size: 10px;
+    }
+    .order__form_title-wrapper {
+        margin-bottom: 10px;
+    }
+    .method__payment_wrapper {
+        flex-direction: column;
+        align-items: start;
+        row-gap: 10px;
+    }
+    .method__payment_wrapper p {
+        font-size: 12px;
+    }
 }

@@ -1,0 +1,120 @@
+.basket__list {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+.basket__body {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.basket__orders {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(200px, 350px));
+    column-gap: 20px;
+    row-gap: 20px;
+    justify-content: space-between;
+}
+
+.order__actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn__cancel_formorder {
+    width: 250px;
+    height: 40px;
+    background-color: #333;
+    color: #fff;
+    font-family: "Montserrat-SemiBold";
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.btn__cancel_formorder:active {
+    transform: scale(0.98);
+    transition: all 0.3s;
+}
+
+.btn__show_formorder {
+    width: 250px;
+    height: 40px;
+    background-color: #4AB8A1;
+    color: #fff;
+    font-family: "Montserrat-SemiBold";
+    border-radius: 5px;
+    transition: all 0.3s;
+    font-size: 14px;
+}
+
+.btn__show_formorder:active {
+    transform: scale(0.98);
+    transition: all 0.3s;
+}
+
+.basket__total_wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.basket__total {
+    display: flex;
+    align-items: center;
+    column-gap: 10px;
+}
+
+.total__title {
+    font-family: "Montserrat-Bold";
+    font-size: 18px;
+}
+
+.total__text {
+    font-family: "Montserrat-Regular";
+    font-size: 16px;
+}
+
+@media(max-width: 1280px) {
+    .basket__orders {
+        grid-template-columns: repeat(3, minmax(150px, 350px));
+    }
+}
+
+@media(max-width: 900px) {
+    .total__title {
+        font-size: 16px;
+    }    
+    .total__text {
+        font-size: 14px;
+    }
+    .btn__show_formorder {
+        width: 200px;
+        height: 30px;
+        font-size: 12px;
+        border-radius: 3px;
+    }
+    .btn__cancel_formorder {
+        width: 200px;
+        height: 30px;
+        font-size: 12px;
+        border-radius: 3px;
+    }
+}
+@media(max-width: 665px) {
+    .basket__orders {
+        grid-template-columns: repeat(2, minmax(150px, 250px));
+    }
+}
+
+@media(max-width: 420px) {
+    .btn__show_formorder {
+        width: 160px;
+    }
+    .btn__cancel_formorder {
+        width: 160px;
+    }
+}

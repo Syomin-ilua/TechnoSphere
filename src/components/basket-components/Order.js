@@ -39,7 +39,7 @@ const Order = (props) => {
                             return (
                                 <div key={order.id} className={styles["order__product"]}>
                                     <div className={styles["image__product"]} >
-                                        <img src={`/products` + order.productImage} alt="Изображение товара" />
+                                        <img src={`/products-images/` + order.productImage} alt="Изображение товара" />
                                         <div className={styles["order__product_info"]}>
                                             <Link className={styles["order__productName_link"]} to={`/products/${order.id}`}>{order.productName}</Link>
                                             <p>Кол-во: {order.quantity} шт.</p>

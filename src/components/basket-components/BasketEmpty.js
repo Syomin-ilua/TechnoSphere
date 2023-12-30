@@ -6,8 +6,9 @@ const BasketEmpty = () => {
 
     return (
         <div className={styles.basketEmpty}>
-            <img src={EmptyBasketIcon} alt="Иконка пустой корзины"/>          
-            <Link to="/products" className={styles.addProductsBtn}>Добавить товары</Link>
+            <img src={EmptyBasketIcon} alt="Иконка пустой корзины"/>  
+            <p className={styles["basket__empty_text"]}>В корзине нет товаров</p>        
+            <Link to="/products" className={styles["add__products_btn"]}>Перейти в каталог</Link>
         </div>
     );
 }

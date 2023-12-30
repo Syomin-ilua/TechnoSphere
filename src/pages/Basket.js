@@ -6,23 +6,18 @@ import BasketEmpty from "../components/basket-components/BasketEmpty";
 import FormOrder from "../components/basket-components/FormOrder";
 import Container from "../components/layout-components/Container";
 import Loader from "../components/UI-components/Loader";
+import { MdError } from "react-icons/md";
+import BasketList from "../components/basket-components/BasketList";
+import { SlBasket } from "react-icons/sl";
 
 const Basket = () => {
 
     const { items, totalCostBasket, status, error } = useSelector((state) => state.basket);
 
-    const [isFormOrderVisible, setIsFormOrderVisible] = useState(false);
-
-    const orderFormHandler = () => {
-        setIsFormOrderVisible(true);
-    }
-
-    const orderFormCancelHandler = () => {
-        setIsFormOrderVisible(false);
-    }
-
     useEffect(() => {
+
         window.scrollTo(0, 0);
+
     }, []);
 
 
@@ -30,53 +25,32 @@ const Basket = () => {
         <Container class="basket__container">
             <div className={styles["basket"]}>
                 <div className={styles["basket__header"]}>
-                    <h1 className={styles["basket__header_text"]}>Корзина</h1>
+                    <h1 className={styles["basket__header_text"]}>
+                        <SlBasket />
+                        Корзина
+                    </h1>
                 </div>
                 {status === "loading" &&
-                <div className={styles["loader__wrapper"]}>
-                    <Loader />
-                </div>
-                }
-                {status === "resolved" &&
-                    <div className={styles["basket__body_wrapper"]}>
-                        {items.length === 0 ?
-                            <BasketEmpty /> :
-                            <div className={styles["basket__body"]}>
-                                <div className={styles["basket__orders"]}>
-                                    {
-                                        items.map((item) => (
-                                            <OrderItem
-                                                key={item.id}
-                                                order={{
-                                                    id: item.id,
-                                                    orderName: item.productName,
-                                                    orderImage: item.productImage,
-                                                    quantity: item.quantity,
-                                                    totalPrice: item.totalPrice,
-                                                    price: item.cost,
-                                                }}
-                                            />
-                                        ))
-                                    }
-                                </div>
-                                <div className={styles["basket__total_wrapper"]}>
-                                    <div className={styles["basket__total"]}>
-                                        <h3 className={styles["total__title"]}>Итого: </h3>
-                                        <p className={styles["total__text"]}>{totalCostBasket} руб.</p>
-                                    </div>
-                                    <div className={styles["order__actions"]}>
-                                        {isFormOrderVisible && <button className={styles["btn__cancel_formorder"]} onClick={orderFormCancelHandler}>Закрыть форму</button>}
-                                        {items.length !== 0 && !isFormOrderVisible && <button className={styles["btn__show_formorder"]} onClick={orderFormHandler}>Оформить заказ</button>}
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                        {isFormOrderVisible && <FormOrder />}
+                    <div className={styles["loader__wrapper"]}>
+                        <Loader />
                     </div>
                 }
-                {error && <p>Произошла ошибка!!!</p>}
+                {status === "resolved" &&
+                    <BasketList
+                        basketProducts={items}
+                        totalCostBasket={totalCostBasket}
+                    />
+                }
+                {error &&
+                    <div className={styles["error__wrapper"]}>
+                        <MdError
+                            size={100}
+                            color="red"
+                        />
+                        <p className={styles["error__text"]}>Произошла ошибка!</p>
+                    </div>
+                }
             </div>
-
         </Container>
     );
 }

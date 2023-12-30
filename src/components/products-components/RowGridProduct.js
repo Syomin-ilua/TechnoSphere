@@ -8,16 +8,25 @@ import { toast, ToastContainer } from 'react-toastify';
 import Skeleton from "react-loading-skeleton";
 import { FaStar } from "react-icons/fa";
 import { useAuth } from '../../hooks/use-auth';
+import { favouritesActions } from '../../store/favourites-slice';
+import { MdFavoriteBorder } from 'react-icons/md';
+import { IoIosHeart } from 'react-icons/io';
 import { ReactComponent as DeleteProductInBasketIcon } from "../../images/delete-icon.svg";
 import styles from "./RowGridProduct.module.css";
 
 const RowGridProduct = (props) => {
 
     const { id, image, productName, cost } = props.product;
+
     const basket = useSelector((state) => state.basket.items);
+    const favourites = useSelector((state) => state.favourites.favourites);
 
     const existingBasketProduct = basket.find((product) =>
         product.id === id
+    );
+
+    const existingFavouritesProduct = favourites.find((favouritesProduct) =>
+        favouritesProduct.id === id
     );
 
     const { isAuth } = useAuth();
@@ -87,6 +96,19 @@ const RowGridProduct = (props) => {
         dispatchAction(basketActions.deleteProductInBasket(id));
     }
 
+    const addProductFavouritesHandler = () => {
+        dispatchAction(favouritesActions.addFavouriteProduct({
+            id: id,
+            image: image,
+            productName: productName,
+            cost: cost,
+        }));
+    }
+
+    const removeProductFavouritesHandler = () => {
+        dispatchAction(favouritesActions.removeProductFavourites(id));
+    }
+
     const productExistsBasketContent =
         <div className={styles["product__actions_content"]}>
             <div className={styles["product__actions_wrapper"]}>
@@ -102,6 +124,13 @@ const RowGridProduct = (props) => {
                         <DeleteProductInBasketIcon />
                     </button>
                 </div>
+                <button onClick={!existingFavouritesProduct ? addProductFavouritesHandler : removeProductFavouritesHandler} className={styles["btn__favorites"]}>
+                    {
+                        !existingFavouritesProduct ?
+                            <MdFavoriteBorder /> :
+                            <IoIosHeart color="red" />
+                    }
+                </button>
             </div>
             <div className={styles["more__detailed_wrapper"]}>
                 <Link className={styles["more__detailed"]} to={`/products/${id}`}>Подробнее → </Link>
@@ -110,7 +139,16 @@ const RowGridProduct = (props) => {
 
     const productNotExistsBasketContent =
         <div className={styles["product__actions"]}>
-            <button onClick={addProductInBasketHandler} className={styles["btn__add_basket"]}>Добавить в корзину</button>
+            <div className={styles["product__actions_add"]}>
+                <button onClick={addProductInBasketHandler} className={styles["btn__add_basket"]}>Добавить в корзину</button>
+                <button onClick={!existingFavouritesProduct ? addProductFavouritesHandler : removeProductFavouritesHandler} className={styles["btn__favorites"]}>
+                    {
+                        !existingFavouritesProduct ?
+                            <MdFavoriteBorder /> :
+                            <IoIosHeart color="red" />
+                    }
+                </button>
+            </div>
             <Link className={styles["more__detailed"]} to={`/products/${id}`}>Подробнее → </Link>
         </div>;
 
