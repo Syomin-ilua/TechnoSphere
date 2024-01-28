@@ -38,7 +38,7 @@ const Product = (props) => {
     const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
-        const getRattingProduct = async () => {
+        const getRatingProduct = async () => {
             setIsLoading(true);
             const reviewsDocRef = doc(db, "reviews", id);
 
@@ -57,7 +57,7 @@ const Product = (props) => {
 
         }
 
-        getRattingProduct().catch((error) => {
+        getRatingProduct().catch((error) => {
             toast.warning(error);
         });
     }, []);
@@ -98,7 +98,7 @@ const Product = (props) => {
 
     const addProductFavouritesHandler = () => {
         if (!isAuth) {
-            toast.warning("Войдите в аккаунт или зарегистрируйтесь!");
+            toast.warning("Авторизуйтесь!");
             return;
         }
 

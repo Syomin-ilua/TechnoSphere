@@ -1,12 +1,12 @@
 .product {
     width: 100%;
     display: flex;
-    justify-content: space-between;
-    align-items: end;
+    align-items: stretch;
     padding: 10px;
     border-radius: 10px;
     box-shadow: 0px 5px 10px 2px rgba(34, 60, 80, 0.2);
     position: relative;
+    column-gap: 15px;
 }
 
 .product__front_wrapper {
@@ -72,6 +72,7 @@
     font-size: 14px;
     text-align: center;
     margin-bottom: 10px;
+    margin-right: 75px;
 }
 
 .more__detailed:hover {
@@ -79,6 +80,8 @@
 }
 
 .product__actions {
+    width: 100%;
+    align-items: end;
     display: flex;
     flex-direction: column;
     row-gap: 15px;
@@ -88,7 +91,8 @@
     display: flex;
     align-items: center;
     column-gap: 10px;
-
+    justify-content: flex-end;
+    width: 100%;
 }
 
 .product__actions_wrapper {
@@ -225,14 +229,6 @@
     color: #878787;
 }
 
-.product__actions_add {
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    column-gap: 10px;
-}
-
 .btn__favorites {
     min-width: 35px;
     height: 35px;
@@ -243,4 +239,80 @@
 .btn__favorites svg {
     width: 60%;
     height: 60%;
+}
+
+.product__general {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: start;
+    justify-content: space-between;
+}
+
+@media(max-width: 500px) {
+    .product__actions {
+        width: max-content;
+    }
+}
+
+@media(max-width: 430px) {
+    .product__name {
+        font-size: 12px;
+    }
+
+    .product__cost {
+        font-size: 12px;
+    }
+
+    .btn__add_basket {
+        width: 150px;
+        height: 30px;
+        font-size: 12px;
+    }
+
+    .btn__favorites {
+        min-width: 30px;
+        height: 30px;
+    }
+
+    .more__detailed {
+        font-size: 12px;
+        margin-right: 80px;
+    }
+
+    .image__wrapper {
+        width: 100px;
+        height: 130px;
+    }
+    .btn__add_product {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+    .btn__remove_product {
+        width: 30px;
+        height: 30px;
+        font-size: 12px;
+    }
+    .product__quantity_wrapper {
+        width: 40px;
+        font-size: 12px;
+    }
+    .btn__delete_product-basket {
+        width: 30px;
+        height: 30px;
+    }
+    .btn__delete_product-basket svg {
+        width: 16px;
+        height: 18px;
+    }
+    
+}
+
+@media(max-width: 390px) {
+    .image__wrapper {
+        width: 90px;
+        height: 120px;
+    }
 }

@@ -5,7 +5,7 @@
 
 .catalog__container {
     display: flex;
-    align-items: start;
+    align-items: stretch;
     justify-content: space-between;
     column-gap: 20px;
     height: 100%;
@@ -36,4 +36,22 @@
 .catalog__show_grid {
     display: flex;
     align-items: center;
+}
+.btn__mobile_filter {
+    background: transparent;
+    font-size: 14px;
+    font-family: "Montserrat-SemiBold";
+    color: #333;
+    transition: all 0.3s;
+}
+
+.btn__mobile_filter:hover {
+    color: #545454;
+    transition: all 0.3s;
+}
+
+@media(max-width: 430px) {
+    .btn__mobile_filter {
+        font-size: 12px;
+    }
 }

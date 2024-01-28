@@ -93,13 +93,13 @@ const MobileProfileLink = () => {
                         }
                         {
                             !isAuth &&
-                            <Link>
+                            <Link className={styles["not__auth_link"]} to="/auth/login">
                                 Войти
                             </Link>
                         }
                         {
                             !isAuth &&
-                            <Link>
+                            <Link className={styles["not__auth_link"]} to="/auth/register">
                                 Зарегистрироваться
                             </Link>
                         }

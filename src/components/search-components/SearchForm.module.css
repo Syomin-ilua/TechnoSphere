@@ -7,8 +7,6 @@
     column-gap: 20px;
 }
 
-/* стилизация инпута */
-
 .searchInputWrapper input {
     width: 100%;
     height: 100%;
@@ -70,4 +68,17 @@
     width: 100%;
     height: 100%;
     fill: #333;
+}
+
+@media(max-width: 430px) {
+    .searchInputWrapper input {
+        font-size: 12px;
+        padding-left: 38px;
+    }
+    .searchIconWrapper { 
+        width: 18px;
+    }
+    .searchForm {
+        height: 30px;
+    }
 }

@@ -22,7 +22,7 @@ const regExpNumberCard = /\d{4}-\d{4}-\d{4}-\d{4}/;
 const regExpDateCard = /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/;
 const regExpCardCVV = /^[0-9]{3}$/;
 
-const FormOrder = () => {
+const FormOrder = ({ onOrderFormCancelHandler }) => {
 
     const dispatchAction = useDispatch();
     const userId = useSelector((state) => state.user.user.id);
@@ -80,7 +80,7 @@ const FormOrder = () => {
         const order = {
             id: Math.random(),
             userBuyerId: userId,
-            fioBuyer: user.name + " " + user.surname + " " + user.patronymic, 
+            fioBuyer: user.name + " " + user.surname + " " + user.patronymic,
             tel: user.tel,
             address: user.address,
             orderProducts: basket.items,
@@ -100,6 +100,8 @@ const FormOrder = () => {
         resetNumberCardInputValues();
         resetCardDateInputValues();
         resetCardCVVInputValues();
+        onOrderFormCancelHandler();
+        toast.success("Заказ оформлен!");
     }
 
     return (

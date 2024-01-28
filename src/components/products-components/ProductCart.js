@@ -11,6 +11,9 @@ import Skeleton from "react-loading-skeleton";
 import { ReactComponent as DeleteProductInBasketIcon } from "../../images/delete-icon.svg";
 import { FaStar } from "react-icons/fa";
 import styles from "./ProductCart.module.css";
+import { favouritesActions } from "../../store/favourites-slice";
+import { MdFavoriteBorder } from "react-icons/md";
+import { IoIosHeart } from "react-icons/io";
 import "swiper/css";
 
 const ProductCart = (props) => {
@@ -21,7 +24,9 @@ const ProductCart = (props) => {
     const { isAuth } = useAuth();
 
     const dispatchAction = useDispatch();
+
     const basket = useSelector((state) => state.basket.items);
+    const favouritesProducts = useSelector((state) => state.favourites.favouritesProducts);
     const { status, error, reviews, rating } = useSelector((state) => state.reviews);
 
     const [isLinkReviewsState, setIsLinkReviewsState] = useState(true);
@@ -37,6 +42,24 @@ const ProductCart = (props) => {
         product.id === id
     );
 
+    const existingFavouritesProduct = favouritesProducts.find((favouritesProduct) =>
+        favouritesProduct.id === id
+    );
+
+    const addProductFavouritesHandler = () => {
+        if (!isAuth) {
+            toast.warning("Авторизуйтесь!");
+            return;
+        }
+
+        dispatchAction(favouritesActions.addFavouriteProduct({
+            id: id,
+            image: images[0],
+            productName: productName,
+            cost: cost,
+        }));
+    }
+
     const reviewsShowLinkHandler = () => {
         setIsLinkReviewsState(false);
     }
@@ -51,8 +74,7 @@ const ProductCart = (props) => {
     const addProductBasketHandler = () => {
 
         if (!isAuth) {
-            toast.warn("Аавторизуйтесь!");
-            navigate("/auth/login");
+            toast.warn("Авторизуйтесь!");
             return;
         }
 
@@ -81,6 +103,10 @@ const ProductCart = (props) => {
 
     const deleteProductBasketHandler = () => {
         dispatchAction(basketActions.deleteProductInBasket(id));
+    }
+
+    const removeProductFavouritesHandler = () => {
+        dispatchAction(favouritesActions.removeProductFavourites(id));
     }
 
     if (type === "smartphones") {
@@ -117,33 +143,48 @@ const ProductCart = (props) => {
 
     const productExistsBasketContent =
         <div className={styles["choise__quontity_actions"]}>
-            <div className={styles["quontity__actions"]}>
-                <button className={styles["increment__button"]} onClick={addProductHandler}>+</button>
-                <div className={styles["product__quantity"]}>
-                    <p>{existingBasketProduct && existingBasketProduct.quantity}</p>
+            <div className={styles["choise__quontity_actions-wrapper"]}>
+                <div className={styles["quontity__actions"]}>
+                    <button className={styles["increment__button"]} onClick={addProductHandler}>+</button>
+                    <div className={styles["product__quantity"]}>
+                        <p>{existingBasketProduct && existingBasketProduct.quantity}</p>
+                    </div>
+                    <button className={styles["decrement__button"]} onClick={removeProductHandler}>-</button>
                 </div>
-                <button className={styles["decrement__button"]} onClick={removeProductHandler}>-</button>
-            </div>
-            <div className={styles["delete__product_basket_wrapper"]}>
-                <button onClick={deleteProductBasketHandler} className={styles["btn__delete_product-basket"]}>
-                    <DeleteProductInBasketIcon />
-                    Убрать из корзины
+                <div className={styles["delete__product_basket_wrapper"]}>
+                    <button onClick={deleteProductBasketHandler} className={styles["btn__delete_product-basket"]}>
+                        <DeleteProductInBasketIcon />
+                    </button>
+                </div>
+                <button onClick={!existingFavouritesProduct ? addProductFavouritesHandler : removeProductFavouritesHandler} className={styles["btn__favorites"]}>
+                    {
+                        !existingFavouritesProduct ?
+                            <MdFavoriteBorder /> :
+                            <IoIosHeart color="red" />
+                    }
                 </button>
             </div>
             {
                 isLinkReviewsState && location.pathname !== `/products/${id}/reviews` ?
-                    <Link className={styles["reviews__link"]} onClick={reviewsShowLinkHandler} to="reviews">Смотреть отзывы</Link>
-                    :
-                    <p className={styles["btn__reviews_hide"]} onClick={reviewsHideLinkHandler}>Закрыть отзывы</p>
+                    <Link className={styles["reviews__link"]} onClick={reviewsShowLinkHandler} to="reviews">Смотреть отзывы</Link> :
+                    <Link className={styles["btn__reviews_hide"]} onClick={reviewsHideLinkHandler}>Закрыть отзывы</Link>
             }
         </div>;
 
     const productNotExistsBasketContent = <div className={styles["product__action"]}>
-        <button className={styles["btn__add_basket"]} onClick={addProductBasketHandler}>Добавить в корзину</button>
+        <div className={styles["product__actions_wrapper"]}>
+            <button className={styles["btn__add_basket"]} onClick={addProductBasketHandler}>Добавить в корзину</button>
+            <button onClick={!existingFavouritesProduct ? addProductFavouritesHandler : removeProductFavouritesHandler} className={styles["btn__favorites"]}>
+                {
+                    !existingFavouritesProduct ?
+                        <MdFavoriteBorder /> :
+                        <IoIosHeart color="red" />
+                }
+            </button>
+        </div>
         {
             isLinkReviewsState && location.pathname !== `/products/${id}/reviews` ?
-                <Link className={styles["reviews__link"]} onClick={reviewsShowLinkHandler} to="reviews">Смотреть отзывы</Link>
-                :
+                <Link className={styles["reviews__link"]} onClick={reviewsShowLinkHandler} to="reviews">Смотреть отзывы</Link> :
                 <p className={styles["btn__reviews_hide"]} onClick={reviewsHideLinkHandler}>Закрыть отзывы</p>
         }
     </div>
@@ -186,8 +227,10 @@ const ProductCart = (props) => {
                     style={{
                         '--swiper-navigation-color': '#fff',
                         '--swiper-pagination-color': '#fff',
-                        'width': '200px',
-                        'height': "200px",
+                        'max-width': '200px',
+                        'max-height': "200px",
+                        "width": "100%",
+                        "height": "100%",
                         'cursor': "pointer",
                         "userSelect": "none",
                     }}
@@ -255,7 +298,6 @@ const ProductCart = (props) => {
                     </div>
                 </div>
             </div>
-            <ToastContainer />
         </div>
     );
 }

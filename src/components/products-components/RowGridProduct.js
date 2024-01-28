@@ -178,23 +178,25 @@ const RowGridProduct = (props) => {
                     :
                     <div className={styles["rating__wrapper"]}>
                         <FaStar color={rating === 0 ? "#e4e5e9" : "#ffc107"} />
-                        <p className={styles["rating__number"]}>{rating === 0 ? "нет отзывов" : rating}</p>
+                        <p className={styles["rating__number"]}>{rating === 0 ? "" : rating}</p>
                     </div>
             }
             <div className={styles["product__front_wrapper"]}>
                 <div className={styles["image__wrapper"]}>
                     <img src={`/products-images/` + image} alt={`Изображение: ${productName}`} className="imageProduct" />
                 </div>
+            </div>
+            <div className={styles["product__general"]}>
                 <div className={styles["product__info"]}>
                     <p className={styles["product__name"]}>{productName}</p>
                     <p className={styles["product__cost"]}><span>Цена: </span>{cost} руб. / 1 шт</p>
                 </div>
+                {
+                    existingBasketProduct ?
+                        productExistsBasketContent :
+                        productNotExistsBasketContent
+                }
             </div>
-            {
-                existingBasketProduct ?
-                    productExistsBasketContent :
-                    productNotExistsBasketContent
-            }
         </div>
     )
 }

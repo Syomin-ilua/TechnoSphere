@@ -55,7 +55,7 @@ const BasketList = (props) => {
                     </div>
                 }
             </div>
-            {isFormOrderVisible && <FormOrder />}
+            {isFormOrderVisible && <FormOrder onOrderFormCancelHandler={orderFormCancelHandler} />}
         </div>
     )
 }

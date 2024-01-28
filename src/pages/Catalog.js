@@ -9,11 +9,16 @@ import SearchForm from "../components/search-components/SearchForm";
 import Filter from "../components/filter-components/Filter";
 import { ReactComponent as RowGridIcon } from "../images/row-icon.svg";
 import { ReactComponent as ColumnGridIcon } from "../images/column-icon.svg";
+import useResize from "../hooks/use-resize";
+import MobileFilter from "../components/filter-components/MobileFilter";
 
 const Catalog = () => {
 
     const dispatchAction = useDispatch();
     const { status, error } = useSelector((state) => state.products);
+
+    const widthDesktop = useResize();
+    const [isShowMobileFilter, setIsShowMobileFilter] = useState(false);
 
     const [gridState, setGridState] = useState(true);
 
@@ -49,9 +54,13 @@ const Catalog = () => {
                         <RowGridIcon />
                     </button>
                 </div>
+                {widthDesktop < 1050 &&
+                    <button className={styles["btn__mobile_filter"]}>Фильтр</button>
+                }
             </div>
             <div className={styles["catalog__container"]}>
                 <Filter />
+                {isShowMobileFilter && <MobileFilter />}
                 <div className={styles["catalog"]}>
                     {status === "loading" &&
                         <div className={styles["loader__wrapper"]}>
