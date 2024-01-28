@@ -296,3 +296,12 @@ main {
 	padding: 5px 10px;
 	border-radius: 5px;
 }
+
+@media(max-width: 600px) {
+	.input__item {
+		width: 150px;
+		height: 20px;
+        font-size: 12px;
+    }
+
+}

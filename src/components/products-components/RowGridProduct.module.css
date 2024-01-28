@@ -141,7 +141,7 @@
 .btn__add_product {
     width: 35px;
     height: 35px;
-    font-size: 16px;
+    font-size: 14px;
     font-family: "Montserrat-Bold";
     color: #fff;
     background-color: #4AB8A1;
@@ -157,7 +157,6 @@
 .btn__add_product:hover {
     background-color: #fff;
     color: #4AB8A1;
-    ;
     transition: all 0.3s;
 }
 

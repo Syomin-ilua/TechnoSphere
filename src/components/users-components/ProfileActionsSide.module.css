@@ -5,15 +5,17 @@
 
 .profile__actions_side {
     background-color: #FFF;
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px 2px rgba(0, 0, 0, 0.25);
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
 .profile__avatar_wrapper {
-    width: 220px;
-    height: 199px;
+    max-width: 220px;
+    max-height: 210px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     margin-bottom: 60px;
     padding-top: 20px;
@@ -74,4 +76,71 @@
 .btn__exit_profile:hover {
     color: #C40000;
     transition: all 0.3s;
+}
+
+@media(max-width: 900px) {
+    .profile__actions_side {
+        width: 100px;
+        min-width: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .profile__avatar_wrapper {
+        width: 60px;
+        height: 60px;
+    }
+
+    .profile__avatar_wrapper img {
+        width: 60px;
+        height: 60px;
+    }
+
+    .profile__link {
+        text-align: center;
+    }
+    .profile__link a svg {
+        width: 25px;
+        height: 25px;
+        stroke: #333;
+        fill: #333;
+    }
+    .btn__exit_profile svg {
+        width: 25px;
+        height: 25px;
+        fill: #C40000;
+        stroke: #C40000;
+    }
+    /* .profile__links {
+        height: 100%;
+
+    } */
+    .profile__link:last-child {
+        border-bottom: none;
+    }
+}
+
+@media(max-width: 550px) {
+    .profile__actions_side {
+        width: 50px;
+        min-width: 50px;
+    }
+    .profile__avatar_wrapper {
+        width: 30px;
+        height: 30px;
+    }
+    .profile__avatar_wrapper img {
+        width: 30px;
+        height: 30px;
+    }
+    .profile__link a svg {
+        width: 15px;
+        height: 15px;
+    }
+    .btn__exit_profile svg {
+        width: 15px;
+        height: 15px;
+    }
 }

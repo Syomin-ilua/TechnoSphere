@@ -115,7 +115,7 @@ const UserInfoEdit = () => {
         <div className={styles["profile__edit"]}>
             <form className={styles["profile__edit_wrapper"]}>
                 <div className={styles["profile__edit_general-info"]}>
-                    <h2>Общая информация</h2>
+                    <h2 className={styles["h2"]}>Общая информация</h2>
                     <div className={styles["edit__sections"]}>
                         <div className={styles["edit__section"]}>
                             <div className={styles["edit__item"]}>
@@ -182,7 +182,7 @@ const UserInfoEdit = () => {
                 </div>
 
                 <div className={styles["profile__edit_contacts-info"]}>
-                    <h2>Контактная информация</h2>
+                    <h2 className={styles["h2"]}>Контактная информация</h2>
                     <div className={styles["edit__sections"]}>
                         <div className={styles["edit__section"]}>
                             <div className={styles["edit__item"]}>

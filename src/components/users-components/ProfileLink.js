@@ -28,7 +28,7 @@ const ProfileLink = () => {
         const auth = getAuth();
         signOut(auth).then(() => {
             dispatchAction(userActions.removeUser());
-            toast.warning("Вы успешно вышли из аккаунта!");
+            toast.success("Вы успешно вышли из аккаунта!");
             setTimeout(() => {
                 navigate("/home");
             }, 500);

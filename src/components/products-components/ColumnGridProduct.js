@@ -7,7 +7,7 @@ import { db } from "../../firebase";
 import { doc, getDoc } from "firebase/firestore";
 import { useAuth } from "../../hooks/use-auth";
 import Skeleton from "react-loading-skeleton";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { FaStar } from "react-icons/fa";
 import { MdFavoriteBorder } from "react-icons/md";
 import { IoIosHeart } from "react-icons/io";
@@ -65,7 +65,7 @@ const Product = (props) => {
     const addProductInBasketHandler = () => {
 
         if (!isAuth) {
-            navigate("/auth/login");
+            toast.warning("Войдите в аккаунт или зарегистрируйтесь!");
             return;
         }
 
@@ -97,6 +97,11 @@ const Product = (props) => {
     }
 
     const addProductFavouritesHandler = () => {
+        if (!isAuth) {
+            toast.warning("Войдите в аккаунт или зарегистрируйтесь!");
+            return;
+        }
+
         dispatchAction(favouritesActions.addFavouriteProduct({
             id: id,
             image: image,

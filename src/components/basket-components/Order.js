@@ -16,8 +16,10 @@ const Order = (props) => {
     return (
         <li className={`${styles["order__wrapper"]} ${orderActiveState ? `${styles["active__order"]}` : ""}`}>
             <div className={styles["order__prev"]}>
-                <p><b>Заказ от: </b> {order.datePlacingOrder}</p>
-                <p><b>Итоговая цена: </b> {order.totalPrice} рублей</p>
+                <div className={styles["order__prev_info"]}>
+                    <p><b>Заказ от: </b> {order.datePlacingOrder}</p>
+                    <p><b>Итоговая цена: </b> {order.totalPrice} рублей</p>
+                </div>
                 <button onClick={btnOpenOrderHandler} type='button' className={styles["btn__open_order"]}>
                     {orderActiveState ?
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">

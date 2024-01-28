@@ -19,7 +19,7 @@ const RowGridProduct = (props) => {
     const { id, image, productName, cost } = props.product;
 
     const basket = useSelector((state) => state.basket.items);
-    const favourites = useSelector((state) => state.favourites.favourites);
+    const favourites = useSelector((state) => state.favourites.favouritesProducts);
 
     const existingBasketProduct = basket.find((product) =>
         product.id === id

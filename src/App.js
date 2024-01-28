@@ -32,6 +32,7 @@ import RequireAdminAuth from './hoc/RequireAdminAuth';
 import { getFavouritesProducts } from './store/favourites-slice';
 import MobileNavigation from './components/layout-components/MobileNavigation';
 import useResize from './hooks/use-resize';
+import { ToastContainer } from 'react-toastify';
 
 let isInitialRunning = true;
 
@@ -182,6 +183,7 @@ function App() {
         } />
 
       </Routes>
+      <ToastContainer />
     </Fragment>
   );
 }

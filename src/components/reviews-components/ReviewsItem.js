@@ -20,7 +20,7 @@ const ReviewsItem = (props) => {
 
     useEffect(() => {
 
-        const getUserReview = async () => {
+        const getUserReview = async (id) => {
             setIsLoading(true);
 
             const userDocRef = doc(db, "users", id);
@@ -38,8 +38,8 @@ const ReviewsItem = (props) => {
 
         }
 
-        getUserReview().catch((error) => {
-            toast.warning("Произошла ошибка!");
+        getUserReview(review.userId).catch((error) => {
+            toast.warning(`Произошла ошибка - ${error}`);
         });
 
     }, []);
