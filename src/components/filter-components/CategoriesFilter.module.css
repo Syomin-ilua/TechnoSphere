@@ -35,8 +35,21 @@
     font-family: "Montserrat-SemiBold";
     color: #333;
 }
+
 .categories__filter_title {
     font-family: "Montserrat-SemiBold";
     color: #333;
     font-size: 14px;
+}
+
+@media(max-width: 430px) {
+    .categories__filter_title {
+        font-size: 12px;
+    }
+    .loading__categories_products {
+        font-size: 12px;
+    }
+    .sort__form {
+        font-size: 12px;
+    }  
 }

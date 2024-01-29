@@ -6,8 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { getAuth, signOut } from 'firebase/auth';
 import { userActions } from '../../store/user-slice';
 import { useAuth } from '../../hooks/use-auth';
-import storage from '../../firebase';
-import { ref, getDownloadURL } from 'firebase/storage';
+import Skeleton from 'react-loading-skeleton';
 import { ReactComponent as AccountIcon } from "../../images/account-icon.svg";
 import { ReactComponent as OrdersIcon } from "../../images/orders-icon.svg";
 import { ReactComponent as LogoutIcon } from "../../images/logout-icon.svg";
@@ -53,8 +52,18 @@ const ProfileLink = () => {
         <div className={styles["profile_link"]}>
             <button onClick={profileLinkHandler} className={styles["btn__profile_link"]}>
                 <div className={styles["profile__link_icon-wrapper"]}>
-                    {status === "loading" && <p>...</p>}
-                    {status === "resolved" && 
+                    {status === "loading" &&
+                        <Skeleton
+                            speed={2}
+                            width={50}
+                            height={50}
+                            viewBox="0 0 400 160"
+                            backgroundColor="#f3f3f3"
+                            foregroundColor="#ecebeb"
+                            borderRadius={`50%`}
+                        />
+                    }
+                    {status === "resolved" &&
                         <img src={user.gender === "мужчина" || user.gender.length === 0 ? "/users-images/men.png" : "/users-images/women.png"} alt="Изоражение профиля" />
                     }
                     {error && "?"}

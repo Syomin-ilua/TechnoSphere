@@ -34,3 +34,12 @@
     box-shadow: 2px 2px 2px 2px #d3d3d3;
     transition: all 0.3s;
 }
+
+@media(max-width: 430px) {
+    .cost__input {
+        font-size: 10px;
+    }
+    .cost__filter_title {
+        font-size: 12px;
+    }
+}

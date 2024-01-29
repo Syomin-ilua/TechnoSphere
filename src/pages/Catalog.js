@@ -37,6 +37,14 @@ const Catalog = () => {
 
     }, []);
 
+    const hideMobileFilter = () => {
+        setIsShowMobileFilter(false);
+    }
+
+    const showMobileFilter = () => {
+        setIsShowMobileFilter(true);
+    }
+
 
     const errorContent = <div className={styles["error"]}>
         <p>Произошла ошибка при получении данных о товарах: {error}</p>
@@ -55,12 +63,12 @@ const Catalog = () => {
                     </button>
                 </div>
                 {widthDesktop < 1050 &&
-                    <button className={styles["btn__mobile_filter"]}>Фильтр</button>
+                    <button onClick={showMobileFilter} className={styles["btn__mobile_filter"]}>Фильтр</button>
                 }
             </div>
             <div className={styles["catalog__container"]}>
                 <Filter />
-                {isShowMobileFilter && <MobileFilter />}
+                {widthDesktop < 1050 && isShowMobileFilter && <MobileFilter onHideMobileFilter={hideMobileFilter} />}
                 <div className={styles["catalog"]}>
                     {status === "loading" &&
                         <div className={styles["loader__wrapper"]}>
