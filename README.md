@@ -8,3 +8,4 @@
   <img src="https://img.shields.io/badge/Redux-593D88?style=for-the-badge&logo=redux&logoColor=white" />
   <img src="https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white"/>  
 </p>
+<h3>Для просмотра приложения перейдите по <a href="https://techno-sphere.vercel.app/home">ссылке</a> </h3>
